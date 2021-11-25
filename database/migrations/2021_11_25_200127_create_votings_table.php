@@ -17,7 +17,8 @@ class CreateVotingsTable extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description');
-            $table->boolean('is_active');
+            $table->date('start_at');
+            $table->date('end_at');
             $table->string('logo');
             $table->timestamps();
         });
