@@ -7,9 +7,9 @@
     <title>Layout &rsaquo; Default &mdash; Stisla</title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
-    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/datatables.css') }}" <!-- CSS Libraries -->
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -29,7 +29,8 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->

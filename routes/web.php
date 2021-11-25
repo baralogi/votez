@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.voting');
+    return view('vendor.datatables.print');
 });
 
 Route::resource('/votings', VotingController::class)->only('index');
