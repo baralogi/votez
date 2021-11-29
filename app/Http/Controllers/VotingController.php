@@ -48,6 +48,6 @@ class VotingController extends Controller
             'logo' => $logoName
         ]);
 
-        return back()->withSuccess("Sukses bos");
+        return redirect()->route('votings.index')->withSuccess("Sukses bos");
     }
 }
