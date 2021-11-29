@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Layout &rsaquo; Default &mdash; Stisla</title>
+    @yield('title')
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -39,6 +39,7 @@
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <!-- Page Specific JS File -->
+    @stack('scripts')
 </body>
 
 </html>

@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('vendor.datatables.print');
 });
 
-Route::resource('/votings', VotingController::class)->only('index');
+Route::resource('votings', VotingController::class);

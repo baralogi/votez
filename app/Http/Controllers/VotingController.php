@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\VotingsDataTable;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VotingController extends Controller
 {
@@ -14,10 +16,9 @@ class VotingController extends Controller
         $this->votingService = $votingService;
     }
 
-    public function index()
+    public function index(VotingsDataTable $dataTable)
     {
-        $data = $this->votingService->getVotings();
-        return view('pages.voting');
+        return $dataTable->render('pages.voting.index');
     }
 
     // public function show($id)
@@ -25,4 +26,28 @@ class VotingController extends Controller
     //     $data = $this->votingService->getPostById($id);
     //     return $data;
     // }
+
+    public function create()
+    {
+        return view('pages.voting.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        $extension = $request->file('logo')->extension();
+        $logoName = date('dmyHis') . '.' . $extension;
+        $path = Storage::putFileAs('public/images/logo', $request->file('logo'), $logoName);
+
+
+        $data = $this->votingService->storeVoting([
+            'name' => $request->name,
+            'description' => $request->description,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
+            'logo' => $logoName
+        ]);
+
+        return back()->withSuccess("Sukses bos");
+    }
 }

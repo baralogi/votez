@@ -14,8 +14,13 @@ class Voting extends Model
         return $this->hasMany(Candidate::class);
     }
 
-    public function participants()
+    public function getLogoLinkAttribute()
     {
-        return $this->hasMany(Participant::class);
+        return asset('storage/images/logo/' . $this->logo);
+    }
+
+    public function getDefaultLogoLinkAttribute()
+    {
+        return asset('images/voting_logo.png');
     }
 }
