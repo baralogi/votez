@@ -32,8 +32,8 @@ class VotingService
         return $this->votingRepository->update($id, $data);
     }
 
-    public function destroyVoting($id, $data)
+    public function destroyVoting($id)
     {
-        return $this->votingRepository->destroy($id, $data);
+        return $this->votingRepository->destroy($id);
     }
 }

@@ -50,4 +50,10 @@ class VotingController extends Controller
 
         return redirect()->route('votings.index')->withSuccess("Sukses bos");
     }
+
+    public function destroy(Request $request)
+    {
+        $this->votingService->destroyVoting($request->voting);
+        return redirect()->route('votings.index');
+    }
 }
