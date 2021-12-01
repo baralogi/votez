@@ -23,7 +23,6 @@
         </section>
     </div>
     {{-- Delete Modal --}}
-    {{-- @include('pages.voting.delete') --}}
 @endsection
 
 @push('scripts')

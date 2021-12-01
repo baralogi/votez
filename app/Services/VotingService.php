@@ -29,6 +29,7 @@ class VotingService
 
     public function updateVoting($id, $data)
     {
+
         return $this->votingRepository->update($id, $data);
     }
 

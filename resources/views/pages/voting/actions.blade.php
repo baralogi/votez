@@ -1,7 +1,6 @@
 <div>
-    <a href="/votings/{{ $voting->id }}/edit" class="btn btn-sm btn-outline-info">Detail</a>
-    <a href="/votings/{{ $voting->id }}/edit" class="btn btn-sm btn-outline-primary">Ubah</a>
-    {{-- <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#destroy">Hapus</button> --}}
+    <button href="/votings/{{ $voting->id }}/edit" class="btn btn-sm btn-outline-info">Detail</button>
+    <a href="{{ route('votings.edit', ['voting' => $voting->id]) }}" class="btn btn-sm btn-outline-primary">Ubah</a>
     <form method="POST" class="d-inline" action="{{ route('votings.destroy', ['voting' => $voting->id]) }}">
         @method("delete")
         @csrf
@@ -10,7 +9,3 @@
             onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
     </form>
 </div>
-
-<script>
-
-</script>

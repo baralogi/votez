@@ -6,6 +6,7 @@ use App\DataTables\VotingsDataTable;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use File;
 
 class VotingController extends Controller
 {
@@ -34,7 +35,6 @@ class VotingController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
         $extension = $request->file('logo')->extension();
         $logoName = date('dmyHis') . '.' . $extension;
         $path = Storage::putFileAs('public/images/logo', $request->file('logo'), $logoName);
@@ -46,6 +46,38 @@ class VotingController extends Controller
             'start_at' => $request->start_at,
             'end_at' => $request->end_at,
             'logo' => $logoName
+        ]);
+
+        return redirect()->route('votings.index')->withSuccess("Sukses bos");
+    }
+
+    public function edit($id)
+    {
+        $data = $this->votingService->getVotingById($id);
+        return view('pages.voting.edit')->with(['voting' => $data]);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $this->votingService->getVotingById($request->voting);
+        $logo = $request->logo;
+        $logoName = null;
+        if (!empty($logo)) {
+            $extension = $request->file('logo')->extension();
+            $logoName = date('dmyHis') . '.' . $extension;
+            $path = Storage::putFileAs('public/images/logo', $request->file('logo'), $logoName);
+            if ($path) {
+                $oldLogo = $data->logo;
+                Storage::delete('public/images/logo/' . $oldLogo);
+            }
+        }
+
+        $this->votingService->updateVoting($request->voting, [
+            'name' => $request->name,
+            'description' => $request->description,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
+            'logo' => $logoName ? $logoName : $data->logo
         ]);
 
         return redirect()->route('votings.index')->withSuccess("Sukses bos");
