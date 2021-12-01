@@ -22,11 +22,11 @@ class VotingController extends Controller
         return $dataTable->render('pages.voting.index');
     }
 
-    // public function show($id)
-    // {
-    //     $data = $this->votingService->getPostById($id);
-    //     return $data;
-    // }
+    public function show($id)
+    {
+        $data = $this->votingService->getVotingById($id);
+        return view('pages.voting.show')->with(['voting' => $data]);
+    }
 
     public function create()
     {

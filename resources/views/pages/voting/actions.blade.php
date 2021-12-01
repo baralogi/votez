@@ -1,5 +1,5 @@
 <div>
-    <button href="/votings/{{ $voting->id }}/edit" class="btn btn-sm btn-outline-info">Detail</button>
+    <a href="{{ route('votings.show', ['voting' => $voting->id]) }}" class="btn btn-sm btn-outline-info">Detail</a>
     <a href="{{ route('votings.edit', ['voting' => $voting->id]) }}" class="btn btn-sm btn-outline-primary">Ubah</a>
     <form method="POST" class="d-inline" action="{{ route('votings.destroy', ['voting' => $voting->id]) }}">
         @method("delete")
