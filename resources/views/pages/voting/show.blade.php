@@ -24,6 +24,11 @@
                         <div class="author-box-details">
                             <div class="author-box-name">
                                 <a href="#">{{ $voting->name }}</a>
+                                @if ($voting->voting_status == 'Aktif')
+                                    <span class="badge badge-pill badge-success">Aktif</span>
+                                @else
+                                    <span class="badge badge-pill badge-danger">Tidak Aktif</span>
+                                @endif
                             </div>
                             <div class="author-box-job">{{ $voting->start_at_format . ' - ' . $voting->end_at_format }}
                             </div>
@@ -31,11 +36,7 @@
                                 <p>{{ $voting->description }}</p>
                             </div>
                             <div class="mb-2 mt-3">
-                                @if ($voting->voting_status == 'Aktif')
-                                    <span class="badge badge-pill badge-success">Aktif</span>
-                                @else
-                                    <span class="badge badge-pill badge-danger">Tidak Aktif</span>
-                                @endif
+                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-info">Kembali</a>
                             </div>
                         </div>
                     </div>
