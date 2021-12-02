@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\VotingController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,8 @@ Route::get('/', function () {
     return view('vendor.datatables.print');
 });
 
-Route::resource('votings', VotingController::class);
+Route::resource('votings', VotingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+
+Route::prefix('votings')->group(function () {
+    Route::get('/{voting}/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+});

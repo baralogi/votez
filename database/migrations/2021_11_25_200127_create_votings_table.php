@@ -19,7 +19,7 @@ class CreateVotingsTable extends Migration
             $table->longText('description');
             $table->date('start_at');
             $table->date('end_at');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

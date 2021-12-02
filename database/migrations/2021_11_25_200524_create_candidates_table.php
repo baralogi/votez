@@ -16,11 +16,11 @@ class CreateCandidatesTable extends Migration
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('voting_id')->constrained();
-            $table->integer('number_of_partner');
+            $table->integer('number_of_partner')->nullable();
             $table->string('name');
-            $table->json('description');
-            $table->boolean('is_pass');
-            $table->string('photo');
+            $table->json('description')->nullable();
+            $table->boolean('is_pass')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

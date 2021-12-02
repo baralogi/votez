@@ -41,6 +41,8 @@
                         </div>
                     </div>
                 </div>
+                @include('pages.candidate.index')
+            </div>
         </section>
     </div>
 @endsection

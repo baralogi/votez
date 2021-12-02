@@ -19,7 +19,6 @@ class VotingFactory extends Factory
             'description' => $this->faker->realText($maxNbChars = 100, $indexSize = 2),
             'start_at' => Carbon::now(),
             'end_at' => Carbon::now()->addDays(3),
-            'logo' => $this->faker->imageUrl($width = 640, $height = 480),
         ];
     }
 }

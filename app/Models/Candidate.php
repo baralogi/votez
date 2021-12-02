@@ -23,4 +23,25 @@ class Candidate extends Model
     {
         return $this->hasMany(CandidateFile::class);
     }
+
+    public function getPhotoLinkAttribute()
+    {
+        return asset('storage/images/photo/' . $this->logo);
+    }
+
+    public function getDefaultPhotoLinkAttribute()
+    {
+        return asset('images/avatar-4.png');
+    }
+
+    public function getIsPassStatusAttribute()
+    {
+        if ($this->is_pass === true) {
+            return 'Lolos';
+        } else if ($this->is_pass === false) {
+            return 'Tidak Lolos';
+        }
+
+        return 'Belum Terseleksi';
+    }
 }

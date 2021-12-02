@@ -22,7 +22,6 @@
             </div>
         </section>
     </div>
-    {{-- Delete Modal --}}
 @endsection
 
 @push('scripts')

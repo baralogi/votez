@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Candidate;
 use App\Models\Voting;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,7 @@ class VotingSeeder extends Seeder
     {
         Voting::factory()
             ->count(3)
+            ->has(Candidate::factory()->count(3))
             ->create();
     }
 }

@@ -6,7 +6,6 @@ use App\DataTables\VotingsDataTable;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use File;
 
 class VotingController extends Controller
 {
