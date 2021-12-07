@@ -7,7 +7,7 @@
             <a href="index.html">VT</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Dashboard</li>
+            <li class="menu-header">Menu</li>
             <li><a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-users"></i>
                     <span>User</span></a></li>
             <li><a class="nav-link" href="{{ route('votings.index') }}"><i class="fas fa-vote-yea"></i>
