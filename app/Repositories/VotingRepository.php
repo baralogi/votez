@@ -26,7 +26,7 @@ class VotingRepository
 
     public function store($data)
     {
-        return $this->voting->insert($data);
+        return $this->voting->create($data);
     }
 
     public function update($id, $data)

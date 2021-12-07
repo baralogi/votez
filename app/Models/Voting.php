@@ -11,6 +11,8 @@ class Voting extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description', 'start_at', 'end_at', 'logo'];
+
     public function candidates()
     {
         return $this->hasMany(Candidate::class);
