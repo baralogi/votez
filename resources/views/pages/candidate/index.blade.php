@@ -49,7 +49,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id='table-candidates' class="table table-striped table-md">
+                            <table id='table-candidates' class="table table-md table-striped">
                                 <thead class="text-center">
                                     <tr>
                                         <th scope="col">#</th>

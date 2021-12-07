@@ -8,7 +8,9 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li><a class="nav-link" href="{{ route('votings.index') }}"><i class="far fa-square"></i>
+            <li><a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-users"></i>
+                    <span>User</span></a></li>
+            <li><a class="nav-link" href="{{ route('votings.index') }}"><i class="fas fa-vote-yea"></i>
                     <span>Voting</span></a></li>
 
 

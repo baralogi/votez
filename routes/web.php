@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VotingController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::get('/', function () {
     return view('vendor.datatables.print');
 });
 
+Route::resource('users', UserController::class);
 Route::resource('votings', VotingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
 Route::prefix('votings')->group(function () {

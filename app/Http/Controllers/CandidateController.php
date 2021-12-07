@@ -20,11 +20,10 @@ class CandidateController extends Controller
         $this->candidateService = $candidateService;
     }
 
-    public function index(CandidatesDataTable $dataTable, $id)
+    public function index($id)
     {
         $data = $this->votingService->getVotingById($id);
-        $dataX = $this->candidateService->getCandidate($id);
 
-        return view('pages.candidate.index')->with(['voting' => $data, 'candidate' => DataTables::of($dataX)->toJson()]);
+        return view('pages.candidate.index')->with(['voting' => $data]);
     }
 }
