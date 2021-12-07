@@ -24,6 +24,6 @@ class CandidateController extends Controller
     {
         $data = $this->votingService->getVotingById($id);
 
-        return view('pages.candidate.index')->with(['voting' => $data]);
+        return view('pages.committee.candidate.index')->with(['voting' => $data]);
     }
 }

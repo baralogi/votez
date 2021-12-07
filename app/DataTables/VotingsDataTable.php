@@ -37,7 +37,7 @@ class VotingsDataTable extends DataTable
                 return date('d-m-Y', strtotime($voting->end_at));
             })
             ->addColumn('action', function (Voting $voting) {
-                return view('pages.voting.actions', compact('voting'));
+                return view('pages.committee.voting.actions', compact('voting'));
             })
             ->rawColumns(['action', 'logo']);
     }

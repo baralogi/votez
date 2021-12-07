@@ -16,13 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('vendor.datatables.print');
+Route::prefix('committee')->group(function () {
+    Route::resource('users', UserController::class);
+    Route::prefix('votings')->group(function () {
+        Route::get('/', [VotingController::class, 'index'])->name('votings.index');
+        Route::get('/create', [VotingController::class, 'create'])->name('votings.create');
+        Route::post('/', [VotingController::class, 'store'])->name('votings.store');
+        Route::get('/{voting}/edit', [VotingController::class, 'edit'])->name('votings.edit');
+        Route::put('/{voting}', [VotingController::class, 'update'])->name('votings.update');
+        Route::delete('/{voting}', [VotingController::class, 'destroy'])->name('votings.destroy');
+        Route::get('/{voting}/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+    });
 });
 
-Route::resource('users', UserController::class);
-Route::resource('votings', VotingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::prefix('votings')->group(function () {
-    Route::get('/{voting}/candidates', [CandidateController::class, 'index'])->name('candidates.index');
-});
+// Route::resource('votings', VotingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);

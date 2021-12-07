@@ -18,18 +18,12 @@ class VotingController extends Controller
 
     public function index(VotingsDataTable $dataTable)
     {
-        return $dataTable->render('pages.voting.index');
-    }
-
-    public function show($id)
-    {
-        $data = $this->votingService->getVotingById($id);
-        return view('pages.voting.show')->with(['voting' => $data]);
+        return $dataTable->render('pages.committee.voting.index');
     }
 
     public function create()
     {
-        return view('pages.voting.create');
+        return view('pages.committee.voting.create');
     }
 
     public function store(Request $request)
@@ -53,7 +47,7 @@ class VotingController extends Controller
     public function edit($id)
     {
         $data = $this->votingService->getVotingById($id);
-        return view('pages.voting.edit')->with(['voting' => $data]);
+        return view('pages.committee.voting.edit')->with(['voting' => $data]);
     }
 
     public function update(Request $request)

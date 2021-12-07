@@ -28,7 +28,7 @@ class UsersDataTable extends DataTable
                 })->implode('<br>');
             })
             ->addColumn('action', function (User $user) {
-                return view('pages.user.actions', compact('user'));
+                return view('pages.committee.user.actions', compact('user'));
             })
             ->rawColumns(['action']);
     }

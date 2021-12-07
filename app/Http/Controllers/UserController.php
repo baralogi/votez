@@ -18,9 +18,6 @@ class UserController extends Controller
 
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('pages.user.index');
-
-        // $data = User::with('roles')->get();
-        // dd($data);
+        return $dataTable->render('pages.committee.user.index');
     }
 }
