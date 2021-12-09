@@ -15,4 +15,5 @@ mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/app.scss", "public/css")
     .sass("resources/sass/fontawesome.scss", "public/css")
     .sass("resources/sass/datatables.scss", "public/css")
+    .sass("resources/sass/animate.scss", "public/css")
     .sourceMaps();
