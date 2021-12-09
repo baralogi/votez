@@ -9,7 +9,7 @@
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ mix('css/datatables.css') }}" <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ mix('css/datatables.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">

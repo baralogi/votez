@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VotingController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::prefix('committee')->group(function () {
     Route::resource('users', UserController::class);
