@@ -21,35 +21,18 @@
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ asset('css/landing-page.css') }}" rel="stylesheet" />
+    <style>
+        main>.container {
+            padding: 120px 30px 0;
+        }
+
+    </style>
 </head>
 
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-        <div class="container px-5">
-            <a class="navbar-brand fw-bold" href="#page-top">Votez</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="bi-list"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                    <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Berita</a></li>
-                    <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Bakal Calon</a></li>
-                </ul>
-                <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal"
-                    data-bs-target="#feedbackModal">
-                    <span class="d-flex align-items-center">
-                        <i class="bi-card-checklist me-2"></i>
-                        <span class="small">Voting</span>
-                    </span>
-                </button>
-            </div>
-        </div>
-    </nav>
+<body id="page-top d-flex flex-column h-100">
+    @include('includes.guest.navbar')
     <!-- Mashead header-->
-    <header class="masthead">
+    <main class="masthead flex-shrink-0">
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
@@ -70,21 +53,8 @@
                 </div>
             </div>
         </div>
-    </header>
-    <!-- Footer-->
-    <footer class="bg-black text-center py-5">
-        <div class="container px-5">
-            <div class="text-white-50 small">
-                <div class="mb-2">&copy; Votez Copyright &copy; {{ date('Y') }}. All Rights Reserved.
-                </div>
-                <a href="#!">Privacy</a>
-                <span class="mx-1">&middot;</span>
-                <a href="#!">Terms</a>
-                <span class="mx-1">&middot;</span>
-                <a href="#!">FAQ</a>
-            </div>
-        </div>
-    </footer>
+    </main>
+    @include('includes.guest.footer')
     <!-- Feedback Modal-->
     <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel"
         aria-hidden="true">
