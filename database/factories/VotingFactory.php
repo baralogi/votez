@@ -16,6 +16,7 @@ class VotingFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(3),
+            'organization_id' => 1,
             'description' => $this->faker->realText($maxNbChars = 100, $indexSize = 2),
             'start_at' => Carbon::now(),
             'end_at' => Carbon::now()->addDays(3),
