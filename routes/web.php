@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\ParticipantController;
@@ -23,6 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::prefix('committee')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('participants', ParticipantController::class);
+    Route::resource('blogs', BlogController::class);
     Route::prefix('votings')->group(function () {
         Route::get('/', [VotingController::class, 'index'])->name('votings.index');
         Route::get('/create', [VotingController::class, 'create'])->name('votings.create');

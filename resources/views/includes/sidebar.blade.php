@@ -14,6 +14,8 @@
                     <span>Voting</span></a></li>
             <li><a class="nav-link" href="{{ route('participants.index') }}"><i class="fas fa-users"></i>
                     <span>Partisipan</span></a></li>
+            <li><a class="nav-link" href="{{ route('blogs.index') }}"><i class="fas fa-newspaper"></i>
+                    <span>Blog</span></a></li>
 
 
             {{-- <li class="nav-item dropdown">

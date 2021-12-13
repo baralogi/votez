@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use App\Models\Organization;
 use App\Models\Participant;
 use App\Models\User;
@@ -18,7 +19,9 @@ class OrganizationSeeder extends Seeder
     {
         Organization::factory()
             ->count(1)
-            ->has(User::factory()->count(2))
+            ->has(User::factory()
+                ->has(Blog::factory()
+                    ->count(5))->count(2))
             ->has(Participant::factory()->count(20))
             ->create();
     }
