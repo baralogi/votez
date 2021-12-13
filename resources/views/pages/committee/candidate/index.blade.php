@@ -132,8 +132,13 @@
                         <div class="text-time">
                             {{ $candidate->sequence_number ? 'No urut:' . $candidate->sequence_number : 'Belum mendapat nomor urut' }}
                         </div>
-                        <div class="media-description text-muted">{{ 'Visi: ' . $candidate->visi }}</div>
-                        <div class="media-description text-muted">{{ 'Misi: ' . $candidate->misi }}</div>
+                        @if ($candidate->description)
+                            <div class="media-description text-muted">{{ 'Visi: ' . $candidate->visi }}</div>
+                            <div class="media-description text-muted">{{ 'Misi: ' . $candidate->misi }}</div>
+                        @else
+                            {{ '-' }}
+                        @endif
+
                     </div>
                 </div>
                 <div class="modal-footer">
