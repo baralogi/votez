@@ -12,7 +12,13 @@
                 <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Berita</a></li>
                 <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Bakal Calon</a></li>
             </ul>
-            <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal"
+            <button class="btn btn-outline-secondary rounded-pill mx-1 px-3 mb-2 mb-lg-0">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    <span class="small">Masuk</span>
+                </span>
+            </button>
+            <button class="btn btn-primary rounded-pill mx-1 px-3 mb-2 mb-lg-0" data-bs-toggle="modal"
                 data-bs-target="#feedbackModal">
                 <span class="d-flex align-items-center">
                     <i class="bi-card-checklist me-2"></i>
