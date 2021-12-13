@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Organization extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
+
+    public function votings()
+    {
+        return $this->hasMany(Voting::class);
+    }
 }

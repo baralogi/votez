@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Organization;
+use App\Models\Participant;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class OrganizationSeeder extends Seeder
@@ -14,6 +16,10 @@ class OrganizationSeeder extends Seeder
      */
     public function run()
     {
-        Organization::factory()->count(1)->create();
+        Organization::factory()
+            ->count(1)
+            ->has(User::factory()->count(2))
+            ->has(Participant::factory()->count(20))
+            ->create();
     }
 }

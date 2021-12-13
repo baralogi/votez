@@ -13,6 +13,11 @@ class Voting extends Model
 
     protected $fillable = ['name', 'description', 'start_at', 'end_at', 'logo'];
 
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
     public function candidates()
     {
         return $this->hasMany(Candidate::class);
