@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Candidate extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'description', 'photo'];
 
     public function voting()
     {
@@ -43,5 +44,17 @@ class Candidate extends Model
         }
 
         return 'Belum Terseleksi';
+    }
+
+    public function getVisiAttribute()
+    {
+        $description = \json_decode($this->description);
+        return $description->visi;
+    }
+
+    public function getMisiAttribute()
+    {
+        $description = \json_decode($this->description);
+        return $description->misi;
     }
 }

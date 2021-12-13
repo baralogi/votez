@@ -36,7 +36,8 @@
                                 <p>{{ $voting->description }}</p>
                             </div>
                             <div class="mb-2 mt-3">
-                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-info">Kembali</a>
+                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-info">Lihat Peserta</a>
+                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
                     </div>

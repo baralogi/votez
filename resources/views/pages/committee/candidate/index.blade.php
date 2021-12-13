@@ -38,7 +38,9 @@
                             </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-info">Kembali</a>
+                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-outline-info">Lihat
+                                    Peserta</a>
+                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -72,19 +74,25 @@
                                             <td>{{ $candidate->name }}</td>
                                             <td>{{ $candidate->number_of_partner }}</td>
                                             <td>{{ $candidate->is_pass_status }}</td>
-                                            <td><img src="{{ $photo }}" alt="photo" border="0" width="40" height="40"
-                                                    align="center" class="rounded-circle"></td>
+                                            <td><img src="{{ $photo }}" alt="photo" border="0" width="40"
+                                                    height="40" align="center" class="rounded-circle"></td>
                                             <td>
                                                 <div>
-                                                    <a href="" class="btn btn-sm btn-outline-info">Detail</a>
-                                                    <a href="" class="btn btn-sm btn-outline-primary">Ubah</a>
-                                                    <form method="POST" class="d-inline" action="">
+                                                    <button type="button" class="btn btn-sm btn-outline-info"
+                                                        id="buttonShowCandidate" data-toggle="modal"
+                                                        data-target="#modalShowCandidate{{ $candidate->id }}">Detail</button>
+                                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#modalShowCandidate{{ $candidate->id }}">
+                                                        Launch demo modal
+                                                    </button> --}}
+                                                    {{-- <a href="" class="btn btn-sm btn-outline-primary">Ubah</a> --}}
+                                                    {{-- <form method="POST" class="d-inline" action="">
                                                         @method("delete")
                                                         @csrf
                                                         <input type="hidden" value="{{ $candidate->id }}" />
                                                         <button class="btn btn-outline-danger btn-sm"
                                                             onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -98,6 +106,45 @@
         </section>
     </div>
 @endsection
+
+@foreach ($voting->candidates as $candidate)
+    <!-- show -->
+    <div class="modal fade" id="modalShowCandidate{{ $candidate->id }}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        Detail Bakal Calon</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @php
+                        $description = json_encode($candidate->description);
+                        $x = json_decode($description);
+                    @endphp
+                    <img alt="image" class="mr-3 rounded-circle" width="70" src="{{ $photo }}">
+                    <div class="media-body">
+                        <div class="media-right">
+                            <div class="text-primary">{{ $candidate->is_pass_status }}</div>
+                        </div>
+                        <div class="media-title mb-1">{{ $candidate->name }}</div>
+                        <div class="text-time">
+                            {{ $candidate->sequence_number ? 'No urut:' . $candidate->sequence_number : 'Belum mendapat nomor urut' }}
+                        </div>
+                        <div class="media-description text-muted">{{ 'Visi: ' . $candidate->visi }}</div>
+                        <div class="media-description text-muted">{{ 'Misi: ' . $candidate->misi }}</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 
 @push('scripts')
     <script>
