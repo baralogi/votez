@@ -79,18 +79,6 @@
                                                     <button type="button" class="btn btn-sm btn-outline-info"
                                                         id="buttonShowCandidate" data-toggle="modal"
                                                         data-target="#modalShowCandidate{{ $candidate->id }}">Detail</button>
-                                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#modalShowCandidate{{ $candidate->id }}">
-                                                        Launch demo modal
-                                                    </button> --}}
-                                                    {{-- <a href="" class="btn btn-sm btn-outline-primary">Ubah</a> --}}
-                                                    {{-- <form method="POST" class="d-inline" action="">
-                                                        @method("delete")
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $candidate->id }}" />
-                                                        <button class="btn btn-outline-danger btn-sm"
-                                                            onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>
