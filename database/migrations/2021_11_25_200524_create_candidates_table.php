@@ -16,7 +16,8 @@ class CreateCandidatesTable extends Migration
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('voting_id')->constrained();
-            $table->integer('number_of_partner')->nullable();
+            $table->integer('number_of_partner');
+            $table->integer('sequence_number')->nullable();
             $table->string('name');
             $table->json('description')->nullable();
             $table->boolean('is_pass')->nullable();
