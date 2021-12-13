@@ -56,7 +56,6 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">No Urut</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Foto</th>
                                         <th scope="col">Aksi</th>
@@ -72,10 +71,9 @@
                                             @endphp
                                             <th scope="row">{{ $i }}</th>
                                             <td>{{ $candidate->name }}</td>
-                                            <td>{{ $candidate->number_of_partner }}</td>
                                             <td>{{ $candidate->is_pass_status }}</td>
-                                            <td><img src="{{ $photo }}" alt="photo" border="0" width="40"
-                                                    height="40" align="center" class="rounded-circle"></td>
+                                            <td><img src="{{ $photo }}" alt="photo" border="0" width="40" height="40"
+                                                    align="center" class="rounded-circle"></td>
                                             <td>
                                                 <div>
                                                     <button type="button" class="btn btn-sm btn-outline-info"
@@ -139,7 +137,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
