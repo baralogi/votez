@@ -18,14 +18,20 @@ class RoleSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // items
+        // committee
+        Permission::create(['name' => 'view committee']);
+        Permission::create(['name' => 'create committee']);
+        Permission::create(['name' => 'edit committee']);
+        Permission::create(['name' => 'delete committee']);
+
+        // voting
         Permission::create(['name' => 'view voting']);
         Permission::create(['name' => 'create voting']);
         Permission::create(['name' => 'edit voting']);
         Permission::create(['name' => 'delete voting']);
 
 
-        Role::create(['name' => 'committee'])
+        Role::create(['name' => 'committee head'])
             ->givePermissionTo(Permission::all());
     }
 }
