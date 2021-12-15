@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    @yield('title')
+    <title>Masuk &mdash; Stisla</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -18,14 +18,7 @@
 
 <body>
     <div id="app">
-        <div class="main-wrapper">
-            @include('includes.navbar')
-            @include('includes.sidebar')
-
-            <!-- Main Content -->
-            @yield('main')
-            @include('includes.footer')
-        </div>
+        @yield('main')
     </div>
 
     <!-- General JS Scripts -->
@@ -40,7 +33,6 @@
     <script src="{{ asset('js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
-    @stack('scripts')
 </body>
 
 </html>
