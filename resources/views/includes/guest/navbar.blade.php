@@ -9,8 +9,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Berita</a></li>
-                <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Bakal Calon</a></li>
+                <li class="nav-item"><a class="nav-link me-lg-3" href="#">Berita</a>
+                </li>
+                <li class="nav-item"><a class="nav-link me-lg-3" href="{{ route('home.candidates') }}">Bakal
+                        Calon</a></li>
             </ul>
             <a href="{{ route('login') }}" class="btn btn-outline-secondary rounded-pill mx-1 px-3 mb-2 mb-lg-0">
                 <span class="d-flex align-items-center">

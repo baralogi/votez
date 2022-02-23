@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Committee;
 
+use App\Http\Controllers\Controller;
 use App\DataTables\VotingsDataTable;
 use App\Services\VotingService;
 use Illuminate\Http\Request;

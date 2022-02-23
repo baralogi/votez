@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Committee\DashboardController;
+use App\Http\Controllers\Committee\VotingController;
+use App\Http\Controllers\Guest\CandidateController as AppCandidateController;
 use App\Http\Controllers\Guest\HomeController;
-use App\Http\Controllers\VotingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/candidates', [AppCandidateController::class, 'index'])->name('home.candidates');
 
 Auth::routes();
 Route::prefix('committee')->group(function () {

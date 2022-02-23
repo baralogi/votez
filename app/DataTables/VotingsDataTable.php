@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Voting;
+use App\Services\VotingService;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -12,6 +13,13 @@ use Yajra\DataTables\Services\DataTable;
 
 class VotingsDataTable extends DataTable
 {
+    protected $votingService;
+
+    public function __construct(VotingService $votingService)
+    {
+        $this->votingService = $votingService;
+    }
+
     /**
      * Build DataTable class.
      *
@@ -24,22 +32,23 @@ class VotingsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('description', function (Voting $voting) {
-                return Str::limit($voting->description, 100);
+                return Str::limit($voting->description, 75);
             })
             ->editColumn('logo', function (Voting $voting) {
                 $logoImage = ($voting->logo) ? $voting->logo_link : $voting->default_logo_link;
                 return '<img src="' . $logoImage . '" alt="voting_logo" border="0" width="40" height="40" align="center" class="rounded-circle">';
             })
-            ->editColumn('start_at', function (Voting $voting) {
-                return date('d-m-Y', strtotime($voting->start_at));
-            })
-            ->editColumn('end_at', function (Voting $voting) {
-                return date('d-m-Y', strtotime($voting->end_at));
+            ->editColumn('status', function (Voting $voting) {
+                if ($voting->voting_status == 'Aktif') {
+                    return '<span class="badge badge-pill badge-success">Aktif</span>';
+                } else {
+                    return '<span class="badge badge-pill badge-danger">Tidak Aktif</span>';
+                }
             })
             ->addColumn('action', function (Voting $voting) {
                 return view('pages.committee.voting.actions', compact('voting'));
             })
-            ->rawColumns(['action', 'logo']);
+            ->rawColumns(['action', 'logo', 'status']);
     }
 
     /**
@@ -48,9 +57,9 @@ class VotingsDataTable extends DataTable
      * @param \App\Models\Voting $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Voting $model)
+    public function query()
     {
-        return $model->newQuery();
+        return $this->votingService->getByOrganizationId(auth()->user()->organization_id)->newQuery();
     }
 
     /**
@@ -86,8 +95,7 @@ class VotingsDataTable extends DataTable
             Column::computed('logo'),
             Column::make('name')->title('Nama'),
             Column::make('description')->title('Keterangan'),
-            Column::make('start_at')->title('Tanggal Mulai'),
-            Column::make('end_at')->title('Tanggal Berakhir'),
+            Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

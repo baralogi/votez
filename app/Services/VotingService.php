@@ -17,6 +17,11 @@ class VotingService
         return $this->votingRepository->getAll();
     }
 
+    public function getByOrganizationId($id)
+    {
+        return $this->votingRepository->getByOrganizationId($id);
+    }
+
     public function getVotingById($id)
     {
         return $this->votingRepository->getById($id);

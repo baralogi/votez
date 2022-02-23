@@ -16,12 +16,17 @@ class VotingRepository
 
     public function getAll()
     {
-        return $this->voting->get();
+        return $this->voting;
     }
 
     public function getById($id)
     {
         return $this->voting->where('id', $id)->first();
+    }
+
+    public function getByOrganizationId($id)
+    {
+        return $this->voting->where('organization_id', $id);
     }
 
     public function store($data)

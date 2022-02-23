@@ -16,7 +16,9 @@
                         <h4>Data Voting</h4>
                     </div>
                     <div class="card-body">
-                        {{ $dataTable->table(['class' => 'table table-striped']) }}
+                        <div class="table-responsive">
+                            {{ $dataTable->table(['class' => 'table table-striped']) }}
+                        </div>
                     </div>
                 </div>
             </div>
