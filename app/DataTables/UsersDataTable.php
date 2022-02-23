@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -24,7 +25,7 @@ class UsersDataTable extends DataTable
             ->addColumn('action', 'users.action')
             ->addColumn('roles', function (User $user) {
                 return $user->roles->map(function ($role) {
-                    return $role->name;
+                    return Str::title($role->name);
                 })->implode('<br>');
             })
             ->addColumn('action', function (User $user) {
@@ -41,7 +42,9 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->with('roles')->newQuery();
+        return $model->where('organization_id', auth()->user()->organization_id)->whereHas('roles', function ($query) {
+            $query->where('roles.name', ['committee head', 'committee']);
+        })->newQuery();
     }
 
     /**
@@ -59,8 +62,6 @@ class UsersDataTable extends DataTable
             ->orderBy(1)
             ->buttons(
                 Button::make('create')->addClass('btn-success'),
-                Button::make('export'),
-                Button::make('print'),
                 Button::make('reset')->addClass('btn-warning'),
                 Button::make('reload')->addClass('btn-danger')
             );

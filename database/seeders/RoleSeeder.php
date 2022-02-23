@@ -19,10 +19,10 @@ class RoleSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // committee
-        Permission::create(['name' => 'view committee']);
-        Permission::create(['name' => 'create committee']);
-        Permission::create(['name' => 'edit committee']);
-        Permission::create(['name' => 'delete committee']);
+        Permission::create(['name' => 'view user']);
+        Permission::create(['name' => 'create user']);
+        Permission::create(['name' => 'edit user']);
+        Permission::create(['name' => 'delete user']);
 
         // voting
         Permission::create(['name' => 'view voting']);
@@ -32,6 +32,12 @@ class RoleSeeder extends Seeder
 
 
         Role::create(['name' => 'committee head'])
+            ->givePermissionTo(Permission::all());
+
+        Role::create(['name' => 'committee'])
+            ->givePermissionTo(Permission::all());
+
+        Role::create(['name' => 'advisor'])
             ->givePermissionTo(Permission::all());
     }
 }
