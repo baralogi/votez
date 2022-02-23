@@ -17,9 +17,9 @@ class CandidateService
         return $this->candidateRepository->getByVotingId($id);
     }
 
-    public function getVotingById($id)
+    public function getCandidateById($votingId, $candidateId)
     {
-        return $this->candidateRepository->getById($id);
+        return $this->candidateRepository->getById($votingId, $candidateId);
     }
 
     public function storeVoting($data)

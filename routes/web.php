@@ -38,5 +38,6 @@ Route::prefix('committee')->group(function () {
         Route::put('/{voting}', [VotingController::class, 'update'])->name('votings.update');
         Route::delete('/{voting}', [VotingController::class, 'destroy'])->name('votings.destroy');
         Route::get('/{voting}/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+        Route::get('/{voting}/candidates/{candidate}', [CandidateController::class, 'show'])->name('candidates.show');
     });
 });

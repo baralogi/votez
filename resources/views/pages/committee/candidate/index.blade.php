@@ -76,9 +76,8 @@
                                                     align="center" class="rounded-circle"></td>
                                             <td>
                                                 <div>
-                                                    <button type="button" class="btn btn-sm btn-outline-info"
-                                                        id="buttonShowCandidate" data-toggle="modal"
-                                                        data-target="#modalShowCandidate{{ $candidate->id }}">Detail</button>
+                                                    <a href="{{ route('candidates.show', ['voting' => $voting->id, 'candidate' => $candidate->id]) }}"
+                                                        type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -92,50 +91,6 @@
         </section>
     </div>
 @endsection
-
-@foreach ($voting->candidates as $candidate)
-    <!-- show -->
-    <div class="modal fade" id="modalShowCandidate{{ $candidate->id }}" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                        Detail Bakal Calon</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @php
-                        $description = json_encode($candidate->description);
-                        $x = json_decode($description);
-                    @endphp
-                    <img alt="image" class="mr-3 rounded-circle" width="70" src="{{ $photo }}">
-                    <div class="media-body">
-                        <div class="media-right">
-                            <div class="text-primary">{{ $candidate->is_pass_status }}</div>
-                        </div>
-                        <div class="media-title mb-1">{{ $candidate->name }}</div>
-                        <div class="text-time">
-                            {{ $candidate->sequence_number ? 'No urut:' . $candidate->sequence_number : 'Belum mendapat nomor urut' }}
-                        </div>
-                        @if ($candidate->description)
-                            <div class="media-description text-muted">{{ 'Visi: ' . $candidate->visi }}</div>
-                            <div class="media-description text-muted">{{ 'Misi: ' . $candidate->misi }}</div>
-                        @else
-                            {{ '-' }}
-                        @endif
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
 
 @push('scripts')
     <script>
@@ -152,5 +107,4 @@
             }).draw();
         });
     </script>
-
 @endpush

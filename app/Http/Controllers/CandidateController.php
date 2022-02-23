@@ -26,4 +26,11 @@ class CandidateController extends Controller
 
         return view('pages.committee.candidate.index')->with(['voting' => $data]);
     }
+
+    public function show($votingId, $candidateId)
+    {
+        $data = $this->candidateService->getCandidateById($votingId, $candidateId);
+
+        return view('pages.committee.candidate.show')->with(['candidate' => $data]);
+    }
 }
