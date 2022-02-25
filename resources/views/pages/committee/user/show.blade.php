@@ -7,17 +7,14 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="User">
+            <x-header title="Panitia">
                 <div class="breadcrumb-item"><a href="{{ route('users.index') }}">Panitia</a></div>
-                <div class="breadcrumb-item">Detail Panitia</div>
+                <div class="breadcrumb-item">Detail Data</div>
             </x-header>
             <div class="section-body">
-                <x-title title="Detail User" lead="Kelola pengguna dengan mudah dan cepat" />
+                <x-title title="Manajemen Panitia" lead="Detail Data Panitia Voting" />
                 <div class="card">
-                    @hasanyrole('committee head')
-                        <div class="card-header">
-                            <h4>Data User</h4>
-                        </div>
+                    @hasanyrole('ketua panitia|panitia')
                         <div class="card-body">
                             <fieldset disabled>
                                 <div class="row">

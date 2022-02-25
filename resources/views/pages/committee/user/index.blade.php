@@ -7,16 +7,13 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="User">
+            <x-header title="Panitia">
                 <div class="breadcrumb-item">Panitia</div>
             </x-header>
             <div class="section-body">
-                <x-title title="Kelola User" lead="Kelola pengguna dengan mudah dan cepat" />
+                <x-title title="Manajemen Panitia" lead="Daftar Panitia Voting" />
                 <div class="card">
-                    @hasanyrole('committee head|committee')
-                        <div class="card-header">
-                            <h4>Data User</h4>
-                        </div>
+                    @hasanyrole('ketua panitia|panitia')
                         <div class="card-body">
                             <div class="table-responsive">
                                 {{ $dataTable->table(['class' => 'table table-md table-striped']) }}

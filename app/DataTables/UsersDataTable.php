@@ -3,15 +3,21 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Build DataTable class.
      *
@@ -40,11 +46,9 @@ class UsersDataTable extends DataTable
      * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query()
     {
-        return $model->where('organization_id', auth()->user()->organization_id)->whereHas('roles', function ($query) {
-            $query->where('roles.name', ['committee head', 'committee']);
-        })->newQuery();
+        return $this->userService->listUsersCommitte()->newQuery();
     }
 
     /**
@@ -81,7 +85,8 @@ class UsersDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('text-center'),
+                ->addClass('text-center')
+                ->title('Aksi'),
         ];
     }
 

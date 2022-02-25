@@ -31,13 +31,13 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'delete voting']);
 
 
-        Role::create(['name' => 'committee head'])
+        Role::create(['name' => 'admin'])
             ->givePermissionTo(Permission::all());
 
-        Role::create(['name' => 'committee'])
+        Role::create(['name' => 'ketua panitia'])
             ->givePermissionTo(Permission::all());
 
-        Role::create(['name' => 'advisor'])
+        Role::create(['name' => 'panitia'])
             ->givePermissionTo(Permission::all());
     }
 }
