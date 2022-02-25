@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
+use Throwable;
 
 class UserService
 {
@@ -45,11 +46,12 @@ class UserService
     public function storeUserData($data)
     {
 
-        $validator = Validator::make($data, [
+        Validator::make($data, [
             'organization_id' => 'required',
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'roles' => 'required'
         ])->validate();
 
         DB::beginTransaction();

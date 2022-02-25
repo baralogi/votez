@@ -42,7 +42,7 @@
                                         <label>Jabatan</label>
                                         <select class="form-control" name="roles">
                                             @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ Str::title($role->name) }}</option>
+                                                <option value="{{ $role->name }}">{{ Str::title($role->name) }}</option>
                                             @endforeach
                                         </select>
                                     </div>

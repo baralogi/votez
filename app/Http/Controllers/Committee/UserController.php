@@ -33,7 +33,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'organization_id' => auth()->user()->organization->id,
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'roles' => $request->roles
         ]);
 
         return redirect()->route('users.index');
