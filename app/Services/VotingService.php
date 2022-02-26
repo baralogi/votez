@@ -54,10 +54,7 @@ class VotingService
 
         DB::beginTransaction();
         try {
-            $extension = $data['logo']->extension();
-            $logoName = date('dmyHis') . '.' . $extension;
-            Storage::putFileAs('public/images/logo', $data['logo'], $logoName);
-
+            $logoName = $this->votingRepository->uploadFile($data['logo'], '/images/logo');
             $result = $this->votingRepository->store($data, $logoName);
             DB::commit();
             return $result;

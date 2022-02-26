@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Voting;
+use Illuminate\Support\Facades\Storage;
 
 class VotingRepository
 {
@@ -51,5 +52,14 @@ class VotingRepository
     public function destroy($id)
     {
         return $this->voting->where('id', $id)->delete();
+    }
+
+    public function uploadFile($file, $filePath)
+    {
+        $extension = $file->extension();
+        $fileName = date('dmyHis') . '.' . $extension;
+        Storage::putFileAs('public' . $filePath, $file, $fileName);
+
+        return $fileName;
     }
 }
