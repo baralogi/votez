@@ -12,7 +12,6 @@ use Throwable;
 
 class UserService
 {
-
     /**
      * @var UserRepository
      */

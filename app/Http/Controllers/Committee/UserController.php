@@ -27,6 +27,12 @@ class UserController extends Controller
         return $dataTable->render('pages.committee.user.index');
     }
 
+    public function create()
+    {
+        $data = $this->roleService->getCommitteeRoles()->get();
+        return view('pages.committee.user.create')->with(['roles' => $data]);
+    }
+
     public function store(Request $request)
     {
         $this->userService->storeUserData([
@@ -38,12 +44,6 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index');
-    }
-
-    public function create()
-    {
-        $data = $this->roleService->getCommitteeRoles()->get();
-        return view('pages.committee.user.create')->with(['roles' => $data]);
     }
 
     public function show($id)

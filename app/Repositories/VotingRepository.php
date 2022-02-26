@@ -29,9 +29,18 @@ class VotingRepository
         return $this->voting->where('organization_id', $id);
     }
 
-    public function store($data)
+    public function store($data, $logoName)
     {
-        return $this->voting->create($data);
+        $voting = new $this->voting;
+        $voting->organization_id = $data['organization_id'];
+        $voting->name = $data['name'];
+        $voting->description = $data['description'];
+        $voting->start_at = $data['start_at'];
+        $voting->end_at = $data['end_at'];
+        $voting->logo = $logoName;
+        $voting->save();
+
+        return $voting;
     }
 
     public function update($id, $data)

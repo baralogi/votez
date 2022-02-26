@@ -27,24 +27,41 @@
                                 <div class="col-sm form-group">
                                     <label>Logo Voting</label>
                                     <input type="file" class="form-control" name="logo" id="image">
+                                    @error('logo')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Nama Voting</label>
-                                <input type="text" class="form-control" name="name"
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}"
                                     placeholder="ex: Badan Eksekutif Mahasiswa, Himpunan Mahasiswa Sistem Informasi">
+                                @error('name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label>
-                                <textarea class="form-control" name="description"></textarea>
+                                <textarea class="form-control" name="description">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Pelaksanaan</label>
-                                <input type="date" class="form-control datepicker" name="start_at">
+                                <input type="date" class="form-control datepicker" name="start_at"
+                                    value="{{ old('start_at') }}">
+                                @error('start_at')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Berakhir</label>
-                                <input type="date" class="form-control datepicker" name="end_at">
+                                <input type="date" class="form-control datepicker" name="end_at"
+                                    value="{{ old('end_at') }}">
+                                @error('end_at')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="card-footer text-right">

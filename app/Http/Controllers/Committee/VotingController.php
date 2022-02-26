@@ -29,20 +29,16 @@ class VotingController extends Controller
 
     public function store(Request $request)
     {
-        $extension = $request->file('logo')->extension();
-        $logoName = date('dmyHis') . '.' . $extension;
-        $path = Storage::putFileAs('public/images/logo', $request->file('logo'), $logoName);
-
-
-        $data = $this->votingService->storeVoting([
+        $this->votingService->storeVotingData([
+            'organization_id' => auth()->user()->organization->id,
             'name' => $request->name,
             'description' => $request->description,
             'start_at' => $request->start_at,
             'end_at' => $request->end_at,
-            'logo' => $logoName
+            'logo' => $request->file('logo')
         ]);
 
-        return redirect()->route('votings.index')->withSuccess("Sukses bos");
+        return redirect()->route('votings.index');
     }
 
     public function edit($id)
