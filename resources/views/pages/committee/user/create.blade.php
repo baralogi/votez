@@ -21,14 +21,14 @@
                                 <div class="row">
                                     <div class="from-group col-md-6 col-12 mb-2">
                                         <label for="">Nama</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                         @error('name')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="from-group col-md-6 col-12 mb-2">
                                         <label for="">Email</label>
-                                        <input type="text" class="form-control" name="email">
+                                        <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                                         @error('email')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
