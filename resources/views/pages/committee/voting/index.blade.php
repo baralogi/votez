@@ -7,14 +7,13 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Voting" />
+            <x-header title="Panitia">
+                <div class="breadcrumb-item">Voting</div>
+            </x-header>
 
             <div class="section-body">
-                <x-title title="Kelola Voting" lead="Kelola voting mu dengan mudah dan cepat" />
+                <x-title title="Manajemen Voting" lead="Daftar Data Voting" />
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Data Voting</h4>
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             {{ $dataTable->table(['class' => 'table table-striped']) }}

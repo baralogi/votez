@@ -77,8 +77,6 @@ class VotingsDataTable extends DataTable
             ->orderBy(1)
             ->buttons(
                 Button::make('create')->addClass('btn-success'),
-                Button::make('export'),
-                Button::make('print'),
                 Button::make('reset')->addClass('btn-warning'),
                 Button::make('reload')->addClass('btn-danger')
             );

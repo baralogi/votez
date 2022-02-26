@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Committee;
 
 use App\Http\Controllers\Controller;
 use App\DataTables\VotingsDataTable;
+use App\Models\Voting;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -47,35 +48,22 @@ class VotingController extends Controller
         return view('pages.committee.voting.edit')->with(['voting' => $data]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Voting $voting)
     {
-        $data = $this->votingService->getVotingById($request->voting);
-        $logo = $request->logo;
-        $logoName = null;
-        if (!empty($logo)) {
-            $extension = $request->file('logo')->extension();
-            $logoName = date('dmyHis') . '.' . $extension;
-            $path = Storage::putFileAs('public/images/logo', $request->file('logo'), $logoName);
-            if ($path) {
-                $oldLogo = $data->logo;
-                Storage::delete('public/images/logo/' . $oldLogo);
-            }
-        }
-
-        $this->votingService->updateVoting($request->voting, [
+        $this->votingService->updateVotingData($voting->id, [
             'name' => $request->name,
             'description' => $request->description,
             'start_at' => $request->start_at,
             'end_at' => $request->end_at,
-            'logo' => $logoName ? $logoName : $data->logo
+            'logo' => $request->file('logo')
         ]);
 
-        return redirect()->route('votings.index')->withSuccess("Sukses bos");
+        return redirect()->route('votings.index')->with('success', 'Data berhasil diubah');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Voting $voting)
     {
-        $this->votingService->destroyVoting($request->voting);
+        $this->votingService->destroyVotingData($voting->id);
         return redirect()->route('votings.index');
     }
 }

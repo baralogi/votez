@@ -44,14 +44,25 @@ class VotingRepository
         return $voting;
     }
 
-    public function update($id, $data)
+    public function update($id, $data, $logoName)
     {
-        return $this->voting->where('id', $id)->update($data);
+        $voting = $this->voting->find($id);
+        $voting->name = $data['name'];
+        $voting->description = $data['description'];
+        $voting->start_at = $data['start_at'];
+        $voting->end_at = $data['end_at'];
+        $voting->logo = $logoName;
+        $voting->update();
+
+        return $voting;
     }
 
     public function destroy($id)
     {
-        return $this->voting->where('id', $id)->delete();
+        $voting = $this->voting->find($id);
+        $voting->delete();
+
+        return $voting;
     }
 
     public function uploadFile($file, $filePath)
@@ -61,5 +72,13 @@ class VotingRepository
         Storage::putFileAs('public' . $filePath, $file, $fileName);
 
         return $fileName;
+    }
+
+    public function removeFile($fileName, $filePath)
+    {
+        $oldLogo = $fileName->logo;
+        Storage::delete('public' . $filePath . $oldLogo);
+
+        return $oldLogo;
     }
 }

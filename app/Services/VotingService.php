@@ -56,6 +56,7 @@ class VotingService
         try {
             $logoName = $this->votingRepository->uploadFile($data['logo'], '/images/logo');
             $result = $this->votingRepository->store($data, $logoName);
+
             DB::commit();
             return $result;
         } catch (Exception $error) {
@@ -64,13 +65,50 @@ class VotingService
         }
     }
 
-    public function updateVoting($id, $data)
+    public function updateVotingData($id, $data)
     {
-        return $this->votingRepository->update($id, $data);
+        DB::beginTransaction();
+        try {
+            $getVotingById = $this->votingRepository->getById($id);
+            $logo = $data['logo'];
+            $logoName = $getVotingById->logo;
+            if (!empty($logo)) {
+                Validator::make($data, [
+                    'name' => 'required',
+                    'description' => 'required',
+                    'start_at' => 'required',
+                    'end_at' => 'required',
+                    'logo' => 'mimes:jpeg,jpg,png|max:2000'
+                ])->validate();
+                $logoName = $this->votingRepository->uploadFile($data['logo'], '/images/logo');
+                if ($logoName) {
+                    $this->votingRepository->removeFile($getVotingById, '/images/logo/');
+                }
+            }
+
+            $result = $this->votingRepository->update($id, $data, $logoName);
+
+            DB::commit();
+            return $result;
+        } catch (Exception $error) {
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
     }
 
-    public function destroyVoting($id)
+    public function destroyVotingData($id)
     {
-        return $this->votingRepository->destroy($id);
+        DB::beginTransaction();
+        try {
+            $voting = $this->votingRepository->destroy($id);
+            $this->votingRepository->removeFile($voting, '/images/logo/');
+
+            DB::commit();
+            return $voting;
+        } catch (Exception $error) {
+            dd($error);
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
     }
 }

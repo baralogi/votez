@@ -7,14 +7,14 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Voting" />
+            <x-header title="Voting">
+                <div class="breadcrumb-item"><a href="{{ route('votings.index') }}">Voting</a></div>
+                <div class="breadcrumb-item">Simpan Data</div>
+            </x-header>
 
             <div class="section-body">
-                <x-title title="Kelola Voting" lead="Kelola voting mu dengan mudah dan cepat" />
+                <x-title title="Manajemen Voting" lead="Simpan Data Voting" />
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Buat Voting Baru</h4>
-                    </div>
                     <form action="{{ route('votings.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
