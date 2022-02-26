@@ -49,10 +49,8 @@
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-save">&nbsp;
-                                        Simpan</i></button>
-                                <a href="{{ route('users.index') }}" class="btn btn-outline-danger"><i
-                                        class="fas fa-arrow-alt-circle-left">&nbsp; Kembali</i></a>
+                                <x-save-button />
+                                <x-back-button route="{{ route('users.index') }}" />
                             </div>
                         </form>
                     </div>

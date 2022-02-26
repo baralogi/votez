@@ -72,8 +72,10 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit">Ubah</button>
-                            <a href="{{ route('votings.index') }}" class="btn btn-outline-secondary">Kembali</a>
+                            <div class="card-footer text-right">
+                                <x-update-button />
+                                <x-back-button route="{{ route('votings.index') }}" />
+                            </div>
                         </div>
                     </form>
                 </div>

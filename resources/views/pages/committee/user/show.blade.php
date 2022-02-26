@@ -44,8 +44,7 @@
                             </fieldset>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="{{ route('users.index') }}" class="btn btn-primary"><i
-                                    class="fas fa-arrow-alt-circle-left">&nbsp; Kembali</i></a>
+                            <x-back-button route="{{ route('users.index') }}" />
                         </div>
                     </div>
                 @else

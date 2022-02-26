@@ -65,8 +65,8 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit">Simpan</button>
-                            <a href="{{ route('votings.index') }}" class="btn btn-outline-secondary">Kembali</a>
+                            <x-save-button />
+                            <x-back-button route="{{ route('votings.index') }}" />
                         </div>
                     </form>
                 </div>
