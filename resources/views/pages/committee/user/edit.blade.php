@@ -24,6 +24,9 @@
                                     <div class="from-group col-md-6 col-12 mb-2">
                                         <label for="">Nama</label>
                                         <input type="text" class="form-control" value="{{ $user->name }}" name="name">
+                                        @error('name')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="from-group col-md-6 col-12 mb-2">
                                         <label for="">Email</label>
@@ -33,6 +36,16 @@
                                         <label for="">Kelompok</label>
                                         <input type="text" class="form-control" value="{{ $user->organization->name }}"
                                             disabled>
+                                    </div>
+                                    <div class="from-group col-md-6 col-12 mb-2">
+                                        <label>Jabatan</label>
+                                        <select class="form-control" name="roles">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->name }}"
+                                                    {{ $role->id === $user->roles[0]->id ? 'selected' : '' }}>
+                                                    {{ Str::title($role->name) }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

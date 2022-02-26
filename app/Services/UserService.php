@@ -65,9 +65,22 @@ class UserService
         }
     }
 
-    public function updateUser($id, $data)
+    public function updateUserData($id, $data)
     {
-        return $this->userRepository->update($id, $data);
+        Validator::make($data, [
+            'name' => 'required',
+            'roles' => 'required'
+        ])->validate();
+
+        DB::beginTransaction();
+        try {
+            $result = $this->userRepository->update($id, $data);
+            DB::commit();
+            return $result;
+        } catch (Exception $error) {
+            DB::rollback();
+            Log::error($error);
+        }
     }
 
     public function destroyUser($id)

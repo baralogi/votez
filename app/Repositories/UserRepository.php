@@ -47,7 +47,11 @@ class UserRepository
 
     public function update($id, $data)
     {
-        return $this->user->where('id', $id)->update($data);
+        $user = $this->user->find($id);
+        $user->name = $data['name'];
+        $user->syncRoles([$data['roles']]);
+        $user->update();
+        return $user;
     }
 
     public function destroy($id)

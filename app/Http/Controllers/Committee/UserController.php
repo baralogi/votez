@@ -55,15 +55,17 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $data = $this->userService->getUserById($id);
+        $roles = $this->roleService->getCommitteeRoles()->get();
+        $user = $this->userService->getUserById($id);
 
-        return view('pages.committee.user.edit')->with(['user' => $data]);
+        return view('pages.committee.user.edit')->with(['user' => $user, 'roles' => $roles]);
     }
 
     public function update(User $user, Request $request)
     {
-        $this->userService->updateUser($user->id, [
-            'name' => $request->name
+        $this->userService->updateUserData($user->id, [
+            'name' => $request->name,
+            'roles' => $request->roles
         ]);
 
         return redirect()->route('users.index');
