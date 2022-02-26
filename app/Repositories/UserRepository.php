@@ -51,11 +51,15 @@ class UserRepository
         $user->name = $data['name'];
         $user->syncRoles([$data['roles']]);
         $user->update();
+
         return $user;
     }
 
     public function destroy($id)
     {
-        return $this->user->where('id', $id)->delete();
+        $user = $this->user->find($id);
+        $user->delete();
+
+        return $user;
     }
 }

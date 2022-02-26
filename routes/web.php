@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/{user}', [CommitteUserController::class, 'show'])->name('users.show');
         Route::get('/users/{user}/edit', [CommitteUserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [CommitteUserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [CommitteUserController::class, 'destroy'])->name('users.destroy');
         Route::resource('participants', ParticipantController::class);
         Route::resource('blogs', BlogController::class);
         Route::prefix('votings')->group(function () {

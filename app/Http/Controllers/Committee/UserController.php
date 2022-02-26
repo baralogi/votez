@@ -48,9 +48,10 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $data = $this->userService->getUserById($id);
+        $roles = $this->roleService->getCommitteeRoles()->get();
+        $user = $this->userService->getUserById($id);
 
-        return view('pages.committee.user.show')->with(['user' => $data]);
+        return view('pages.committee.user.show')->with(['user' => $user, 'roles' => $roles]);
     }
 
     public function edit($id)
@@ -67,6 +68,13 @@ class UserController extends Controller
             'name' => $request->name,
             'roles' => $request->roles
         ]);
+
+        return redirect()->route('users.index');
+    }
+
+    public function destroy(User $user)
+    {
+        $this->userService->destroyUserData($user->id);
 
         return redirect()->route('users.index');
     }

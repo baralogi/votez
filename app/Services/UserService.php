@@ -61,7 +61,7 @@ class UserService
             return $result;
         } catch (Exception $error) {
             DB::rollback();
-            Log::error($error);
+            Log::error($error->getMessage());
         }
     }
 
@@ -79,12 +79,20 @@ class UserService
             return $result;
         } catch (Exception $error) {
             DB::rollback();
-            Log::error($error);
+            Log::error($error->getMessage());
         }
     }
 
-    public function destroyUser($id)
+    public function destroyUserData($id)
     {
-        return $this->userRepository->destroy($id);
+        DB::beginTransaction();
+        try {
+            $result = $this->userRepository->destroy($id);
+            DB::commit();
+            return $result;
+        } catch (Exception $error) {
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
     }
 }
