@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Committee;
 
 use App\Http\Controllers\Controller;
 use App\DataTables\UsersDataTable;
+use App\Models\Organization;
 use App\Services\UserService;
 use App\Models\User;
+use App\Services\OrganizationService;
 use App\Services\RoleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,12 +16,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    protected $userService, $roleService;
+    protected $userService, $roleService, $organizationService;
 
-    public function __construct(UserService $userService, RoleService $roleService)
+    public function __construct(UserService $userService, RoleService $roleService, OrganizationService $organizationService)
     {
         $this->userService = $userService;
         $this->roleService = $roleService;
+        $this->organizationService = $organizationService;
     }
 
     public function index(UsersDataTable $dataTable)

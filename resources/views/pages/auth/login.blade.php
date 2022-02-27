@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+    <title>Votez &mdash; Masuk</title>
+@endsection
+
 @section('main')
     <section class="section">
         <div class="d-flex flex-wrap align-items-stretch">
@@ -26,7 +30,7 @@
 
                         <div class="form-group">
                             <div class="d-block">
-                                <label for="password" class="control-label">Password</label>
+                                <label for="password" class="control-label">Kata Sandi</label>
                             </div>
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2"
@@ -47,26 +51,27 @@
                             </div> --}}
 
                         <div class="form-group text-right">
-                            <a href="auth-forgot-password.html" class="float-left mt-3">
+                            {{-- <a href="auth-forgot-password.html" class="float-left mt-3">
                                 Forgot Password?
-                            </a>
+                            </a> --}}
                             <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                                 Masuk
                             </button>
                         </div>
 
-                        {{-- <div class="mt-5 text-center">
-                                Don't have an account? <a href="auth-register.html">Create new one</a>
-                            </div> --}}
+                        <div class="mt-5 text-center">
+                            Ingin menjadi pemimpin? <a href="{{ route('register') }}">Daftar calon
+                                Kandidat</a>
+                        </div>
                     </form>
 
-                    <div class="text-center mt-5 text-small">
-                        Copyright &copy; Votez. Made with 💙 by Stisla
-                        <div class="mt-2">
+                    <div class="text-center mt-2 text-small">
+                        &copy; {{ now()->year }} Votez. Made with 💙 by Sebastianus Sembara
+                        {{-- <div class="mt-2">
                             <a href="#">Privacy Policy</a>
                             <div class="bullet"></div>
                             <a href="#">Terms of Service</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
