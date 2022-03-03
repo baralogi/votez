@@ -14,7 +14,7 @@
                             Universitas Dinamika</span>
                     </h4>
                     <p class="text-muted">Sebelum kamu memulai, kamu harus masuk terlebih dahulu</p>
-                    <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                    <form method="POST" action="{{ route('login') }}" class="needs-validation">
                         @csrf
                         <div class="form-group">
                             <label for="email">Email</label>

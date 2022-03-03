@@ -23,7 +23,20 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                switch (Auth::user()->roles[0]->name) {
+                    case 'ketua panitia':
+                        return RouteServiceProvider::COMMITTEE;
+                        break;
+                    case 'panitia':
+                        return RouteServiceProvider::COMMITTEE;
+                        break;
+                    case 'kandidat calon':
+                        return RouteServiceProvider::CANDIDATEE;
+                        break;
+                    default:
+                        return \abort(403);
+                        break;
+                }
             }
         }
 

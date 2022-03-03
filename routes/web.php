@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Committee\DashboardController;
 use App\Http\Controllers\Committee\VotingController;
@@ -49,5 +50,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{voting}/candidates', [CandidateController::class, 'index'])->name('candidates.index');
             Route::get('/{voting}/candidates/{candidate}', [CandidateController::class, 'show'])->name('candidates.show');
         });
+    });
+    Route::prefix('candidates')->group(function () {
+        Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('candidate.dashboard.index');
     });
 });
