@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -17,7 +18,24 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::COMMITTEE;
+    public function redirectTo()
+    {
+        $role = Auth::user()->roles[0]->name;
+        switch ($role) {
+            case 'ketua panitia':
+                return RouteServiceProvider::COMMITTEE;
+                break;
+            case 'panitia':
+                return RouteServiceProvider::COMMITTEE;
+                break;
+            case 'kandidat':
+                return RouteServiceProvider::CANDIDATEE;
+                break;
+            default:
+                return \abort(403);
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.

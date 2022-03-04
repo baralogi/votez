@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidate;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -29,7 +34,24 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::COMMITTEE;
+    public function redirectTo()
+    {
+        $role = Auth::user()->roles[0]->name;
+        switch ($role) {
+            case 'ketua panitia':
+                return RouteServiceProvider::COMMITTEE;
+                break;
+            case 'panitia':
+                return RouteServiceProvider::COMMITTEE;
+                break;
+            case 'kandidat':
+                return RouteServiceProvider::CANDIDATEE;
+                break;
+            default:
+                return \abort(403);
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -52,8 +74,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
-            // 'organization' => ['required']
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'organization_id' => ['required'],
+            'voting_id' => ['required']
         ]);
     }
 
@@ -65,12 +88,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            // 'organization_id' => $data['organization'],
-        ]);
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'organization_id' => $data['organization_id'],
+            ]);
+            $user->assignRole('kandidat');
+
+            $findLastCandidate = Candidate::where('voting_id', $data['voting_id'])->orderBy('number_of_partner', 'desc')->first();
+
+            Candidate::create([
+                'voting_id' => $data['voting_id'],
+                'number_of_partner' => $findLastCandidate ? ((int) $findLastCandidate->number_of_partner + (int) 1) : 1,
+                'name' => $data['name'],
+            ]);
+
+            DB::commit();
+        } catch (Exception $error) {
+            DB::rollback();
+            dd($error);
+            Log::error($error->getMessage());
+        }
+
+        return $user;
     }
 }

@@ -39,5 +39,8 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'panitia'])
             ->givePermissionTo(Permission::all());
+
+        Role::create(['name' => 'kandidat'])
+            ->givePermissionTo(Permission::all());
     }
 }

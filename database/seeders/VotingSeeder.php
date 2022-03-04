@@ -17,7 +17,6 @@ class VotingSeeder extends Seeder
     {
         Voting::factory()
             ->count(3)
-            ->has(Candidate::factory()->count(3))
             ->create();
     }
 }

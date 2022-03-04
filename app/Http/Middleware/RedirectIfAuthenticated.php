@@ -23,14 +23,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                switch (Auth::user()->roles[0]->name) {
+                $role = Auth::user()->roles[0]->name;
+                switch ($role) {
                     case 'ketua panitia':
                         return RouteServiceProvider::COMMITTEE;
                         break;
                     case 'panitia':
                         return RouteServiceProvider::COMMITTEE;
                         break;
-                    case 'kandidat calon':
+                    case 'kandidat':
                         return RouteServiceProvider::CANDIDATEE;
                         break;
                     default:
