@@ -57,5 +57,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('candidate.dashboard.index');
         Route::get('/teams', [TeamController::class, 'index'])->name('candidate.team.index');
         Route::get('/personal', [PersonalController::class, 'index'])->name('candidate.personal.index');
+        Route::get('/personal/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
     });
 });

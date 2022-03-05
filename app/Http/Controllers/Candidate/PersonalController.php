@@ -23,4 +23,9 @@ class PersonalController extends Controller
 
         return view('pages.candidate.personal.index')->with(['candidates' => $data]);
     }
+
+    public function create()
+    {
+        return view('pages.candidate.personal.create');
+    }
 }

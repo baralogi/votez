@@ -7,14 +7,18 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Personal" />
+            <x-header title="Personal">
+                <div class="breadcrumb-item"><a href="{{ route('candidate.dashboard.index') }}">Dashboard</a></div>
+                <div class="breadcrumb-item">Personal</div>
+            </x-header>
 
             <div class="section-body">
                 <x-title title="Data Personal" lead="Manajemen data personal pasangan calon" />
                 <div class="card">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn btn-outline-success"><i class="fas fa-plus">&nbsp;&nbsp; Tambah
+                            <a href="{{ route('candidate.personal.create') }}" class="btn btn-outline-success"><i
+                                    class="fas fa-plus">&nbsp;&nbsp; Tambah
                                     Kandidat</i></a>
                         </div>
                         <div class="card-body">
