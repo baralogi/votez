@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\CandidatePartner;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Exception;
@@ -98,12 +99,16 @@ class RegisterController extends Controller
             ]);
             $user->assignRole('kandidat');
 
-            $findLastCandidate = Candidate::where('voting_id', $data['voting_id'])->orderBy('number_of_partner', 'desc')->first();
+            $candidatePartner = CandidatePartner::create([
+                'is_pass' => false
+            ]);
 
             Candidate::create([
+                'user_id' => $user->id,
                 'voting_id' => $data['voting_id'],
-                'number_of_partner' => $findLastCandidate ? ((int) $findLastCandidate->number_of_partner + (int) 1) : 1,
+                'candidate_partner_id' => $candidatePartner->id,
                 'name' => $data['name'],
+                'status' => Candidate::CHAIRMAN
             ]);
 
             DB::commit();

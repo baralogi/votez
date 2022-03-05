@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Candidate extends Model
 {
     use HasFactory;
-    protected $fillable = ['voting_id', 'number_of_partner', 'name', 'description', 'is_pass', 'photo'];
+
+    const CHAIRMAN = 'KETUA';
+    const VICE = 'WAKIL KETUA';
+    protected $fillable = ['user_id', 'voting_id', 'candidate_partner_id', 'name', 'status', 'description'];
 
     public function voting()
     {
@@ -25,9 +28,9 @@ class Candidate extends Model
         return $this->hasMany(CandidateFile::class);
     }
 
-    public function candidatePartners()
+    public function candidatePartner()
     {
-        return $this->hasMany(CandidatePartner::class);
+        return $this->belongsTo(CandidatePartner::class);
     }
 
     public function getPhotoLinkAttribute()

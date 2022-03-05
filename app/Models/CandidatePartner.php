@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CandidatePartner extends Model
 {
     use HasFactory;
-    protected $fillable = ['vision', 'mission'];
+    protected $fillable = ['sequence_number', 'vision', 'mission', 'is_pass', 'photo'];
 
-    public function candidate()
+    public function candidates()
     {
-        return $this->belongsTo(Candidate::class);
+        return $this->hasMany(Candidate::class);
     }
 }

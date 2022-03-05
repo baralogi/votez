@@ -19,9 +19,8 @@ class CreateCandidatesTable extends Migration
             $table->foreignId('voting_id')->constrained();
             $table->foreignId('candidate_partner_id')->constrained();
             $table->string('name');
+            $table->string('status');
             $table->json('description')->nullable();
-            $table->boolean('is_pass')->nullable();
-            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
