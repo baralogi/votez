@@ -7,6 +7,16 @@ use App\Repositories\CandidateRepository;
 class CandidateService
 {
 
+    /**
+     * @var CandidateRepository $candidateRepository
+     */
+    protected $candidateRepository;
+
+    /**
+     * CandidateService constructor.
+     *
+     * @param CandidateRepository $candidateRepository
+     */
     public function __construct(CandidateRepository $candidateRepository)
     {
         $this->candidateRepository = $candidateRepository;
@@ -20,6 +30,11 @@ class CandidateService
     public function getCandidateById($votingId, $candidateId)
     {
         return $this->candidateRepository->getById($votingId, $candidateId);
+    }
+
+    public function getCandidateByPartner($votingId, $partnerId)
+    {
+        return $this->candidateRepository->getByPartner($votingId, $partnerId);
     }
 
     public function storeVoting($data)

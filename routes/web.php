@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
+use App\Http\Controllers\Candidate\PersonalController;
+use App\Http\Controllers\Candidate\TeamController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Committee\DashboardController;
 use App\Http\Controllers\Committee\VotingController;
@@ -53,5 +55,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('candidates')->group(function () {
         Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('candidate.dashboard.index');
+        Route::get('/teams', [TeamController::class, 'index'])->name('candidate.team.index');
+        Route::get('/personal', [PersonalController::class, 'index'])->name('candidate.personal.index');
     });
 });

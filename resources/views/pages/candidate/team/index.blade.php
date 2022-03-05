@@ -1,16 +1,16 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Dashboard</title>
+    <title>Votez &mdash; Team</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Dashboard" />
+            <x-header title="Team" />
 
             <div class="section-body">
-                <x-title title="Dashboard Kandidat Calon" lead="Dashboard Informasi voting untuk kandidat calon" />
+                <x-title title="Data Team" lead="Manajemen data team pasangan calon" />
                 <div class="card">
                     <div class="card-body">
                     </div>

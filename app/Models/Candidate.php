@@ -23,6 +23,11 @@ class Candidate extends Model
         return $this->hasMany(VotingCount::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function candidateFiles()
     {
         return $this->hasMany(CandidateFile::class);

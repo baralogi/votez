@@ -24,6 +24,11 @@ class CandidateRepository
         return $this->candidate->where('voting_id', $votingId)->where('id', $candidateId)->with('candidateFiles')->first();
     }
 
+    public function getByPartner($votingId, $partnerId)
+    {
+        return $this->candidate->where('voting_id', $votingId)->where('candidate_partner_id', $partnerId);
+    }
+
     public function store($data)
     {
         return $this->candidate->insert($data);
