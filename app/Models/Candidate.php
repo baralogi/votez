@@ -25,6 +25,11 @@ class Candidate extends Model
         return $this->hasMany(CandidateFile::class);
     }
 
+    public function candidatePartners()
+    {
+        return $this->hasMany(CandidatePartner::class);
+    }
+
     public function getPhotoLinkAttribute()
     {
         return asset('storage/images/photo/' . $this->logo);
