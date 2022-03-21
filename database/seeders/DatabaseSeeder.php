@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             OrganizationSeeder::class,
             VotingSeeder::class,
+            FacultySeeder::class,
+            MajorSeeder::class
         ]);
     }
 }
