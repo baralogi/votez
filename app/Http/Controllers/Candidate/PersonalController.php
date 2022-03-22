@@ -4,15 +4,25 @@ namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
 use App\Services\CandidateService;
+use App\Services\FacultyService;
 use Illuminate\Support\Facades\Auth;
 
 class PersonalController extends Controller
 {
-    protected $candidateService;
+    /**
+     * @var CandidateService $candidateService
+     * @var FacultyService $facultyService
+     */
+    protected $candidateService, $facultyService;
 
-    public function __construct(CandidateService $candidateService)
+    /**
+     * @var CandidateService $candidateService
+     * @var FacultyService $facultyService
+     */
+    public function __construct(CandidateService $candidateService, FacultyService $facultyService)
     {
         $this->candidateService = $candidateService;
+        $this->facultyService = $facultyService;
     }
 
     public function index()
@@ -26,6 +36,7 @@ class PersonalController extends Controller
 
     public function create()
     {
-        return view('pages.candidate.personal.create');
+        $faculties = $this->facultyService->listFaculty();
+        return view('pages.candidate.personal.create')->with(['faculties' => $faculties]);
     }
 }

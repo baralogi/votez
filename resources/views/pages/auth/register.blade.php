@@ -99,11 +99,10 @@
 @endsection
 
 @push('scripts')
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
             $('#organization_id').on('change', function() {
                 var organizationId = $(this).val();
-                console.log(organizationId);
                 if (organizationId) {
                     $.ajax({
                         url: '/api/organizations/' + organizationId + '/votings',

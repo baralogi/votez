@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\MajorController;
 use App\Http\Controllers\Api\VotingController;
+use App\Http\Controllers\Api\FacultyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('organizations')->group(function () {
     Route::get('/{id}/votings', [VotingController::class, 'getByOrganization'])->name('organizations.voting');
 });
-// });
+
+Route::get('/faculties', [FacultyController::class, 'index'])->name('faculties.index');
+
+Route::get('/faculties/{faculty}/majors', [MajorController::class, 'getByFacultyId'])->name('faculties.show.majors');
+Route::get('/majors', [MajorController::class, 'index'])->name('majors.index');

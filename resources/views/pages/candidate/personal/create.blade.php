@@ -87,13 +87,14 @@
                                     <label>Fakultas</label>
                                     <select class="form-control" name="faculty" id="faculty">
                                         <option hidden>Pilih Fakultas</option>
+                                        @foreach ($faculties as $faculty)
+                                            <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Program Studi</label>
-                                    <select class="form-control" name="major" id="major">
-                                        <option hidden>Pilih Prodi</option>
-                                    </select>
+                                    <select class="form-control" name="major" id="major"></select>
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Semester Sekarang</label>
@@ -119,3 +120,37 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#faculty').on('change', function() {
+                var facultyId = $(this).val();
+                if (facultyId) {
+                    $.ajax({
+                        url: '/api/faculties/' + facultyId + '/majors',
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data) {
+                                $('#major').empty();
+                                $('#major').append(
+                                    '<option hidden>Pilih Program Studi</option>');
+                                $.each(data.data, function(key, value) {
+                                    console.log(value.name);
+                                    $('select[name="major"]').append(
+                                        '<option value="' + value.id + '">' +
+                                        value.name + '</option>');
+                                });
+                            } else {
+                                $('#major').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#major').empty();
+                }
+            });
+        });
+    </script>
+@endpush
