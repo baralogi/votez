@@ -17,9 +17,11 @@
                 <div class="card">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('candidate.personal.create') }}" class="btn btn-outline-success"><i
-                                    class="fas fa-plus">&nbsp;&nbsp; Tambah
-                                    Kandidat</i></a>
+                            @if ($candidates->count() == 1)
+                                <a href="{{ route('candidate.personal.create') }}" class="btn btn-outline-success"><i
+                                        class="fas fa-plus">&nbsp;&nbsp; Tambah
+                                        Kandidat</i></a>
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -42,7 +44,8 @@
                                                 <td>{{ $candidate->status }}</td>
                                                 <td>
                                                     <div>
-                                                        <a href="#" type="button" class="btn btn-sm btn-outline-info">Lihat
+                                                        <a href="{{ route('candidate.personal.show', ['candidate' => $candidate->id]) }}"
+                                                            type="button" class="btn btn-sm btn-outline-info">Lihat
                                                             Detail</a>
                                                     </div>
                                                 </td>

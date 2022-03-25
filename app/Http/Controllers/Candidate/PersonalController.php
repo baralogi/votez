@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidate;
 use App\Services\CandidateService;
 use App\Services\FacultyService;
 use Illuminate\Http\Request;
@@ -30,9 +31,9 @@ class PersonalController extends Controller
     {
         $votingId = Auth::user()->candidate->voting_id;
         $candidate_partners_id = Auth::user()->candidate->candidate_partner_id;
-        $data = $this->candidateService->getCandidateByPartner($votingId, $candidate_partners_id)->get();
+        $candidates = $this->candidateService->getCandidateByPartner($votingId, $candidate_partners_id)->get();
 
-        return view('pages.candidate.personal.index')->with(['candidates' => $data]);
+        return view('pages.candidate.personal.index')->with(['candidates' => $candidates]);
     }
 
     public function create()
@@ -44,7 +45,7 @@ class PersonalController extends Controller
     public function store(Request $request)
     {
 
-        $data = $this->candidateService->storeCandidate([
+        $this->candidateService->storeCandidate([
             'name' => $request->name,
             'nim' => $request->name,
             'email' => $request->email,
@@ -60,7 +61,14 @@ class PersonalController extends Controller
             'sskm' => $request->sskm,
         ]);
 
-
         return redirect()->route('candidate.personal.index');
+    }
+
+    public function show(Candidate $candidate)
+    {
+        $votingId = Auth::user()->candidate->voting_id;
+        $candidates = $this->candidateService->getCandidateById($votingId, $candidate->id);
+
+        return view('pages.candidate.personal.show')->with(['candidates' => $candidates]);
     }
 }

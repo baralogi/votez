@@ -56,8 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('candidates')->group(function () {
         Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('candidate.dashboard.index');
         Route::get('/teams', [TeamController::class, 'index'])->name('candidate.team.index');
+        // Personal Data 
         Route::get('/personals', [PersonalController::class, 'index'])->name('candidate.personal.index');
         Route::get('/personals/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
         Route::post('/personals', [PersonalController::class, 'store'])->name('candidate.personal.store');
+        Route::get('/personals/{candidate}', [PersonalController::class, 'show'])->name('candidate.personal.show');
     });
 });
