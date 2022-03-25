@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Candidate;
+use Illuminate\Support\Facades\Auth;
 
 class CandidateRepository
 {
@@ -31,7 +32,28 @@ class CandidateRepository
 
     public function store($data)
     {
-        return $this->candidate->insert($data);
+        $desc['nim'] = $data['nim'];
+        $desc['email'] = $data['email'];
+        $desc['phone'] = $data['phone'];
+        $desc['sex'] = $data['sex'];
+        $desc['address'] = $data['address'];
+        $desc['birth_place'] = $data['birth_place'];
+        $desc['birth_date'] = $data['birth_date'];
+        $desc['faculty'] = $data['faculty'];
+        $desc['major'] = $data['major'];
+        $desc['semester'] = $data['semester'];
+        $desc['ipk'] = $data['ipk'];
+        $desc['sskm'] = $data['sskm'];
+
+        $candidate = new $this->candidate;
+        $candidate->voting_id = Auth::user()->candidate->voting->id;
+        $candidate->candidate_partner_id = Auth::user()->candidate->candidate_partner_id;
+        $candidate->name = $data['name'];
+        $candidate->status = 'WAKIL KETUA';
+        $candidate->description = json_encode($desc);
+        $candidate->save();
+
+        return $candidate;
     }
 
     public function update($id, $data)

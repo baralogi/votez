@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Candidate;
 use App\Http\Controllers\Controller;
 use App\Services\CandidateService;
 use App\Services\FacultyService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PersonalController extends Controller
@@ -38,5 +39,28 @@ class PersonalController extends Controller
     {
         $faculties = $this->facultyService->listFaculty();
         return view('pages.candidate.personal.create')->with(['faculties' => $faculties]);
+    }
+
+    public function store(Request $request)
+    {
+
+        $data = $this->candidateService->storeCandidate([
+            'name' => $request->name,
+            'nim' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'sex' => $request->sex,
+            'address' => $request->address,
+            'birth_place' => $request->birth_place,
+            'birth_date' => $request->birth_date,
+            'faculty' => $request->faculty,
+            'major' => $request->major,
+            'semester' => $request->semester,
+            'ipk' => $request->ipk,
+            'sskm' => $request->sskm,
+        ]);
+
+
+        return redirect()->route('candidate.personal.index');
     }
 }

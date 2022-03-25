@@ -15,7 +15,7 @@
             <div class="section-body">
                 <x-title title="Manajemen Kandidat" lead="Simpan Data Kandidat" />
                 <div class="card">
-                    <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('candidate.personal.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -29,7 +29,11 @@
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="nim">Nim</label>
-                                    <input type="number" class="form-control" name="nim">
+                                    <input type="number" class="form-control" id="nim" name="nim"
+                                        value="{{ old('nim') }}">
+                                    @error('nim')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="email">Email</label>
@@ -41,47 +45,64 @@
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="phone">No. Handphone</label>
-                                    <input type="number" class="form-control" name="phone">
+                                    <input type="number" class="form-control" name="phone" id="phone"
+                                        value="{{ old('phone') }}">
+                                    @error('phone')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
-                                    <label>Kelompok</label>
+                                    <label>Voting</label>
                                     <input type="text" class="form-control"
-                                        value="{{ auth()->user()->organization->name }}" disabled>
+                                        value="{{ auth()->user()->candidate->voting->name }}" disabled>
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="status">Jabatan</label>
-                                    <input type="text" class="form-control" name="status" value="WAKIL KETUA" disabled>
+                                    <input type="text" class="form-control" name="status" id="status" value="WAKIL KETUA"
+                                        disabled>
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="gender">Jenis Kelamin</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="gender1"
-                                                value="L">
-                                            <label class="form-check-label" for="gender1">
+                                            <input class="form-check-input" type="radio" name="sex" id="sex1" value="L">
+                                            <label class="form-check-label" for="sex1">
                                                 Laki Laki
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="gender2"
-                                                value="P">
-                                            <label class="form-check-label" for="gender2">
+                                            <input class="form-check-input" type="radio" name="sex" id="sex2" value="P">
+                                            <label class="form-check-label" for="sex2">
                                                 Perempuan
                                             </label>
                                         </div>
                                     </div>
+                                    @error('sex')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
-                                    <label for="address">Domisili</label>
-                                    <input type="text" class="form-control" name="address">
+                                    <label for="address">Alamat</label>
+                                    <textarea type="text" class="form-control" name="address" id="address">{{ old('addres') }}</textarea>
+                                    @error('address')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
-                                    <label for="born_place">Tempat Lahir</label>
-                                    <input type="text" class="form-control" name="born_place">
+                                    <label for="birth_place">Tempat Lahir</label>
+                                    <input type="text" class="form-control" name="birth_place" id="birth_place"
+                                        value={{ old('birth_place') }}>
+                                    @error('address')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
-                                    <label for="born_date">Tanggal Lahir</label>
-                                    <input type="date" class="form-control" name="born_date">
+                                    <label for="birth_date">Tanggal Lahir</label>
+                                    <input type="date" class="form-control" name="birth_date" id="birth_date"
+                                        value={{ old('birth_date') }}>
+                                    @error('birth_date')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Fakultas</label>
@@ -91,22 +112,40 @@
                                             <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('faculty')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Program Studi</label>
                                     <select class="form-control" name="major" id="major"></select>
+                                    @error('major')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Semester Sekarang</label>
-                                    <input type="number" class="form-control" name="semester" id="semester">
+                                    <input type="number" class="form-control" name="semester" id="semester"
+                                        value={{ old('semester') }}>
+                                    @error('semester')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <label>IPK</label>
-                                    <input type="number" class="form-control" name="ipk" id="ipk">
+                                    <input type="number" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01" class="form-control"
+                                        name="ipk" id="ipk" value={{ old('ipk') }}>
+                                    @error('ipk')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <label>SSKM</label>
-                                    <input type="number" class="form-control" name="sskm" id="sskm">
+                                    <input type="number" class="form-control" name="sskm" id="sskm"
+                                        value={{ old('sskm') }}>
+                                    @error('sskm')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

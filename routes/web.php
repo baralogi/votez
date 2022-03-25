@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/candidates', [AppCandidateController::class, 'index'])->name('home.candidates');
 
@@ -56,7 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('candidates')->group(function () {
         Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('candidate.dashboard.index');
         Route::get('/teams', [TeamController::class, 'index'])->name('candidate.team.index');
-        Route::get('/personal', [PersonalController::class, 'index'])->name('candidate.personal.index');
-        Route::get('/personal/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
+        Route::get('/personals', [PersonalController::class, 'index'])->name('candidate.personal.index');
+        Route::get('/personals/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
+        Route::post('/personals', [PersonalController::class, 'store'])->name('candidate.personal.store');
     });
 });
