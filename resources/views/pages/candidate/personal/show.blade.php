@@ -95,7 +95,9 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <x-save-button />
+                        <a href="{{ route('candidate.personal.edit', ['candidate' => $candidates->id]) }}" type="button"
+                            class="btn btn-info">
+                            Ubah</a>
                         <x-back-button route="{{ route('candidate.personal.index') }}" />
                     </div>
                 </div>

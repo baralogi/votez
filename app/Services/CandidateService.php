@@ -63,7 +63,36 @@ class CandidateService
         DB::beginTransaction();
         try {
             $result = $this->candidateRepository->store($data);
+            DB::commit();
+        } catch (Exception $error) {
+            dd($error->getMessage());
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
+        return $result;
+    }
 
+    public function updateCanditate($id, $data)
+    {
+        // Validator::make($data, [
+        //     'name' => 'required',
+        //     'nim' => 'required',
+        //     'email' => 'required|email',
+        //     'phone' => 'required',
+        //     'sex' => 'required',
+        //     'address' => 'required',
+        //     'birth_place' => 'required',
+        //     'birth_date' => 'required',
+        //     'faculty' => 'required',
+        //     'major' => 'required',
+        //     'semester' => 'required',
+        //     'ipk' => 'required',
+        //     'sskm' => 'required',
+        // ])->validate();
+
+        DB::beginTransaction();
+        try {
+            $result = $this->candidateRepository->update($id, $data);
             DB::commit();
         } catch (Exception $error) {
             dd($error->getMessage());

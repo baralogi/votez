@@ -71,4 +71,34 @@ class PersonalController extends Controller
 
         return view('pages.candidate.personal.show')->with(['candidates' => $candidates]);
     }
+
+    public function edit(Candidate $candidate)
+    {
+        $faculties = $this->facultyService->listFaculty();
+        $votingId = Auth::user()->candidate->voting_id;
+        $candidates = $this->candidateService->getCandidateById($votingId, $candidate->id);
+
+        return view('pages.candidate.personal.edit')->with(['faculties' => $faculties, 'candidates' => $candidates]);
+    }
+
+    public function update(Request $request, Candidate $candidate)
+    {
+        $this->candidateService->updateCanditate($candidate->id, [
+            'name' => $request->name,
+            'nim' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'sex' => $request->sex,
+            'address' => $request->address,
+            'birth_place' => $request->birth_place,
+            'birth_date' => $request->birth_date,
+            'faculty' => $request->faculty,
+            'major' => $request->major,
+            'semester' => $request->semester,
+            'ipk' => $request->ipk,
+            'sskm' => $request->sskm,
+        ]);
+
+        return redirect()->route('candidate.personal.index');
+    }
 }

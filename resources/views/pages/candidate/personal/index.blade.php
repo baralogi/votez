@@ -47,6 +47,9 @@
                                                         <a href="{{ route('candidate.personal.show', ['candidate' => $candidate->id]) }}"
                                                             type="button" class="btn btn-sm btn-outline-info">Lihat
                                                             Detail</a>
+                                                        <a href="{{ route('candidate.personal.edit', ['candidate' => $candidate->id]) }}"
+                                                            type="button" class="btn btn-sm btn-outline-info">
+                                                            Ubah</a>
                                                     </div>
                                                 </td>
                                             </tr>

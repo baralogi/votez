@@ -61,5 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/personals/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
         Route::post('/personals', [PersonalController::class, 'store'])->name('candidate.personal.store');
         Route::get('/personals/{candidate}', [PersonalController::class, 'show'])->name('candidate.personal.show');
+        Route::get('/personals/{candidate}/edit', [PersonalController::class, 'edit'])->name('candidate.personal.edit');
+        Route::put('/personals/{candidate}', [PersonalController::class, 'update'])->name('candidate.personal.update');
     });
 });
