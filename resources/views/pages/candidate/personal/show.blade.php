@@ -60,37 +60,37 @@
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="birth_place">Tempat Lahir</label>
                                 <input type="text" class="form-control" name="birth_place" id="birth_place"
-                                    value={{ $candidates->birth_place }} readonly>
+                                    value="{{ $candidates->birth_place }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="birth_date">Tanggal Lahir</label>
                                 <input type="text" class="form-control" name="birth_date" id="birth_date"
-                                    value={{ $candidates->birth_date }} readonly>
+                                    value="{{ $candidates->birth_date }}" readonly>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-6 col-12 mb-2">
                                 <label>Fakultas</label>
                                 <input type="text" class="form-control" name="faculty" id="faculty"
-                                    value={{ $candidates->faculty }} readonly>
+                                    value="{{ $candidates->faculty }}" readonly>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-6 col-12 mb-2">
                                 <label>Program Studi</label>
                                 <input type="text" class="form-control" name="major" id="major"
-                                    value={{ $candidates->major }} readonly>
+                                    value="{{ $candidates->major }}" readonly>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-6 col-12 mb-2">
                                 <label>Semester Sekarang</label>
                                 <input type="text" class="form-control" name="faculty" id="faculty"
-                                    value={{ $candidates->semester }} readonly>
+                                    value="{{ $candidates->semester }}" readonly>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-6 col-12 mb-2">
                                 <label>IPK</label>
                                 <input type="text" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01" class="form-control"
-                                    name="ipk" id="ipk" value={{ $candidates->ipk }} readonly>
+                                    name="ipk" id="ipk" value="{{ $candidates->ipk }}" readonly>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-6 col-12 mb-2">
                                 <label>SSKM</label>
                                 <input type="text" class="form-control" name="sskm" id="sskm"
-                                    value={{ $candidates->sskm }} readonly>
+                                    value="{{ $candidates->sskm }}" readonly>
                             </div>
                         </div>
                     </div>

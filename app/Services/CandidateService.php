@@ -74,21 +74,21 @@ class CandidateService
 
     public function updateCanditate($id, $data)
     {
-        // Validator::make($data, [
-        //     'name' => 'required',
-        //     'nim' => 'required',
-        //     'email' => 'required|email',
-        //     'phone' => 'required',
-        //     'sex' => 'required',
-        //     'address' => 'required',
-        //     'birth_place' => 'required',
-        //     'birth_date' => 'required',
-        //     'faculty' => 'required',
-        //     'major' => 'required',
-        //     'semester' => 'required',
-        //     'ipk' => 'required',
-        //     'sskm' => 'required',
-        // ])->validate();
+        Validator::make($data, [
+            'name' => 'required',
+            'nim' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'sex' => 'required',
+            'address' => 'required',
+            'birth_place' => 'required',
+            'birth_date' => 'required',
+            'faculty' => 'required',
+            'major' => 'required',
+            'semester' => 'required',
+            'ipk' => 'required',
+            'sskm' => 'required',
+        ])->validate();
 
         DB::beginTransaction();
         try {

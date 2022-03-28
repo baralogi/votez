@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="address">Alamat</label>
-                                    <textarea type="text" class="form-control" name="address" id="address">{{ old('addres') }}</textarea>
+                                    <textarea type="text" class="form-control" name="address" id="address">{{ old('address') }}</textarea>
                                     @error('address')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -92,7 +92,7 @@
                                     <label for="birth_place">Tempat Lahir</label>
                                     <input type="text" class="form-control" name="birth_place" id="birth_place"
                                         value={{ old('birth_place') }}>
-                                    @error('address')
+                                    @error('birth_place')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -109,7 +109,7 @@
                                     <select class="form-control" name="faculty" id="faculty">
                                         <option hidden>Pilih Fakultas</option>
                                         @foreach ($faculties as $faculty)
-                                            <option value="{{ $faculty->name }}">{{ $faculty->name }}</option>
+                                            <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('faculty')
@@ -148,6 +148,8 @@
                                     @enderror
                                 </div>
                             </div>
+                            <input type="hidden" id="facultyText" name="facultyText" readonly>
+                            <input type="hidden" id="majorText" name="majorText" readonly>
                         </div>
                         <div class="card-footer text-right">
                             <x-save-button />
@@ -164,7 +166,9 @@
     <script>
         $(document).ready(function() {
             $('#faculty').on('change', function() {
-                var facultyId = $(this).val();
+                let facultyId = $(this).val();
+                let facultyText = $('#faculty :selected').text();
+                $("#facultyText").attr("value", facultyText);
                 if (facultyId) {
                     $.ajax({
                         url: '/api/faculties/' + facultyId + '/majors',
@@ -180,6 +184,10 @@
                                         '<option value="' + value.name + '">' +
                                         value.name + '</option>');
                                 });
+                                $('#major').on('change', function() {
+                                    let majorText = $('#major :selected').text();
+                                    $("#majorText").attr("value", majorText);
+                                })
                             } else {
                                 $('#major').empty();
                             }

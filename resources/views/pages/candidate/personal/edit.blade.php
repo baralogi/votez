@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="nim">Nim</label>
-                                    <input type="number" class="form-control" id="nim" name="nim"
+                                    <input type="text" class="form-control" id="nim" name="nim"
                                         value="{{ $candidates->nim }}">
                                     @error('nim')
                                         <p class="text-danger">{{ $message }}</p>
@@ -71,14 +71,14 @@
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="sex" id="sex1" value="L"
-                                                {{ $candidates->sex ? 'checked' : '' }}>
+                                                {{ $candidates->sex == 'L' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="sex1">
                                                 Laki Laki
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="sex" id="sex2" value="P"
-                                                {{ $candidates->sex ? 'checked' : '' }}>
+                                                {{ $candidates->sex == 'P' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="sex2">
                                                 Perempuan
                                             </label>
@@ -98,7 +98,7 @@
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="birth_place">Tempat Lahir</label>
                                     <input type="text" class="form-control" name="birth_place" id="birth_place"
-                                        value={{ $candidates->faculty }}>
+                                        value={{ $candidates->birth_place }}>
                                     @error('address')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -114,10 +114,10 @@
                                 <div class="form-group col-6">
                                     <label>Fakultas</label>
                                     <select class="form-control" name="faculty" id="faculty">
-                                        <option hidden>Pilih Fakultas</option>
+                                        <option disabled>Pilih Fakultas</option>
                                         @foreach ($faculties as $faculty)
                                             <option value="{{ $faculty->id }}"
-                                                {{ $faculty->id == $candidates->faculty ? 'selected' : '' }}>
+                                                {{ $faculty->name == $candidates->faculty ? 'selected' : '' }}>
                                                 {{ $faculty->name }}
                                             </option>
                                         @endforeach
@@ -162,6 +162,8 @@
                                     @enderror
                                 </div>
                             </div>
+                            <input type="text" id="facultyText" name="facultyText" value="{{ $candidates->faculty }}">
+                            <input type="text" id="majorText" name="majorText" value="{{ $candidates->major }}" readonly>
                         </div>
                         <div class="card-footer text-right">
                             <x-update-button />
@@ -178,7 +180,9 @@
     <script>
         $(document).ready(function() {
             $('#faculty').on('change', function() {
-                var facultyId = $(this).val();
+                let facultyId = $(this).val();
+                let facultyText = $('#faculty :selected').text();
+                $("#facultyText").attr("value", facultyText.trim());
                 if (facultyId) {
                     $.ajax({
                         url: '/api/faculties/' + facultyId + '/majors',
@@ -188,12 +192,17 @@
                             if (data) {
                                 $('#major').empty();
                                 $('#major').append(
-                                    '<option hidden>Pilih Program Studi</option>');
+                                    '<option disabled selected>Pilih Program Studi</option>'
+                                );
                                 $.each(data.data, function(key, value) {
                                     $('select[name="major"]').append(
                                         '<option value="' + value.id + '">' +
                                         value.name + '</option>');
                                 });
+                                $('#major').on('change', function() {
+                                    let majorText = $('#major :selected').text();
+                                    $("#majorText").attr("value", majorText.trim());
+                                })
                             } else {
                                 $('#major').empty();
                             }
