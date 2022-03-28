@@ -18,8 +18,8 @@ class PersonalController extends Controller
     protected $candidateService, $facultyService;
 
     /**
-     * @var CandidateService $candidateService
-     * @var FacultyService $facultyService
+     * @param CandidateService $candidateService
+     * @param FacultyService $facultyService
      */
     public function __construct(CandidateService $candidateService, FacultyService $facultyService)
     {
