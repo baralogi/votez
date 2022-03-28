@@ -34,7 +34,7 @@ class CandidateService
 
     public function getCandidateById($votingId, $candidateId)
     {
-        return $this->candidateRepository->getById($votingId, $candidateId);
+        return $this->candidateRepository->getByIdAndVotingId($votingId, $candidateId);
     }
 
     public function getCandidateByPartner($votingId, $partnerId)
@@ -100,6 +100,23 @@ class CandidateService
             Log::error($error->getMessage());
         }
         return $result;
+    }
+
+    public function destroyCandidateData($id)
+    {
+        DB::beginTransaction();
+        try {
+            $candidate = $this->candidateRepository->getById($id);
+            if ($candidate->status != 'KETUA') {
+                $result = $this->candidateRepository->destroy($id);
+
+                return $result;
+            }
+            DB::commit();
+        } catch (Exception $error) {
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
     }
 
     public function storeVoting($data)

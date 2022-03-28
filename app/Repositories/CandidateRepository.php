@@ -20,9 +20,14 @@ class CandidateRepository
         return $this->candidate->where('voting_id', $id)->with('voting')->get();
     }
 
-    public function getById($votingId, $candidateId)
+    public function getByIdAndVotingId($votingId, $candidateId)
     {
         return $this->candidate->where('voting_id', $votingId)->where('id', $candidateId)->with('candidateFiles')->first();
+    }
+
+    public function getById($candidateId)
+    {
+        return $this->candidate->where('id', $candidateId)->first();
     }
 
     public function getByPartner($votingId, $partnerId)
@@ -71,16 +76,19 @@ class CandidateRepository
         $desc['ipk'] = $data['ipk'];
         $desc['sskm'] = $data['sskm'];
 
-        $candidate = $this->candidate->find($id);
-        $candidate->name = $data['name'];
-        $candidate->description = json_encode($desc);
-        $candidate->update();
+        $candidates = $this->candidate->find($id);
+        $candidates->name = $data['name'];
+        $candidates->description = json_encode($desc);
+        $candidates->update();
 
-        return $candidate;
+        return $candidates;
     }
 
     public function destroy($id)
     {
-        return $this->candidate->where('id', $id)->delete();
+        $candidates = $this->candidate->find($id);
+        $candidates->delete();
+
+        return $candidates;
     }
 }

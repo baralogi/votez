@@ -83,7 +83,7 @@ class PersonalController extends Controller
 
     public function update(Request $request, Candidate $candidate)
     {
-        $this->candidateService->updateCanditate($candidate->id, [
+        $x = $this->candidateService->updateCanditate($candidate->id, [
             'name' => $request->name,
             'nim' => $request->nim,
             'email' => $request->email,
@@ -98,6 +98,13 @@ class PersonalController extends Controller
             'ipk' => $request->ipk,
             'sskm' => $request->sskm,
         ]);
+
+        return redirect()->route('candidate.personal.index');
+    }
+
+    public function destroy(Candidate $candidate)
+    {
+        $this->candidateService->destroyCandidateData($candidate->id);
 
         return redirect()->route('candidate.personal.index');
     }

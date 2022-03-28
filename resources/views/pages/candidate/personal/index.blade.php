@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card">
                         <div class="card-header">
-                            @if ($candidates->count() == 1)
+                            @if (count($candidates) < 2)
                                 <a href="{{ route('candidate.personal.create') }}" class="btn btn-outline-success"><i
                                         class="fas fa-plus">&nbsp;&nbsp; Tambah
                                         Kandidat</i></a>
@@ -48,8 +48,10 @@
                                                             type="button" class="btn btn-sm btn-outline-info">Lihat
                                                             Detail</a>
                                                         <a href="{{ route('candidate.personal.edit', ['candidate' => $candidate->id]) }}"
-                                                            type="button" class="btn btn-sm btn-outline-info">
+                                                            type="button" class="btn btn-sm btn-outline-secondary">
                                                             Ubah</a>
+                                                        <button class="btn btn-sm btn-outline-danger" data-toggle="modal"
+                                                            data-target="#deleteModal{{ $candidate->id }}">Hapus</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -64,6 +66,44 @@
         </section>
     </div>
 @endsection
+
+<!-- Delete Modal -->
+@foreach ($candidates as $candidate)
+    <div class="modal fade" id="deleteModal{{ $candidate->id }}" tabindex="-1" role="dialog"
+        aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title">Hapus
+                        Jadwal Event
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action={{ route('candidate.personal.destroy', ['candidate' => $candidate->id]) }}
+                        method="post">
+                        @method('DELETE')
+                        @csrf
+                        <div class="modal-body">
+                            <p>Apakah anda yakin ingin menghapus calon kandidat
+                                <strong style="text-transform: uppercase">{{ $candidate->name }}</strong>?</br>
+                                <small>NB: DATA CALON KETUA TIDAK DAPAT DIHAPUS</small>
+                            </p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+<!-- End Delete Modal -->
+
 
 @push('scripts')
     <script>
