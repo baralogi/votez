@@ -48,4 +48,19 @@ class TeamController extends Controller
 
         return redirect()->route('candidate.team.index');
     }
+
+    public function editPhoto(CandidatePartner $candidatePartner)
+    {
+        $candidatePartners = $this->candidatePartnerService->showCandidatePartnerById($candidatePartner->id);
+        return view('pages.candidate.team.edit-photo')->with(['candidatePartners' => $candidatePartners]);
+    }
+
+    public function updatePhoto(CandidatePartner $candidatePartner, Request $request)
+    {
+        $this->candidatePartnerService->updateCandidatePhoto($candidatePartner->id, [
+            'photo' => $request->file('photo')
+        ]);
+
+        return redirect()->route('candidate.team.index');
+    }
 }

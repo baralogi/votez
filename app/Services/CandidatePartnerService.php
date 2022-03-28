@@ -46,4 +46,33 @@ class CandidatePartnerService
         }
         return $result;
     }
+
+    public function updateCandidatePhoto($id, $data)
+    {
+        DB::beginTransaction();
+        try {
+            $candidatePartners = $this->candidatePartnerRepository->getById($id);
+            $photo = $data['photo'];
+            $photoName = $candidatePartners->photo;
+
+            if (!empty($photo)) {
+                Validator::make($data, [
+                    'photo' => 'mimes:jpeg,jpg,png|max:2000'
+                ])->validate();
+                $photoName = $this->candidatePartnerRepository->uploadFile($data['photo'], '/images/photo');
+
+                if ($photoName) {
+                    $this->candidatePartnerRepository->removeFile($candidatePartners, '/images/photo/');
+                }
+            }
+
+            $result = $this->candidatePartnerRepository->updateImage($id, $photoName);
+
+            DB::commit();
+            return $result;
+        } catch (Exception $error) {
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
+    }
 }

@@ -14,4 +14,14 @@ class CandidatePartner extends Model
     {
         return $this->hasMany(Candidate::class);
     }
+
+    public function getDefaultPhotoLinkAttribute()
+    {
+        return asset('images/default-image.jpg');
+    }
+
+    public function getPhotoLinkAttribute()
+    {
+        return asset('storage/images/photo/' . $this->photo);
+    }
 }

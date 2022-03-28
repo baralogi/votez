@@ -59,6 +59,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/teams', [TeamController::class, 'index'])->name('candidate.team.index');
         Route::get('/teams/{candidatePartner}', [TeamController::class, 'edit'])->name('candidate.team.edit');
         Route::put('/teams/{candidatePartner}', [TeamController::class, 'update'])->name('candidate.team.update');
+        Route::get('/teams/{candidatePartner}/photo', [TeamController::class, 'editPhoto'])->name('candidate.team.edit.photo');
+        Route::put('/teams/{candidatePartner}/photo', [TeamController::class, 'updatePhoto'])->name('candidate.team.update.photo');
         // Personal Data 
         Route::get('/personals', [PersonalController::class, 'index'])->name('candidate.personal.index');
         Route::get('/personals/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
