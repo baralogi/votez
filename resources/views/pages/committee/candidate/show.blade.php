@@ -47,8 +47,8 @@
                                     @endphp
                                     @if ($description)
                                         <div class="author-box-description">
-                                            <p>{{ 'Visi: ' . $description->visi }}</p>
-                                            <p>{{ 'Visi: ' . $description->misi }}</p>
+                                            {{-- <p>{{ 'Visi: ' . $description->visi }}</p>
+                                            <p>{{ 'Visi: ' . $description->misi }}</p> --}}
                                         </div>
                                     @else
                                         <div class="author-box-description">

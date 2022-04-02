@@ -15,6 +15,9 @@
             <div class="section-body">
                 <x-title title="Manajemen Kandidat" lead="Detail Data Kandidat" />
                 <div class="card">
+                    <div class="card-header">
+                        <h4>Data Diri Kandidat</h4>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="from-group col-md-6 col-12 mb-2">
@@ -99,6 +102,17 @@
                             class="btn btn-info">
                             Ubah</a>
                         <x-back-button route="{{ route('candidate.personal.index') }}" />
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4>File Berkas Kandidat</h4>
+                    </div>
+                    <div class="card-body">
+                        @foreach ($candidates->candidateFiles as $file)
+                            <p>{{ $file }}</p>
+                        @endforeach
                     </div>
                 </div>
             </div>
