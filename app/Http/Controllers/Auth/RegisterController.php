@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\CandidatePartner;
+use App\Models\Organization;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Exception;
@@ -62,6 +63,17 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        $organizations = Organization::all();
+        return view('pages.auth.register')->with(['organizations' => $organizations]);
     }
 
     /**
