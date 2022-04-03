@@ -110,15 +110,64 @@
                         <h4>File Berkas Kandidat</h4>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('candidate.personal.file.create', ['candidate' => $candidates->id]) }}"
-                            class="btn btn-outline-success"><i class="fas fa-plus">&nbsp;&nbsp; Unggah
-                                Berkas</i></a>
-                        @foreach ($candidates->candidateFiles as $file)
-                            <p>{{ $file }}</p>
-                        @endforeach
+                        @if (count($candidates->candidateFiles) == 0)
+                            <a href="{{ route('candidate.personal.file.create', ['candidate' => $candidates->id]) }}"
+                                class="btn btn-outline-success"><i class="fas fa-plus">&nbsp;&nbsp; Unggah
+                                    Berkas</i></a>
+                        @else
+                            <div class="table-responsive">
+                                <table id='table-candidate-files' class="table table-md table-striped">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama File</th>
+                                            <th scope="col">Jenis File</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        @php $i=0 @endphp
+                                        @foreach ($candidates->candidateFiles as $file)
+                                            @php $i++ @endphp
+                                            <tr>
+                                                <th scope="row">{{ $i }}</th>
+                                                <td>{{ $file->filename }}</td>
+                                                <td>{{ $file->filetype }}</td>
+                                                <td>
+                                                    <div>
+                                                        <a href="{{ asset('files/' . $file->filename) }}" target="_blank"
+                                                            type="button" class="btn btn-sm btn-outline-info">Lihat
+                                                            File</a>
+                                                        <a href="#" target="_blank" type="button"
+                                                            class="btn btn-sm btn-info">Ubah Berkas</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            var t = $('#table-candidate-files').DataTable({});
+
+            t.on('order.dt search.dt', function() {
+                t.column(0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).nodes().each(function(cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+    </script>
+@endpush

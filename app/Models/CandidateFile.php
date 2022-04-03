@@ -11,7 +11,7 @@ class CandidateFile extends Model
 
     const SK_AK = 'SURAT KETERANGAN AKTIF';
     const TK_NILAI = 'TRANSKRIP NILAI';
-    const LKMM_TD = 'SERTIFIKAT LKMM_TD';
+    const LKMM_TD = 'SERTIFIKAT LKMM-TD';
     const SK_ORG = 'SURAT KETERANGAN AKTIF ORGANISASI';
     const P_ORG = 'PENGALAMAN ORGANISASI';
     const B_KOALISI = 'BUKTI KOALISI ORMAWA';

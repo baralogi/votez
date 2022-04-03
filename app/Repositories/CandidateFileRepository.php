@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CandidateFile;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class CandidateFileRepository
@@ -26,22 +27,58 @@ class CandidateFileRepository
     {
 
         $data = [
-            ['candidate_id' => $id, 'filename' => $files1, 'filetype' => $this->candidateFile::SK_AK],
-            ['candidate_id' => $id, 'filename' => $files2, 'filetype' => $this->candidateFile::TK_NILAI],
-            ['candidate_id' => $id, 'filename' => $files3, 'filetype' => $this->candidateFile::LKMM_TD],
-            ['candidate_id' => $id, 'filename' => $files4, 'filetype' => $this->candidateFile::SK_ORG],
-            ['candidate_id' => $id, 'filename' => $files5, 'filetype' => $this->candidateFile::P_ORG],
-            ['candidate_id' => $id, 'filename' => $files6, 'filetype' => $this->candidateFile::B_KOALISI],
+            [
+                'candidate_id' => $id,
+                'filename' => $files1,
+                'filetype' => $this->candidateFile::SK_AK,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'candidate_id' => $id,
+                'filename' => $files2,
+                'filetype' => $this->candidateFile::TK_NILAI,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'candidate_id' => $id,
+                'filename' => $files3,
+                'filetype' => $this->candidateFile::LKMM_TD,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'candidate_id' => $id,
+                'filename' => $files4,
+                'filetype' => $this->candidateFile::SK_ORG,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'candidate_id' => $id,
+                'filename' => $files5,
+                'filetype' => $this->candidateFile::P_ORG,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'candidate_id' => $id,
+                'filename' => $files6,
+                'filetype' => $this->candidateFile::B_KOALISI,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
         $candidateFiles = $this->candidateFile->insert($data);
 
         return $candidateFiles;
     }
 
-    public function uploadFile($file, $filePath)
+    public function uploadFile($file, $filePath, $filePrefix)
     {
         $extension = $file->extension();
-        $fileName = date('dmyHis') . '.' . $extension;
+        $fileName = $filePrefix . '-' . date('dmyHis') . '.' . $extension;
         Storage::putFileAs('public' . $filePath, $file, $fileName);
 
         return $fileName;

@@ -40,12 +40,12 @@ class CandidateFileService
         DB::beginTransaction();
         try {
             $path = '/files';
-            $files1 = $this->candidateFileRepository->uploadFile($data['sk_aktif'], $path);
-            $files2 = $this->candidateFileRepository->uploadFile($data['tk_nilai'], $path);
-            $files3 = $this->candidateFileRepository->uploadFile($data['s_lkmmtd'], $path);
-            $files4 = $this->candidateFileRepository->uploadFile($data['sk_aktif_org'], $path);
-            $files5 = $this->candidateFileRepository->uploadFile($data['s_org'], $path);
-            $files6 = $this->candidateFileRepository->uploadFile($data['bukti_koalisi'], $path);
+            $files1 = $this->candidateFileRepository->uploadFile($data['sk_aktif'], $path, 'sk_aktif');
+            $files2 = $this->candidateFileRepository->uploadFile($data['tk_nilai'], $path, 'tk_nilai');
+            $files3 = $this->candidateFileRepository->uploadFile($data['s_lkmmtd'], $path, 's_lkmmtd');
+            $files4 = $this->candidateFileRepository->uploadFile($data['sk_aktif_org'], $path, 'sk_aktif_org');
+            $files5 = $this->candidateFileRepository->uploadFile($data['s_org'], $path, 's_org');
+            $files6 = $this->candidateFileRepository->uploadFile($data['bukti_koalisi'], $path, 'bukti_koalisi');
             $result = $this->candidateFileRepository->store($data['candidate_id'], $files1, $files2, $files3, $files4, $files5, $files6);
             DB::commit();
         } catch (Exception $error) {
