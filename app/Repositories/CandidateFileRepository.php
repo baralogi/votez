@@ -22,18 +22,20 @@ class CandidateFileRepository
         $this->candidateFile = $candidateFile;
     }
 
-    public function getByCandidateId($id)
+    public function store($id, $files1, $files2, $files3, $files4, $files5, $files6)
     {
-        return $this->candidateFile->where('candidate_id', $id)->get();
-    }
 
-    public function updateImage($id, $photoName)
-    {
-        $candidatePartners = $this->candidatePartner->find($id);
-        $candidatePartners->photo = $photoName;
-        $candidatePartners->update();
+        $data = [
+            ['candidate_id' => $id, 'filename' => $files1, 'filetype' => $this->candidateFile::SK_AK],
+            ['candidate_id' => $id, 'filename' => $files2, 'filetype' => $this->candidateFile::TK_NILAI],
+            ['candidate_id' => $id, 'filename' => $files3, 'filetype' => $this->candidateFile::LKMM_TD],
+            ['candidate_id' => $id, 'filename' => $files4, 'filetype' => $this->candidateFile::SK_ORG],
+            ['candidate_id' => $id, 'filename' => $files5, 'filetype' => $this->candidateFile::P_ORG],
+            ['candidate_id' => $id, 'filename' => $files6, 'filetype' => $this->candidateFile::B_KOALISI],
+        ];
+        $candidateFiles = $this->candidateFile->insert($data);
 
-        return $candidatePartners;
+        return $candidateFiles;
     }
 
     public function uploadFile($file, $filePath)

@@ -162,8 +162,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <input type="text" id="facultyText" name="facultyText" value="{{ $candidates->faculty }}">
-                            <input type="text" id="majorText" name="majorText" value="{{ $candidates->major }}" readonly>
+                            <input type="hidden" id="facultyText" name="facultyText" value="{{ $candidates->faculty }}">
+                            <input type="hidden" id="majorText" name="majorText" value="{{ $candidates->major }}"
+                                readonly>
                         </div>
                         <div class="card-footer text-right">
                             <x-update-button />

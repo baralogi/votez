@@ -110,6 +110,9 @@
                         <h4>File Berkas Kandidat</h4>
                     </div>
                     <div class="card-body">
+                        <a href="{{ route('candidate.personal.file.create', ['candidate' => $candidates->id]) }}"
+                            class="btn btn-outline-success"><i class="fas fa-plus">&nbsp;&nbsp; Unggah
+                                Berkas</i></a>
                         @foreach ($candidates->candidateFiles as $file)
                             <p>{{ $file }}</p>
                         @endforeach

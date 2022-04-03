@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Services\CandidateFileService;
 use App\Services\CandidateService;
 use App\Services\FacultyService;
 use Illuminate\Http\Request;
@@ -14,17 +15,23 @@ class PersonalController extends Controller
     /**
      * @var CandidateService $candidateService
      * @var FacultyService $facultyService
+     * @var CandidateFileService $candidateFileService
      */
-    protected $candidateService, $facultyService;
+    protected $candidateService, $facultyService, $candidateFileService;
 
     /**
      * @param CandidateService $candidateService
      * @param FacultyService $facultyService
+     * @param CandidateFileService $candidateFileService
      */
-    public function __construct(CandidateService $candidateService, FacultyService $facultyService)
-    {
+    public function __construct(
+        CandidateService $candidateService,
+        FacultyService $facultyService,
+        CandidateFileService $candidateFileService
+    ) {
         $this->candidateService = $candidateService;
         $this->facultyService = $facultyService;
+        $this->candidateFileService = $candidateFileService;
     }
 
     public function index()
@@ -83,7 +90,7 @@ class PersonalController extends Controller
 
     public function update(Request $request, Candidate $candidate)
     {
-        $x = $this->candidateService->updateCanditate($candidate->id, [
+        $this->candidateService->updateCanditate($candidate->id, [
             'name' => $request->name,
             'nim' => $request->nim,
             'email' => $request->email,
@@ -105,6 +112,28 @@ class PersonalController extends Controller
     public function destroy(Candidate $candidate)
     {
         $this->candidateService->destroyCandidateData($candidate->id);
+
+        return redirect()->route('candidate.personal.index');
+    }
+
+    public function createFile(Candidate $candidate)
+    {
+        $votingId = Auth::user()->candidate->voting_id;
+        $candidates = $this->candidateService->getCandidateById($votingId, $candidate->id);
+        return view('pages.candidate.personal.create-file')->with(['candidates' => $candidates]);
+    }
+
+    public function storeFile(Request $request)
+    {
+        $this->candidateFileService->storeFileData([
+            'candidate_id' => $request->candidate,
+            'sk_aktif' => $request->sk_aktif,
+            'tk_nilai' => $request->tk_nilai,
+            's_lkmmtd' => $request->s_lkmmtd,
+            'sk_aktif_org' => $request->sk_aktif_org,
+            's_org' => $request->s_org,
+            'bukti_koalisi' => $request->bukti_koalisi,
+        ]);
 
         return redirect()->route('candidate.personal.index');
     }
