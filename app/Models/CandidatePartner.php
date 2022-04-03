@@ -24,4 +24,15 @@ class CandidatePartner extends Model
     {
         return asset('storage/images/photo/' . $this->photo);
     }
+
+    public function getIsPassStatusAttribute()
+    {
+        if ($this->is_pass === true) {
+            return 'Lolos';
+        } else if ($this->is_pass === false) {
+            return 'Tidak Lolos';
+        }
+
+        return 'Belum Terseleksi';
+    }
 }

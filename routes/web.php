@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('blogs', BlogController::class);
         Route::prefix('votings')->group(function () {
             Route::get('/', [VotingController::class, 'index'])->name('votings.index');
+            Route::get('/{voting}', [VotingController::class, 'show'])->name('votings.show');
             Route::get('/create', [VotingController::class, 'create'])->name('votings.create');
             Route::post('/', [VotingController::class, 'store'])->name('votings.store');
             Route::get('/{voting}/edit', [VotingController::class, 'edit'])->name('votings.edit');

@@ -48,17 +48,6 @@ class Candidate extends Model
         return asset('images/avatar-4.png');
     }
 
-    public function getIsPassStatusAttribute()
-    {
-        if ($this->is_pass === true) {
-            return 'Lolos';
-        } else if ($this->is_pass === false) {
-            return 'Tidak Lolos';
-        }
-
-        return 'Belum Terseleksi';
-    }
-
     public function getNimAttribute()
     {
         $description = \json_decode($this->description);

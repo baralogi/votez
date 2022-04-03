@@ -5,22 +5,43 @@ namespace App\Http\Controllers\Committee;
 use App\Http\Controllers\Controller;
 use App\DataTables\VotingsDataTable;
 use App\Models\Voting;
+use App\Services\CandidatePartnerService;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class VotingController extends Controller
 {
+    /**
+     * @var $votingService
+     */
     protected $votingService;
 
-    public function __construct(VotingService $votingService)
-    {
+    /**
+     * VotingController Constructor
+     * 
+     * @param VotingService $votingService
+     * @param CandidatePartnerService $candidatePartnerService
+     */
+    public function __construct(
+        VotingService $votingService,
+        CandidatePartnerService $candidatePartnerService
+    ) {
         $this->votingService = $votingService;
+        $this->candidatePartnerService = $candidatePartnerService;
     }
 
     public function index(VotingsDataTable $dataTable)
     {
         return $dataTable->render('pages.committee.voting.index');
+    }
+
+    public function show($id)
+    {
+        $votings = $this->votingService->getVotingById($id);
+        $candidatePartners = $this->candidatePartnerService->showCandidatePartnerByVoting($id);
+
+        return view('pages.committee.voting.show')->with(['voting' => $votings, 'candidatePartners' => $candidatePartners]);
     }
 
     public function create()

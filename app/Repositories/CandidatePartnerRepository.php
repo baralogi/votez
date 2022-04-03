@@ -27,6 +27,15 @@ class CandidatePartnerRepository
         return $this->candidatePartner->where('id', $id)->first();
     }
 
+    public function getByVotingId($votingId)
+    {
+        return $this->candidatePartner
+            ->join('candidates', 'candidate_partners.id', '=', 'candidates.candidate_partner_id')
+            ->where('status', 'KETUA')
+            ->where('voting_id', $votingId)
+            ->get();
+    }
+
     public function update($id, $data)
     {
         $candidatePartners = $this->candidatePartner->find($id);

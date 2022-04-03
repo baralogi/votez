@@ -33,6 +33,11 @@ class CandidatePartnerService
         return $this->candidatePartnerRepository->getById($id);
     }
 
+    public function showCandidatePartnerByVoting($votingId)
+    {
+        return $this->candidatePartnerRepository->getByVotingId($votingId);
+    }
+
     public function updateCanditatePartnerData($id, $data)
     {
         DB::beginTransaction();
