@@ -80,6 +80,15 @@ class CandidateFileRepository
         return $candidateFiles;
     }
 
+    public function update($id, $fileName)
+    {
+        $candidateFiles = $this->candidateFile->find($id);
+        $candidateFiles->filename = $fileName;
+        $candidateFiles->update();
+
+        return $candidateFiles;
+    }
+
     public function uploadFile($file, $filePath, $filePrefix)
     {
         $extension = $file->extension();
@@ -91,9 +100,9 @@ class CandidateFileRepository
 
     public function removeFile($fileName, $filePath)
     {
-        $oldPhoto = $fileName->photo;
-        Storage::delete('public' . $filePath . $oldPhoto);
+        $oldFiles = $fileName->filename;
+        Storage::delete('public' . $filePath . $oldFiles);
 
-        return $oldPhoto;
+        return $oldFiles;
     }
 }

@@ -60,4 +60,33 @@ class CandidateFileService
 
         return $result;
     }
+
+    public function updateFileData($id, $data)
+    {
+        DB::beginTransaction();
+        try {
+            $getFileId = $this->candidateFileRepository->getById($id);
+            $file = $data['filename'];
+            $fileName = $getFileId->filename;
+            $filePrefix = explode('-', $getFileId->filename);
+            if (!empty($file)) {
+                Validator::make($data, [
+                    'filename' => 'required|mimes:pdf|max:2000'
+                ])->validate();
+                $fileName = $this->candidateFileRepository->uploadFile($data['filename'], '/files', $filePrefix[0]);
+
+                if ($fileName) {
+                    $this->candidateFileRepository->removeFile($getFileId, '/files/');
+                }
+            }
+
+            $result = $this->candidateFileRepository->update($id, $fileName);
+
+            DB::commit();
+            return $result;
+        } catch (Exception $error) {
+            DB::rollback();
+            Log::error($error->getMessage());
+        }
+    }
 }

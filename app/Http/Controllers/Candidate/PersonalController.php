@@ -148,8 +148,12 @@ class PersonalController extends Controller
         return view('pages.candidate.personal.edit-file')->with(['candidates' => $candidates, 'candidateFiles' => $candidateFiles]);
     }
 
-    public function updateFile(Candidate $candidate, Request $request)
+    public function updateFile($candidateId, $candidateFileId, Request $request)
     {
-        # code...
+        $this->candidateFileService->updateFileData($candidateFileId, [
+            'filename' => $request->file('filename')
+        ]);
+
+        return redirect()->route('candidate.personal.index');
     }
 }
