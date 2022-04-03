@@ -26,6 +26,11 @@ class CandidateFileService
         $this->candidateFileRepository = $candidateFileRepository;
     }
 
+    public function getFilesById($id)
+    {
+        return $this->candidateFileRepository->getById($id);
+    }
+
     public function storeFileData($data)
     {
         Validator::make($data, [

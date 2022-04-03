@@ -138,8 +138,8 @@
                                                         <a href="{{ asset('files/' . $file->filename) }}" target="_blank"
                                                             type="button" class="btn btn-sm btn-outline-info">Lihat
                                                             File</a>
-                                                        <a href="#" target="_blank" type="button"
-                                                            class="btn btn-sm btn-info">Ubah Berkas</a>
+                                                        <a href={{ route('candidate.personal.file.edit', ['candidate' => $candidates->id, 'candidateFile' => $file->id]) }}
+                                                            type="button" class="btn btn-sm btn-info">Ubah Berkas</a>
                                                     </div>
                                                 </td>
                                             </tr>

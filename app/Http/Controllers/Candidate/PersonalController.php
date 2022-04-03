@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\CandidateFile;
 use App\Services\CandidateFileService;
 use App\Services\CandidateService;
 use App\Services\FacultyService;
@@ -136,5 +137,19 @@ class PersonalController extends Controller
         ]);
 
         return redirect()->route('candidate.personal.index');
+    }
+
+    public function editFile($candidateId, $candidateFileId)
+    {
+        $votingId = Auth::user()->candidate->voting_id;
+        $candidates = $this->candidateService->getCandidateById($votingId, $candidateId);
+        $candidateFiles = $this->candidateFileService->getFilesById($candidateFileId);
+
+        return view('pages.candidate.personal.edit-file')->with(['candidates' => $candidates, 'candidateFiles' => $candidateFiles]);
+    }
+
+    public function updateFile(Candidate $candidate, Request $request)
+    {
+        # code...
     }
 }

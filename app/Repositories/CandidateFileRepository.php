@@ -23,6 +23,11 @@ class CandidateFileRepository
         $this->candidateFile = $candidateFile;
     }
 
+    public function getById($id)
+    {
+        return $this->candidateFile->where('id', $id)->first();
+    }
+
     public function store($id, $files1, $files2, $files3, $files4, $files5, $files6)
     {
 

@@ -71,5 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/personals/{candidate}', [PersonalController::class, 'destroy'])->name('candidate.personal.destroy');
         Route::get('/personals/{candidate}/files/create', [PersonalController::class, 'createFile'])->name('candidate.personal.file.create');
         Route::post('/personals/{candidate}/files', [PersonalController::class, 'storeFile'])->name('candidate.personal.file.store');
+        Route::get('/personals/{candidate}/files/{candidateFile}/edit', [PersonalController::class, 'editFile'])->name('candidate.personal.file.edit');
+        Route::put('/personals/{candidate}/files/{candidateFile}', [PersonalController::class, 'updateFile'])->name('candidate.personal.file.update');
     });
 });
