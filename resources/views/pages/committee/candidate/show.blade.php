@@ -12,57 +12,60 @@
                 <x-title title="Kelola Kandidat" lead="Kelola kandidat dengan mudah dan cepat" />
                 <div class="card author-box card-primary">
                     <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @php
-                                        $photo = $candidate->photo ? $candidate->photo_link : $candidate->default_photo_link;
-                                    @endphp
-                                    <div class="text-center">
-                                        <img src="{{ $photo }}" style="object-fit: cover; object-position: 50% 0%;"
-                                            width="150" height="150" class="rounded-circle elevation-2 mb-2" alt="Logo Image"
-                                            id="previewImage">
+                        <div class="author-box-left">
+                            @php
+                                $photo = $candidate->photo ? $candidate->photo_link : $candidate->default_photo_link;
+                            @endphp
+                            <img alt="image" src="{{ $photo }}" class="rounded-circle author-box-picture" width="150"
+                                style="object-fit: cover; object-position: 50% 0%;">
+                        </div>
+                        <div class="author-box-details">
+                            <div class="author-box-name">
+                                {{ $candidate->name }}
+                            </div>
+                            <div class="author-box-job">
+                                {{ $candidate->sequence_number ? 'No urut:' . $candidate->sequence_number : 'Belum mendapat nomor urut' }}
+                            </div>
+                            <div class="author-box-description">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Status &nbsp;: {{ $candidate->status }}</li>
+                                            <li class="list-group-item">Email &nbsp;: {{ $candidate->email }}</li>
+                                            <li class="list-group-item">Jenis Kelamin &nbsp;: {{ $candidate->sex }}</li>
+                                            <li class="list-group-item">Tempat Lahir &nbsp;: {{ $candidate->birth_place }}
+                                            </li>
+                                            <li class="list-group-item">Fakultas &nbsp;: {{ $candidate->faculty }}</li>
+                                            <li class="list-group-item">Semester &nbsp;: {{ $candidate->semester }}</li>
+                                        </ul>
                                     </div>
-                                    <div class="text-center">
-                                        @if ($candidate->is_pass_status == 'Lolos')
-                                            <span class="badge badge-pill badge-success">Lolos</span>
-                                        @elseif ($candidate->is_pass_status == 'Tidak Lolos')
-                                            <span class="badge badge-pill badge-danger">Tidak Lolos</span>
-                                        @else
-                                            <span class="badge badge-pill badge-info">Belum Terseleksi</span>
-                                        @endif
+                                    <div class="col-md-6">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">NIM &nbsp;: {{ $candidate->nim }}</li>
+                                            <li class="list-group-item">HP &nbsp;: {{ $candidate->phone }}</li>
+                                            <li class="list-group-item">Tanggal Lahir &nbsp;:
+                                                {{ $candidate->birth_date }}</li>
+                                            <li class="list-group-item">Jurusan &nbsp;: {{ $candidate->major }}</li>
+                                            <li class="list-group-item">IPK &nbsp;: {{ $candidate->ipk }}</li>
+                                            <li class="list-group-item">SSKM &nbsp;: {{ $candidate->sskm }}</li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="author-box-name">
-                                        {{ $candidate->name }}
-                                    </div>
-                                    <div class="author-box-description">
-                                        <p>{{ $candidate->sequence_number ? 'No urut:' . $candidate->sequence_number : 'Belum mendapat nomor urut' }}
-                                        </p>
-                                    </div>
-                                    @php
-                                        $data = json_encode($candidate->description);
-                                        $description = json_decode($data);
-                                    @endphp
-                                    @if ($description)
-                                        <div class="author-box-description">
-                                            {{-- <p>{{ 'Visi: ' . $description->visi }}</p>
-                                            <p>{{ 'Visi: ' . $description->misi }}</p> --}}
-                                        </div>
-                                    @else
-                                        <div class="author-box-description">
-                                            <p>{{ 'Belum ada deskripsi' }}</p>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="float-right mt-sm-0 mt-3">
-                            <a href="{{ route('candidates.index', ['voting' => $candidate->voting_id]) }}"
-                                class="btn btn-sm btn-danger">Kembali</a>
+                            <div class="mb-2 mt-3">
+                                @if ($candidate->is_pass_status == 'Lolos')
+                                    <span class="badge badge-pill badge-success">Lolos</span>
+                                @elseif ($candidate->is_pass_status == 'Tidak Lolos')
+                                    <span class="badge badge-pill badge-danger">Tidak Lolos</span>
+                                @else
+                                    <span class="badge badge-pill badge-info">Belum Terseleksi</span>
+                                @endif
+                            </div>
+                            <div class="w-100 d-sm-none"></div>
+                            <div class="float-right mt-sm-0 mt-3">
+                                <a href="{{ route('candidates.index', ['voting' => $candidate->voting_id]) }}"
+                                    class="btn btn-sm btn-danger">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -59,18 +59,6 @@ class Candidate extends Model
         return 'Belum Terseleksi';
     }
 
-    public function getVisiAttribute()
-    {
-        $description = \json_decode($this->description);
-        return $description->visi;
-    }
-
-    public function getMisiAttribute()
-    {
-        $description = \json_decode($this->description);
-        return $description->misi;
-    }
-
     public function getNimAttribute()
     {
         $description = \json_decode($this->description);

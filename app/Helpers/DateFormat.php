@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class DateFormat
 {
-    public function indonesianFormatDate($date)
+    public static function indonesianFormatDate($date)
     {
         $month = array(
             1 =>   'Januari',
