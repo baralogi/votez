@@ -135,8 +135,9 @@
                                                 <td>{{ $file->filetype }}</td>
                                                 <td>
                                                     <div>
-                                                        <a href="{{ asset('files/' . $file->filename) }}" target="_blank"
-                                                            type="button" class="btn btn-sm btn-outline-info">Lihat
+                                                        <a href="{{ Storage::disk('local')->url('files/' . $file->filename) }}"
+                                                            target="_blank" type="button"
+                                                            class="btn btn-sm btn-outline-info">Lihat
                                                             File</a>
                                                         <a href={{ route('candidate.personal.file.edit', ['candidate' => $candidates->id, 'candidateFile' => $file->id]) }}
                                                             type="button" class="btn btn-sm btn-info">Ubah Berkas</a>
