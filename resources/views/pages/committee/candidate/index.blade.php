@@ -38,9 +38,9 @@
                             </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-outline-info">Lihat
+                                <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-info">Lihat
                                     Peserta</a>
-                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-danger">Kembali</a>
+                                <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -75,10 +75,10 @@
                                             <td><img src="{{ $photo }}" alt="photo" border="0" width="40" height="40"
                                                     align="center" class="rounded-circle"></td>
                                             <td>
-                                                <div>
-                                                    <a href="{{ route('candidates.show', ['voting' => $voting->id, 'candidate' => $candidate->id]) }}"
+                                                {{-- <div>
+                                                    <a href="{{ route('candidate.show', ['voting' => $voting->id, 'candidate' => $candidate->id]) }}"
                                                         type="button" class="btn btn-sm btn-outline-info">Detail</a>
-                                                </div>
+                                                </div> --}}
                                             </td>
                                         </tr>
                                     @endforeach

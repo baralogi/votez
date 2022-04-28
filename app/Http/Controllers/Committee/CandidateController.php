@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Committee;
 
 use App\DataTables\CandidatesDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\Voting;
 use App\Services\CandidatePartnerService;
 use App\Services\CandidateService;
 use App\Services\VotingService;
@@ -26,12 +28,9 @@ class CandidateController extends Controller
         $this->candidatePartnerService = $candidatePartnerService;
     }
 
-    public function index($id)
+    public function index(Voting $voting)
     {
-        $data = $this->votingService->getVotingById($id);
-        $candidatePartners = $this->candidatePartnerService->showCandidatePartnerByVoting($id);
-
-        return view('pages.committee.candidate.index')->with(['voting' => $data, 'candidatePartners' => $candidatePartners]);
+        return view('pages.committee.candidate.index')->with(['voting' => $voting]);
     }
 
     public function show($votingId, $candidateId)

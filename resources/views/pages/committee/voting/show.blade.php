@@ -38,9 +38,9 @@
                             </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-outline-info">Lihat
+                                <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-info">Lihat
                                     Peserta</a>
-                                <a href="{{ route('votings.index') }}" class="btn btn-sm btn-danger">Kembali</a>
+                                <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -55,28 +55,31 @@
                                 <thead class="text-center">
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">No. Urut</th>
                                         <th scope="col">Nama Ketua</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">Foto</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
                                     @php $i=0 @endphp
-                                    @foreach ($candidatePartners as $candidate)
+                                    @foreach ($candidatePartners as $candidatePartner)
                                         @php $i++ @endphp
                                         <tr>
                                             @php
-                                                $photo = $candidate->photo ? $candidate->photo_link : $candidate->default_photo_link;
+                                                $photo = $candidatePartner->photo ? $candidatePartner->photo_link : $candidatePartner->default_photo_link;
+                                                $sequence_number = $candidatePartner->sequence_number ? $candidatePartner->sequence_number : '-';
                                             @endphp
                                             <th scope="row">{{ $i }}</th>
-                                            <td>{{ $candidate->name }}</td>
-                                            <td>{{ $candidate->is_pass_status }}</td>
-                                            <td><img src="{{ $photo }}" alt="photo" border="0" width="40" height="40"
-                                                    align="center" class="rounded-circle"></td>
+                                            <td>{{ $sequence_number }}</td>
+                                            <td>{{ $candidatePartner->candidates[0]->name }}</td>
+                                            <td>
+                                                <img src="{{ $photo }}" alt="photo" border="0" width="40" height="40"
+                                                    align="center" class="rounded-circle">
+                                            </td>
                                             <td>
                                                 <div>
-                                                    <a href="{{ route('candidates.show', ['voting' => $voting->id, 'candidate' => $candidate->id]) }}"
+                                                    <a href={{ route('voting.candidate.index', ['voting' => $voting]) }}
                                                         type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                                 </div>
                                             </td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Committee;
 use App\Http\Controllers\Controller;
 use App\DataTables\VotingsDataTable;
 use App\Models\Voting;
+use App\Repositories\Eloquent\CandidatePartnerRepository;
 use App\Services\CandidatePartnerService;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
@@ -36,12 +37,10 @@ class VotingController extends Controller
         return $dataTable->render('pages.committee.voting.index');
     }
 
-    public function show($id)
+    public function show(Voting $voting, CandidatePartnerRepository $candidatePartnerRepository)
     {
-        $votings = $this->votingService->getVotingById($id);
-        $candidatePartners = $this->candidatePartnerService->showCandidatePartnerByVoting($id);
-
-        return view('pages.committee.voting.show')->with(['voting' => $votings, 'candidatePartners' => $candidatePartners]);
+        $candidatePartners = $candidatePartnerRepository->list($voting->candidates[0]->candidate_partner_id);
+        return view('pages.committee.voting.show')->with(['voting' => $voting, 'candidatePartners' => $candidatePartners]);
     }
 
     public function create()

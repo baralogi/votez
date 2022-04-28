@@ -13,7 +13,7 @@
                     <span>Dashboard</span></a></li>
             <li><a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i>
                     <span>Panitia</span></a></li>
-            <li><a class="nav-link" href="{{ route('votings.index') }}"><i class="fas fa-vote-yea"></i>
+            <li><a class="nav-link" href="{{ route('voting.index') }}"><i class="fas fa-vote-yea"></i>
                     <span>Voting</span></a></li>
             <li><a class="nav-link" href="{{ route('participants.index') }}"><i class="fas fa-users"></i>
                     <span>Partisipan</span></a></li>

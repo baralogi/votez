@@ -15,6 +15,7 @@ class CreateCandidatePartnersTable extends Migration
     {
         Schema::create('candidate_partners', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('voting_id')->constrained()->nullable();
             $table->integer('sequence_number')->nullable();
             $table->longText('vision')->nullable();
             $table->longText('mission')->nullable();
