@@ -18,9 +18,9 @@ class Voting extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function candidates()
+    public function candidatePartners()
     {
-        return $this->hasMany(Candidate::class);
+        return $this->hasMany(CandidatePartner::class);
     }
 
     public function getLogoLinkAttribute()

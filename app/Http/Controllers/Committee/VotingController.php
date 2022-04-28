@@ -39,8 +39,8 @@ class VotingController extends Controller
 
     public function show(Voting $voting, CandidatePartnerRepository $candidatePartnerRepository)
     {
-        $candidatePartners = $candidatePartnerRepository->list($voting->candidates[0]->candidate_partner_id);
-        return view('pages.committee.voting.show')->with(['voting' => $voting, 'candidatePartners' => $candidatePartners]);
+        // $candidatePartners = $candidatePartnerRepository->list($voting->candidates[0]->candidate_partner_id);
+        return view('pages.committee.voting.show')->with(['voting' => $voting]);
     }
 
     public function create()

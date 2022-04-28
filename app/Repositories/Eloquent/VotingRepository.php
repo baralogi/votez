@@ -12,4 +12,9 @@ class VotingRepository extends BaseRepository
     {
         $this->model = $model;
     }
+
+    public function getByOrganizationId($organizationId)
+    {
+        return $this->model->where('organization_id', $organizationId);
+    }
 }

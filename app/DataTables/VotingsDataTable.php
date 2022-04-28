@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Voting;
+use App\Repositories\Eloquent\VotingRepository;
 use App\Services\VotingService;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
@@ -13,13 +14,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class VotingsDataTable extends DataTable
 {
-    protected $votingService;
-
-    public function __construct(VotingService $votingService)
-    {
-        $this->votingService = $votingService;
-    }
-
     /**
      * Build DataTable class.
      *
@@ -57,9 +51,10 @@ class VotingsDataTable extends DataTable
      * @param \App\Models\Voting $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query(VotingRepository $votingRepository)
     {
-        return $this->votingService->getByOrganizationId(auth()->user()->organization_id)->newQuery();
+        $organizationId = auth()->user()->organization_id;
+        return $votingRepository->getByOrganizationId($organizationId)->newQuery();
     }
 
     /**

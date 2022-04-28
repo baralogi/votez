@@ -10,6 +10,11 @@ class CandidatePartner extends Model
     use HasFactory;
     protected $fillable = ['sequence_number', 'vision', 'mission', 'is_pass', 'photo'];
 
+    public function voting()
+    {
+        return $this->belongsTo(Voting::class);
+    }
+
     public function candidates()
     {
         return $this->hasMany(Candidate::class);

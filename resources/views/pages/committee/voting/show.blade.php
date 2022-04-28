@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>Votez &mdash; Kelola Calon Kandidat</title>
+    <title>Votez &mdash; Kelola Data Voting</title>
 @endsection
 
 @section('main')
@@ -10,7 +10,7 @@
             <x-header title="Voting" />
 
             <div class="section-body">
-                <x-title title="Kelola Calon Kandidat" lead="Kelola calon kandidat voting mu" />
+                <x-title title="Kelola Data Voting" lead="Detail data voting" />
                 <div class="card author-box card-primary">
                     <div class="card-body">
                         <div class="author-box-left">
@@ -38,8 +38,6 @@
                             </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-info">Lihat
-                                    Peserta</a>
                                 <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
@@ -63,7 +61,7 @@
                                 </thead>
                                 <tbody class="text-center">
                                     @php $i=0 @endphp
-                                    @foreach ($candidatePartners as $candidatePartner)
+                                    @foreach ($voting->candidatePartners as $candidatePartner)
                                         @php $i++ @endphp
                                         <tr>
                                             @php
