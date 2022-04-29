@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CandidatePartner extends Model
 {
     use HasFactory;
-    protected $fillable = ['sequence_number', 'vision', 'mission', 'is_pass', 'photo'];
+
+    protected $guarded = [];
 
     public function voting()
     {

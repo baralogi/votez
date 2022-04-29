@@ -42,8 +42,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('participants', ParticipantController::class);
         Route::resource('blogs', BlogController::class);
 
-        Route::resource('votings', Committee\VotingController::class)->names('voting');
-        Route::resource('votings/{voting}/candidates', Committee\CandidateController::class)->names('voting.candidate');
+        Route::resource('voting', Committee\VotingController::class)->names('voting');
+        Route::resource('voting/{voting}/candidate-partner', Committee\CandidateController::class)->names('voting.candidate-partner');
+        Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate');
 
 
         // Route::prefix('votings')->group(function () {

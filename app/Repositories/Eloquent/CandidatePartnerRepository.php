@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\CandidatePartner;
+use App\Models\Voting;
 
 class CandidatePartnerRepository extends BaseRepository
 {
@@ -12,8 +13,8 @@ class CandidatePartnerRepository extends BaseRepository
         $this->model = $model;
     }
 
-    public function list($id)
+    public function listByVotingId(Voting $voting)
     {
-        return $this->model->where('id', $id)->get();
+        return $this->model->where('voting_id', $voting->id)->first();
     }
 }

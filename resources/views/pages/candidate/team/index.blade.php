@@ -25,22 +25,24 @@
                                         Foto</i></a>
                             </div>
                         </div>
-                        @if ($candidatePartners->vision == null)
-                            <p class="text-center">Belum ada Visi dan Misi</p>
-                        @else
-                            <div class="from-group col-md-12 col-12 mb-2">
-                                <label for="vision">Visi</label>
-                                <p>{!! $candidatePartners->vision !!}</p>
+                        <div class="mt-5 mb-5">
+                            @if ($candidatePartners->vision == null)
+                                <p class="text-center">Belum ada Visi dan Misi</p>
+                            @else
+                                <div class="from-group col-md-12 col-12 mb-2">
+                                    <label for="vision">Visi</label>
+                                    <p>{!! $candidatePartners->vision !!}</p>
+                                </div>
+                                <div class="from-group col-md-12 col-12 mb-2">
+                                    <label for="mision">Misi</label>
+                                    <p>{!! $candidatePartners->mission !!}</p>
+                                </div>
+                            @endif
+                            <div class="text-center">
+                                <a href={{ route('candidate.team.edit', ['candidatePartner' => $candidatePartners->id]) }}
+                                    class="btn btn-outline-success"><i class="fas fa-edit">&nbsp;&nbsp; Ubah
+                                        Visi dan Misi</i></a>
                             </div>
-                            <div class="from-group col-md-12 col-12 mb-2">
-                                <label for="mision">Misi</label>
-                                <p>{!! $candidatePartners->mission !!}</p>
-                            </div>
-                        @endif
-                        <div class="card-footer text-right">
-                            <a href={{ route('candidate.team.edit', ['candidatePartner' => $candidatePartners->id]) }}
-                                class="btn btn-outline-success"><i class="fas fa-edit">&nbsp;&nbsp; Ubah
-                                    Visi dan Misi</i></a>
                         </div>
                     </div>
                 </div>

@@ -77,7 +77,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <a href={{ route('voting.candidate.index', ['voting' => $voting]) }}
+                                                    <a href={{ route('voting.candidate-partner.index', ['voting' => $voting]) }}
                                                         type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                                 </div>
                                             </td>

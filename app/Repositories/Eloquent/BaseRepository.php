@@ -14,41 +14,31 @@ class BaseRepository implements EloquentRepositoryInterface
         $this->model = $model;
     }
 
-    public function index()
+    public function create(array $attributes): Model
     {
-        return $this->model->all();
+        return $this->model->create($attributes);
     }
 
-    // public function create(array $attributes): Model
-    // {
-    //     return $this->model->create($attributes);
-    // }
-
-    public function find($id)
+    public function update(Model $model, array $attributes): Model
     {
-        return $this->model->find($id);
+        $model->update($attributes);
+        return $model;
     }
 
-    // public function update(Model $model, array $attributes): Model
-    // {
-    //     $model->update($attributes);
-    //     return $model;
-    // }
+    public function upsert(array $query, array $attributes): Model
+    {
+        return $this->model->updateOrCreate($query, $attributes);
+    }
 
-    // public function upsert(array $query, array $attributes): Model
-    // {
-    //     return $this->model->updateOrCreate($query, $attributes);
-    // }
+    public function destroy(Model $model)
+    {
+        return $model->delete();
+    }
 
-    // public function destroy(Model $model)
-    // {
-    //     return $model->delete();
-    // }
-
-    // public function restore($id): Model
-    // {
-    //     $model = $this->model->onlyTrashed()->where($this->model->getRouteKeyName(), $id)->firstOrFail();
-    //     $model->restore();
-    //     return $model;
-    // }
+    public function restore($id): Model
+    {
+        $model = $this->model->onlyTrashed()->where($this->model->getRouteKeyName(), $id)->firstOrFail();
+        $model->restore();
+        return $model;
+    }
 }

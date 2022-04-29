@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Interface EloquentRepositoryInterface
@@ -12,17 +11,13 @@ use Spatie\QueryBuilder\QueryBuilder;
  */
 interface EloquentRepositoryInterface
 {
-    public function index();
+    public function create(array $attributes): Model;
 
-    // public function create(array $attributes): Model;
+    public function upsert(array $query, array $attributes): Model;
 
-    // public function upsert(array $query, array $attributes): Model;
+    public function update(Model $model, array $attributes): Model;
 
-    // public function find($id): ?Model;
+    public function destroy(Model $model);
 
-    // public function update(Model $model, array $attributes): Model;
-
-    // public function destroy(Model $model);
-
-    // public function restore($id): Model;
+    public function restore($id): Model;
 }

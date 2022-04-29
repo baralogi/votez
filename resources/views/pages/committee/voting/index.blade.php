@@ -7,7 +7,7 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Panitia">
+            <x-header title="Voting">
                 <div class="breadcrumb-item">Voting</div>
             </x-header>
 

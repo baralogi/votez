@@ -11,7 +11,7 @@ class Voting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'start_at', 'end_at', 'logo'];
+    protected $guarded = [];
 
     public function organization()
     {

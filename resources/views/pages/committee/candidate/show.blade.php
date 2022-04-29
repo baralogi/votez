@@ -14,19 +14,16 @@
                     <div class="card-body">
                         <div class="author-box-left">
                             @php
-                                $photo = $candidate->photo ? $candidate->photo_link : $candidate->default_photo_link;
+                                $photo = $candidatePartner->photo ? $candidatePartner->photo_link : $candidatePartner->default_photo_link;
                             @endphp
                             <img alt="image" src="{{ $photo }}" class="rounded-circle author-box-picture" width="150"
                                 style="object-fit: cover; object-position: 50% 0%;">
                         </div>
                         <div class="author-box-details">
                             <div class="author-box-name">
-                                {{ $candidate->name }}
+                                {{ $candidatePartner->candidates }}
                             </div>
-                            <div class="author-box-job">
-                                {{ $candidate->sequence_number ? 'No urut:' . $candidate->sequence_number : 'Belum mendapat nomor urut' }}
-                            </div>
-                            <div class="author-box-description">
+                            {{-- <div class="author-box-description">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="list-group list-group-flush">
@@ -65,11 +62,11 @@
                             <div class="float-right mt-sm-0 mt-3">
                                 <a href="{{ route('candidates.index', ['voting' => $candidate->voting_id]) }}"
                                     class="btn btn-sm btn-danger">Kembali</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <h4>Data Kandidat</h4>
                     </div>
@@ -104,7 +101,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
     </div>

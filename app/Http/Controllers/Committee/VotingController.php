@@ -4,32 +4,28 @@ namespace App\Http\Controllers\Committee;
 
 use App\Http\Controllers\Controller;
 use App\DataTables\VotingsDataTable;
+use App\Http\Requests\Committee\Voting\StoreVotingRequest;
+use App\Http\Requests\Committee\Voting\UpdateVotingRequest;
 use App\Models\Voting;
-use App\Repositories\Eloquent\CandidatePartnerRepository;
+use App\Repositories\Eloquent\VotingRepository;
 use App\Services\CandidatePartnerService;
 use App\Services\VotingService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class VotingController extends Controller
 {
-    /**
-     * @var $votingService
-     */
     protected $votingService;
 
-    /**
-     * VotingController Constructor
-     * 
-     * @param VotingService $votingService
-     * @param CandidatePartnerService $candidatePartnerService
-     */
+    private $votingRepository;
+
     public function __construct(
         VotingService $votingService,
-        CandidatePartnerService $candidatePartnerService
+        CandidatePartnerService $candidatePartnerService,
+        VotingRepository $votingRepository
     ) {
         $this->votingService = $votingService;
         $this->candidatePartnerService = $candidatePartnerService;
+        $this->votingRepository = $votingRepository;
     }
 
     public function index(VotingsDataTable $dataTable)
@@ -37,9 +33,8 @@ class VotingController extends Controller
         return $dataTable->render('pages.committee.voting.index');
     }
 
-    public function show(Voting $voting, CandidatePartnerRepository $candidatePartnerRepository)
+    public function show(Voting $voting)
     {
-        // $candidatePartners = $candidatePartnerRepository->list($voting->candidates[0]->candidate_partner_id);
         return view('pages.committee.voting.show')->with(['voting' => $voting]);
     }
 
@@ -48,42 +43,26 @@ class VotingController extends Controller
         return view('pages.committee.voting.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreVotingRequest $request)
     {
-        $this->votingService->storeVotingData([
-            'organization_id' => auth()->user()->organization->id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at,
-            'logo' => $request->file('logo')
-        ]);
-
-        return redirect()->route('votings.index');
+        $this->votingRepository->create($request->validated());
+        return redirect()->route('voting.index');
     }
 
-    public function edit($id)
+    public function edit(Voting $voting)
     {
-        $data = $this->votingService->getVotingById($id);
-        return view('pages.committee.voting.edit')->with(['voting' => $data]);
+        return view('pages.committee.voting.edit')->with(['voting' => $voting]);
     }
 
-    public function update(Request $request, Voting $voting)
+    public function update(UpdateVotingRequest $request, Voting $voting)
     {
-        $this->votingService->updateVotingData($voting->id, [
-            'name' => $request->name,
-            'description' => $request->description,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at,
-            'logo' => $request->file('logo')
-        ]);
-
-        return redirect()->route('votings.index')->with('success', 'Data berhasil diubah');
+        $this->votingRepository->update($voting, $request->validated());
+        return redirect()->route('voting.index');
     }
 
     public function destroy(Voting $voting)
     {
-        $this->votingService->destroyVotingData($voting->id);
-        return redirect()->route('votings.index');
+        $this->votingRepository->destroy($voting);
+        return redirect()->route('voting.index');
     }
 }

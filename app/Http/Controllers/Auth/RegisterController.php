@@ -112,12 +112,12 @@ class RegisterController extends Controller
             $user->assignRole('kandidat');
 
             $candidatePartner = CandidatePartner::create([
+                'voting_id' => $data['voting_id'],
                 'is_pass' => false
             ]);
 
             Candidate::create([
                 'user_id' => $user->id,
-                'voting_id' => $data['voting_id'],
                 'candidate_partner_id' => $candidatePartner->id,
                 'name' => $data['name'],
                 'status' => Candidate::CHAIRMAN
