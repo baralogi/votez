@@ -30,6 +30,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::prefix('committee')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('committee.dashboard.index');
+
         /** User */
         Route::get('/users', [CommitteUserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [CommitteUserController::class, 'create'])->name('users.create');
@@ -38,25 +39,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/{user}/edit', [CommitteUserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [CommitteUserController::class, 'update'])->name('users.update');
         Route::delete('/users/{user}', [CommitteUserController::class, 'destroy'])->name('users.destroy');
-        Route::resource('participants', ParticipantController::class);
-        Route::resource('blogs', BlogController::class);
 
         Route::resource('voting', Committee\VotingController::class)->names('voting');
         Route::resource('voting/{voting}/candidate-partner', Committee\CandidatePartnerController::class)->names('voting.candidate-partner')->only('show');
         Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate')->only('show');
-
-
-        // Route::prefix('votings')->group(function () {
-        //     Route::get('/', [VotingController::class, 'index'])->name('votings.index');
-        //     Route::get('/{voting}', [VotingController::class, 'show'])->name('votings.show');
-        //     Route::get('/create', [VotingController::class, 'create'])->name('votings.create');
-        //     Route::post('/', [VotingController::class, 'store'])->name('votings.store');
-        //     Route::get('/{voting}/edit', [VotingController::class, 'edit'])->name('votings.edit');
-        //     Route::put('/{voting}', [VotingController::class, 'update'])->name('votings.update');
-        //     Route::delete('/{voting}', [VotingController::class, 'destroy'])->name('votings.destroy');
-        //     Route::get('/{voting}/candidates', [CandidateController::class, 'index'])->name('candidates.index');
-        //     Route::get('/{voting}/candidates/{candidate}', [CandidateController::class, 'show'])->name('candidates.show');
-        // });
+        Route::resource('participant', Committee\ParticipantController::class)->names('participant')->only('index');
+        Route::resource('blog', Committee\BlogController::class)->names('blog')->only('index');
     });
 
     Route::prefix('candidates')->group(function () {

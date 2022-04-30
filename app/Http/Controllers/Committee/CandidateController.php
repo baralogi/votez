@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\CandidatePartner;
 use App\Models\Voting;
+use App\Repositories\CandidateRepository;
 
 class CandidateController extends Controller
 {
     protected $candidate;
 
     public function __construct(
-        Candidate $candidate
+        CandidateRepository $candidateRepository
     ) {
-        $this->candidate = $candidate;
+        $this->candidateRepository = $candidateRepository;
     }
 
     public function show(Voting $voting, CandidatePartner $candidate_partner, Candidate $candidate)

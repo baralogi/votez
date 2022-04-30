@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Participant;
+use App\Repositories\Eloquent\ParticipantRepository;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -11,6 +11,14 @@ use Yajra\DataTables\Services\DataTable;
 
 class ParticipantsDataTable extends DataTable
 {
+    protected $participantRepository;
+
+    public function __construct(
+        ParticipantRepository $participantRepository
+    ) {
+        $this->participantRepository = $participantRepository;
+    }
+
     /**
      * Build DataTable class.
      *
@@ -21,7 +29,7 @@ class ParticipantsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'participants.action');
+            ->addColumn('action', 'participant.action');
     }
 
     /**
@@ -30,9 +38,9 @@ class ParticipantsDataTable extends DataTable
      * @param \App\Models\Participant $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Participant $model)
+    public function query()
     {
-        return $model->newQuery();
+        return $this->participantRepository->listByOrganizationId(auth()->user()->organization_id)->newQuery();
     }
 
     /**

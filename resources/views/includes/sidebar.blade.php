@@ -15,9 +15,9 @@
                     <span>Panitia</span></a></li>
             <li><a class="nav-link" href="{{ route('voting.index') }}"><i class="fas fa-vote-yea"></i>
                     <span>Voting</span></a></li>
-            <li><a class="nav-link" href="{{ route('participants.index') }}"><i class="fas fa-users"></i>
+            <li><a class="nav-link" href="{{ route('participant.index') }}"><i class="fas fa-users"></i>
                     <span>Partisipan</span></a></li>
-            <li><a class="nav-link" href="{{ route('blogs.index') }}"><i class="fas fa-newspaper"></i>
+            <li><a class="nav-link" href="{{ route('blog.index') }}"><i class="fas fa-newspaper"></i>
                     <span>Blog</span></a></li>
 
 
