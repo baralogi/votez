@@ -33,7 +33,7 @@ class UsersDataTable extends DataTable
             ->addColumn('roles', function (User $user) {
                 return $user->roles->map(function ($role) {
                     return Str::title($role->name);
-                })->implode('<br>');
+                })->implode(', ');
             })
             ->addColumn('action', function (User $user) {
                 return view('pages.committee.user.actions', compact('user'));

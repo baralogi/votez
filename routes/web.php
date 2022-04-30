@@ -28,17 +28,7 @@ Route::get('/candidates', [AppCandidateController::class, 'index'])->name('home.
 Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::prefix('committee')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('committee.dashboard.index');
-
-        /** User */
-        // Route::get('/users', [CommitteUserController::class, 'index'])->name('users.index');
-        // Route::get('/users/create', [CommitteUserController::class, 'create'])->name('users.create');
-        // Route::post('/users', [CommitteUserController::class, 'store'])->name('users.store');
-        // Route::get('/users/{user}', [CommitteUserController::class, 'show'])->name('users.show');
-        // Route::get('/users/{user}/edit', [CommitteUserController::class, 'edit'])->name('users.edit');
-        // Route::put('/users/{user}', [CommitteUserController::class, 'update'])->name('users.update');
-        // Route::delete('/users/{user}', [CommitteUserController::class, 'destroy'])->name('users.destroy');
-
+        Route::resource('dashboard', Committee\DashboardController::class)->names('dashboard')->only('index');
         Route::resource('user', Committee\UserController::class)->names('user');
         Route::resource('voting', Committee\VotingController::class)->names('voting');
         Route::resource('voting/{voting}/candidate-partner', Committee\CandidatePartnerController::class)->names('voting.candidate-partner')->only('show');
