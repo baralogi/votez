@@ -58,4 +58,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Candidate::class);
     }
+
+    public function scopeCommitteeRole($query)
+    {
+        return $query
+            ->where('organization_id', auth()->user()->organization_id)
+            ->whereHas('roles', function ($query) {
+                $query->whereIn('roles.name', ['ketua panitia', 'panitia']);
+            });
+    }
 }

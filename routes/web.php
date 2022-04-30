@@ -4,7 +4,6 @@ use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardCont
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
 use App\Http\Controllers\Committee\DashboardController;
-use App\Http\Controllers\Committee\UserController as CommitteUserController;
 use App\Http\Controllers\Guest\CandidateController as AppCandidateController;
 use App\Http\Controllers\Guest\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -32,14 +31,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('committee.dashboard.index');
 
         /** User */
-        Route::get('/users', [CommitteUserController::class, 'index'])->name('users.index');
-        Route::get('/users/create', [CommitteUserController::class, 'create'])->name('users.create');
-        Route::post('/users', [CommitteUserController::class, 'store'])->name('users.store');
-        Route::get('/users/{user}', [CommitteUserController::class, 'show'])->name('users.show');
-        Route::get('/users/{user}/edit', [CommitteUserController::class, 'edit'])->name('users.edit');
-        Route::put('/users/{user}', [CommitteUserController::class, 'update'])->name('users.update');
-        Route::delete('/users/{user}', [CommitteUserController::class, 'destroy'])->name('users.destroy');
+        // Route::get('/users', [CommitteUserController::class, 'index'])->name('users.index');
+        // Route::get('/users/create', [CommitteUserController::class, 'create'])->name('users.create');
+        // Route::post('/users', [CommitteUserController::class, 'store'])->name('users.store');
+        // Route::get('/users/{user}', [CommitteUserController::class, 'show'])->name('users.show');
+        // Route::get('/users/{user}/edit', [CommitteUserController::class, 'edit'])->name('users.edit');
+        // Route::put('/users/{user}', [CommitteUserController::class, 'update'])->name('users.update');
+        // Route::delete('/users/{user}', [CommitteUserController::class, 'destroy'])->name('users.destroy');
 
+        Route::resource('user', Committee\UserController::class)->names('user');
         Route::resource('voting', Committee\VotingController::class)->names('voting');
         Route::resource('voting/{voting}/candidate-partner', Committee\CandidatePartnerController::class)->names('voting.candidate-partner')->only('show');
         Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate')->only('show');

@@ -4,25 +4,22 @@ namespace App\Http\Controllers\Committee;
 
 use App\Http\Controllers\Controller;
 use App\DataTables\UsersDataTable;
-use App\Models\Organization;
-use App\Services\UserService;
+use App\Http\Requests\Committee\User\StoreUserRequest;
+use App\Http\Requests\Committee\User\UpdateUserRequest;
 use App\Models\User;
-use App\Services\OrganizationService;
-use App\Services\RoleService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Repositories\Eloquent\RoleRepository;
+use App\Repositories\Eloquent\UserRepository;
 
 
 
 class UserController extends Controller
 {
-    protected $userService, $roleService, $organizationService;
+    protected $roleRepository, $userRepository;
 
-    public function __construct(UserService $userService, RoleService $roleService, OrganizationService $organizationService)
+    public function __construct(RoleRepository $roleRepository, UserRepository $userRepository)
     {
-        $this->userService = $userService;
-        $this->roleService = $roleService;
-        $this->organizationService = $organizationService;
+        $this->roleRepository = $roleRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index(UsersDataTable $dataTable)
@@ -32,53 +29,36 @@ class UserController extends Controller
 
     public function create()
     {
-        $data = $this->roleService->getCommitteeRoles()->get();
-        return view('pages.committee.user.create')->with(['roles' => $data]);
+        $roles = $this->roleRepository->getCommitteeRole();
+        return view('pages.committee.user.create')->with(['roles' => $roles]);
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $this->userService->storeUserData([
-            'name' => $request->name,
-            'email' => $request->email,
-            'organization_id' => auth()->user()->organization->id,
-            'password' => Hash::make('password'),
-            'roles' => $request->roles
-        ]);
-
-        return redirect()->route('users.index');
+        $this->userRepository->create($request->validated());
+        return redirect()->route('user.index');
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $roles = $this->roleService->getCommitteeRoles()->get();
-        $user = $this->userService->getUserById($id);
-
-        return view('pages.committee.user.show')->with(['user' => $user, 'roles' => $roles]);
+        return view('pages.committee.user.show')->with(['user' => $user]);
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $roles = $this->roleService->getCommitteeRoles()->get();
-        $user = $this->userService->getUserById($id);
-
+        $roles = $this->roleRepository->getCommitteeRole();
         return view('pages.committee.user.edit')->with(['user' => $user, 'roles' => $roles]);
     }
 
-    public function update(User $user, Request $request)
+    public function update(User $user, UpdateUserRequest $request)
     {
-        $this->userService->updateUserData($user->id, [
-            'name' => $request->name,
-            'roles' => $request->roles
-        ]);
-
-        return redirect()->route('users.index');
+        $this->userRepository->update($user, $request->validated());
+        return redirect()->route('user.index');
     }
 
     public function destroy(User $user)
     {
-        $this->userService->destroyUserData($user->id);
-
+        $this->userRepository->destroy($user);
         return redirect()->route('users.index');
     }
 }

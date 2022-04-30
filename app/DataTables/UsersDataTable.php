@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
-use App\Services\UserService;
+use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,11 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
-    protected $userService;
+    protected $userRepository;
 
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
+    public function __construct(
+        UserRepository $userRepository
+    ) {
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -48,7 +49,7 @@ class UsersDataTable extends DataTable
      */
     public function query()
     {
-        return $this->userService->listUsersCommitte()->newQuery();
+        return $this->userRepository->listByOrganizationId(auth()->user()->organization_id)->newQuery();
     }
 
     /**

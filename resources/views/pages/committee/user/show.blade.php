@@ -8,7 +8,7 @@
     <div class="main-content">
         <section class="section">
             <x-header title="Panitia">
-                <div class="breadcrumb-item"><a href="{{ route('users.index') }}">Panitia</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('user.index') }}">Panitia</a></div>
                 <div class="breadcrumb-item">Detail Data</div>
             </x-header>
             <div class="section-body">
@@ -32,28 +32,23 @@
                                     </div>
                                     <div class="from-group col-md-6 col-12 mb-2">
                                         <label>Jabatan</label>
-                                        <select class="form-control" name="roles">
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->name }}"
-                                                    {{ $role->id === $user->roles[0]->id ? 'selected' : '' }}>
-                                                    {{ Str::title($role->name) }} </option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control"
+                                            value="{{ Str::title($user->roles->implode('name', ', ')) }}">
                                     </div>
+
                                 </div>
                             </fieldset>
                         </div>
                         <div class="card-footer text-right">
-                            <x-back-button route="{{ route('users.index') }}" />
+                            <x-back-button route="{{ route('user.index') }}" />
                         </div>
-                    </div>
-                @else
-                    <div class="card-body p-5">
-                        <h4 class="text-center">{{ __('403 | Tidak ada akses ') }}</h4>
-                    </div>
-                @endhasanyrole
+                    @else
+                        <div class="card-body p-5">
+                            <h4 class="text-center">{{ __('403 | Tidak ada akses ') }}</h4>
+                        </div>
+                    @endhasanyrole
+                </div>
             </div>
-    </div>
-    </section>
+        </section>
     </div>
 @endsection

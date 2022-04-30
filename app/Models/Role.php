@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function scopeCommitteeRole($query)
+    {
+        return $query->whereIn('name', ['ketua panitia', 'panitia']);
+    }
 }

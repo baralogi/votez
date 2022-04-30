@@ -11,7 +11,7 @@
             <li><a class="nav-link" href="{{ route('committee.dashboard.index') }}"><i
                         class="fab fa-dashcube"></i>
                     <span>Dashboard</span></a></li>
-            <li><a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i>
+            <li><a class="nav-link" href="{{ route('user.index') }}"><i class="fas fa-user"></i>
                     <span>Panitia</span></a></li>
             <li><a class="nav-link" href="{{ route('voting.index') }}"><i class="fas fa-vote-yea"></i>
                     <span>Voting</span></a></li>
