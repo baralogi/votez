@@ -44,6 +44,8 @@
 
                         <div class="w-100 d-sm-none"></div>
                         <div class="float-right mt-sm-0 mt-3">
+                            <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-success">Terima</a>
+                            <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-danger">Tolak</a>
                             <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                         </div>
                     </div>
