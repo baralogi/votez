@@ -2,36 +2,23 @@
 
 namespace App\Http\Controllers\Committee;
 
-use App\DataTables\CandidatesDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\CandidatePartner;
 use App\Models\Voting;
-use App\Repositories\Eloquent\CandidatePartnerRepository;
-use App\Services\CandidatePartnerService;
-use App\Services\CandidateService;
-use App\Services\VotingService;
-use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 
 class CandidateController extends Controller
 {
-    private $candidatePartnerRepository;
+    protected $candidate;
 
     public function __construct(
-        CandidatePartnerRepository $candidatePartnerRepository
+        Candidate $candidate
     ) {
-        $this->candidatePartnerRepository = $candidatePartnerRepository;
+        $this->candidate = $candidate;
     }
 
-    public function index(Voting $voting)
+    public function show(Voting $voting, CandidatePartner $candidate_partner, Candidate $candidate)
     {
-        $candidatePartner = $this->candidatePartnerRepository->listByVotingId($voting);
-        return view('pages.committee.candidate.index')->with(['voting' => $voting, 'candidatePartner' => $candidatePartner]);
-    }
-
-    public function show(Voting $voting, CandidatePartner $candidatePartner)
-    {
-        return view('pages.committee.candidate.show')->with(['voting' => $voting, 'candidatePartner' => $candidatePartner]);
+        return view('pages.committee.candidate.show')->with(['voting' => $voting, 'candidatePartner' => $candidate_partner, 'candidate' => $candidate]);
     }
 }

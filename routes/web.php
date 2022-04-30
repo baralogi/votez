@@ -3,7 +3,6 @@
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
-use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Committee\DashboardController;
 use App\Http\Controllers\Committee\UserController as CommitteUserController;
 use App\Http\Controllers\Guest\CandidateController as AppCandidateController;
@@ -43,8 +42,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('blogs', BlogController::class);
 
         Route::resource('voting', Committee\VotingController::class)->names('voting');
-        Route::resource('voting/{voting}/candidate-partner', Committee\CandidateController::class)->names('voting.candidate-partner');
-        Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate');
+        Route::resource('voting/{voting}/candidate-partner', Committee\CandidatePartnerController::class)->names('voting.candidate-partner')->only('show');
+        Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate')->only('show');
 
 
         // Route::prefix('votings')->group(function () {

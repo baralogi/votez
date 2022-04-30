@@ -12,9 +12,4 @@ class CandidatePartnerRepository extends BaseRepository
     {
         $this->model = $model;
     }
-
-    public function listByVotingId(Voting $voting)
-    {
-        return $this->model->where('voting_id', $voting->id)->first();
-    }
 }

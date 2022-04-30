@@ -21,9 +21,9 @@
                         </div>
                         <div class="author-box-details">
                             <div class="author-box-name">
-                                {{ $candidatePartner->candidates }}
+                                {{ $candidate->name }}
                             </div>
-                            {{-- <div class="author-box-description">
+                            <div class="author-box-description">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="list-group list-group-flush">
@@ -60,13 +60,13 @@
                             </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('candidates.index', ['voting' => $candidate->voting_id]) }}"
+                                <a href="{{ route('voting.candidate-partner.candidate.show', ['voting' => $voting,'candidate_partner' => $candidatePartner,'candidate' => $candidate]) }}"
                                     class="btn btn-sm btn-danger">Kembali</a>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="card">
+                <div class="card">
                     <div class="card-header">
                         <h4>Data Kandidat</h4>
                     </div>
@@ -101,7 +101,7 @@
                             </table>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </section>
     </div>

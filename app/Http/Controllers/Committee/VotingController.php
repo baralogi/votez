@@ -8,23 +8,14 @@ use App\Http\Requests\Committee\Voting\StoreVotingRequest;
 use App\Http\Requests\Committee\Voting\UpdateVotingRequest;
 use App\Models\Voting;
 use App\Repositories\Eloquent\VotingRepository;
-use App\Services\CandidatePartnerService;
-use App\Services\VotingService;
-use Illuminate\Http\Request;
 
 class VotingController extends Controller
 {
-    protected $votingService;
-
-    private $votingRepository;
+    protected $votingRepository;
 
     public function __construct(
-        VotingService $votingService,
-        CandidatePartnerService $candidatePartnerService,
         VotingRepository $votingRepository
     ) {
-        $this->votingService = $votingService;
-        $this->candidatePartnerService = $candidatePartnerService;
         $this->votingRepository = $votingRepository;
     }
 

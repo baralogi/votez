@@ -25,7 +25,8 @@
                                 {{ $candidatePartner->sequence_number? 'Nomor urut ' . $candidatePartner->sequence_number: 'Belum memiliki nomor urut' }}
                             </div>
                             <div class="author-box-description">
-                                <p>{!! $candidatePartner->vision !!}</p>
+                                <p>Visi : {!! $candidatePartner->vision !!}</p>
+                                <p>Misi : {!! $candidatePartner->mission !!}</p>
                             </div>
                             <div class="mb-2 mt-3">
                                 @if ($candidatePartner->is_pass_status === 'Lolos')
@@ -73,7 +74,7 @@
                                         <td>{{ $candidate->status }}</td>
                                         <td>
                                             <div>
-                                                <a href={{ route('voting.candidate.partner.show', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}
+                                                <a href={{ route('voting.candidate-partner.candidate.show', ['voting' => $voting,'candidate_partner' => $candidatePartner,'candidate' => $candidate]) }}
                                                     type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                             </div>
                                         </td>
