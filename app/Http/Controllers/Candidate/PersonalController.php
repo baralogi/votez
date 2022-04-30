@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Candidate;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\CandidateFile;
+use App\Repositories\Eloquent\CandidateRepository;
 use App\Services\CandidateFileService;
 use App\Services\CandidateService;
 use App\Services\FacultyService;
@@ -13,12 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonalController extends Controller
 {
-    /**
-     * @var CandidateService $candidateService
-     * @var FacultyService $facultyService
-     * @var CandidateFileService $candidateFileService
-     */
-    protected $candidateService, $facultyService, $candidateFileService;
+    protected $candidateRepository, $candidateService, $facultyService, $candidateFileService;
 
     /**
      * @param CandidateService $candidateService
@@ -26,10 +22,12 @@ class PersonalController extends Controller
      * @param CandidateFileService $candidateFileService
      */
     public function __construct(
+        CandidateRepository $candidateRepository,
         CandidateService $candidateService,
         FacultyService $facultyService,
         CandidateFileService $candidateFileService
     ) {
+        $this->candidateRepository = $candidateRepository;
         $this->candidateService = $candidateService;
         $this->facultyService = $facultyService;
         $this->candidateFileService = $candidateFileService;
@@ -37,10 +35,7 @@ class PersonalController extends Controller
 
     public function index()
     {
-        $votingId = Auth::user()->candidate->voting_id;
-        $candidate_partners_id = Auth::user()->candidate->candidate_partner_id;
-        $candidates = $this->candidateService->getCandidateByPartner($votingId, $candidate_partners_id)->get();
-
+        $candidates = $this->candidateRepository->listByPartnerId(auth()->user()->candidate->candidate_partner_id);
         return view('pages.candidate.personal.index')->with(['candidates' => $candidates]);
     }
 
@@ -72,21 +67,15 @@ class PersonalController extends Controller
         return redirect()->route('candidate.personal.index');
     }
 
-    public function show(Candidate $candidate)
+    public function show(Candidate $personal)
     {
-        $votingId = Auth::user()->candidate->voting_id;
-        $candidates = $this->candidateService->getCandidateById($votingId, $candidate->id);
-
-        return view('pages.candidate.personal.show')->with(['candidates' => $candidates]);
+        return view('pages.candidate.personal.show')->with(['candidate' => $personal]);
     }
 
     public function edit(Candidate $candidate)
     {
         $faculties = $this->facultyService->listFaculty();
-        $votingId = Auth::user()->candidate->voting_id;
-        $candidates = $this->candidateService->getCandidateById($votingId, $candidate->id);
-
-        return view('pages.candidate.personal.edit')->with(['faculties' => $faculties, 'candidates' => $candidates]);
+        return view('pages.candidate.personal.edit')->with(['faculties' => $faculties, 'candidates' => $candidate]);
     }
 
     public function update(Request $request, Candidate $candidate)
@@ -119,9 +108,7 @@ class PersonalController extends Controller
 
     public function createFile(Candidate $candidate)
     {
-        $votingId = Auth::user()->candidate->voting_id;
-        $candidates = $this->candidateService->getCandidateById($votingId, $candidate->id);
-        return view('pages.candidate.personal.create-file')->with(['candidates' => $candidates]);
+        return view('pages.candidate.personal.create-file')->with(['candidates' => $candidate]);
     }
 
     public function storeFile(Request $request)
@@ -141,8 +128,7 @@ class PersonalController extends Controller
 
     public function editFile($candidateId, $candidateFileId)
     {
-        $votingId = Auth::user()->candidate->voting_id;
-        $candidates = $this->candidateService->getCandidateById($votingId, $candidateId);
+        $candidates = $this->candidateService->getCandidateById($candidateId);
         $candidateFiles = $this->candidateFileService->getFilesById($candidateFileId);
 
         return view('pages.candidate.personal.edit-file')->with(['candidates' => $candidates, 'candidateFiles' => $candidateFiles]);

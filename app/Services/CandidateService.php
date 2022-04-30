@@ -32,9 +32,9 @@ class CandidateService
         return $this->candidateRepository->getByVotingId($id);
     }
 
-    public function getCandidateById($votingId, $candidateId)
+    public function getCandidateById($candidateId)
     {
-        return $this->candidateRepository->getByIdAndVotingId($votingId, $candidateId);
+        return $this->candidateRepository->getByIdAndVotingId($candidateId);
     }
 
     public function getCandidateByPartner($votingId, $partnerId)

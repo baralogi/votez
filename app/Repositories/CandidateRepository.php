@@ -20,9 +20,9 @@ class CandidateRepository
         return $this->candidate->where('voting_id', $id)->with('voting')->get();
     }
 
-    public function getByIdAndVotingId($votingId, $candidateId)
+    public function getByIdAndVotingId($candidateId)
     {
-        return $this->candidate->where('voting_id', $votingId)->where('id', $candidateId)->with('candidateFiles')->first();
+        return $this->candidate->where('id', $candidateId)->with('candidateFiles')->first();
     }
 
     public function getById($candidateId)

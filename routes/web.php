@@ -3,7 +3,6 @@
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
-use App\Http\Controllers\Committee\DashboardController;
 use App\Http\Controllers\Guest\CandidateController as AppCandidateController;
 use App\Http\Controllers\Guest\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -46,10 +45,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/teams/{candidatePartner}/photo', [TeamController::class, 'editPhoto'])->name('candidate.team.edit.photo');
         Route::put('/teams/{candidatePartner}/photo', [TeamController::class, 'updatePhoto'])->name('candidate.team.update.photo');
         // Personal Data 
-        Route::get('/personals', [PersonalController::class, 'index'])->name('candidate.personal.index');
+        // Route::get('/personals', [PersonalController::class, 'index'])->name('candidate.personal.index');
         Route::get('/personals/create', [PersonalController::class, 'create'])->name('candidate.personal.create');
         Route::post('/personals', [PersonalController::class, 'store'])->name('candidate.personal.store');
-        Route::get('/personals/{candidate}', [PersonalController::class, 'show'])->name('candidate.personal.show');
+        // Route::get('/personals/{candidate}', [PersonalController::class, 'show'])->name('candidate.personal.show');
         Route::get('/personals/{candidate}/edit', [PersonalController::class, 'edit'])->name('candidate.personal.edit');
         Route::put('/personals/{candidate}', [PersonalController::class, 'update'])->name('candidate.personal.update');
         Route::delete('/personals/{candidate}', [PersonalController::class, 'destroy'])->name('candidate.personal.destroy');
@@ -57,5 +56,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/personals/{candidate}/files', [PersonalController::class, 'storeFile'])->name('candidate.personal.file.store');
         Route::get('/personals/{candidate}/files/{candidateFile}/edit', [PersonalController::class, 'editFile'])->name('candidate.personal.file.edit');
         Route::put('/personals/{candidate}/files/{candidateFile}', [PersonalController::class, 'updateFile'])->name('candidate.personal.file.update');
+
+        Route::resource('/personal', Candidate\PersonalController::class)->names('candidate.personal')->only('index', 'show');
     });
 });

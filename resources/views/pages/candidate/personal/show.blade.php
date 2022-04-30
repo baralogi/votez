@@ -23,82 +23,81 @@
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="name">Nama</label>
                                 <input type="text" class="form-control" name="name" id="name"
-                                    value="{{ $candidates->name }}" readonly>
+                                    value="{{ $candidate->name }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="nim">Nim</label>
                                 <input type="text" class="form-control" id="nim" name="nim"
-                                    value="{{ $candidates->nim }}" readonly>
+                                    value="{{ $candidate->nim }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                    value="{{ $candidates->email }}" readonly>
+                                    value="{{ $candidate->email }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="phone">No. Handphone</label>
                                 <input type="number" class="form-control" name="phone" id="phone"
-                                    value="{{ $candidates->phone }}" readonly>
+                                    value="{{ $candidate->phone }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label>Voting</label>
-                                <input type="text" class="form-control" value="{{ $candidates->voting->name }}"
-                                    readonly>
+                                <input type="text" class="form-control"
+                                    value="{{ $candidate->candidatePartner->voting->name }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="status">Jabatan</label>
                                 <input type="text" class="form-control" name="status" id="status"
-                                    value="{{ $candidates->status }}" readonly>
+                                    value="{{ $candidate->status }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="status">Jenis Kelamin</label>
                                 <input type="text" class="form-control" name="sex" id="sex"
-                                    value="{{ $candidates->sex }}" readonly>
+                                    value="{{ $candidate->sex }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="address">Alamat</label>
-                                <textarea type="text" class="form-control" name="address" id="address"
-                                    readonly>{{ $candidates->address }}</textarea>
+                                <textarea type="text" class="form-control" name="address" id="address" readonly>{{ $candidate->address }}</textarea>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="birth_place">Tempat Lahir</label>
                                 <input type="text" class="form-control" name="birth_place" id="birth_place"
-                                    value="{{ $candidates->birth_place }}" readonly>
+                                    value="{{ $candidate->birth_place }}" readonly>
                             </div>
                             <div class="from-group col-md-6 col-12 mb-2">
                                 <label for="birth_date">Tanggal Lahir</label>
                                 <input type="text" class="form-control" name="birth_date" id="birth_date"
-                                    value="{{ $candidates->birth_date }}" readonly>
+                                    value="{{ $candidate->birth_date }}" readonly>
                             </div>
                             <div class="form-group col-md-6 col-12 mb-2">
                                 <label>Fakultas</label>
                                 <input type="text" class="form-control" name="faculty" id="faculty"
-                                    value="{{ $candidates->faculty }}" readonly>
+                                    value="{{ $candidate->faculty }}" readonly>
                             </div>
                             <div class="form-group col-md-6 col-12 mb-2">
                                 <label>Program Studi</label>
                                 <input type="text" class="form-control" name="major" id="major"
-                                    value="{{ $candidates->major }}" readonly>
+                                    value="{{ $candidate->major }}" readonly>
                             </div>
                             <div class="form-group col-md-6 col-12 mb-2">
                                 <label>Semester Sekarang</label>
                                 <input type="text" class="form-control" name="faculty" id="faculty"
-                                    value="{{ $candidates->semester }}" readonly>
+                                    value="{{ $candidate->semester }}" readonly>
                             </div>
                             <div class="form-group col-md-6 col-12 mb-2">
                                 <label>IPK</label>
                                 <input type="text" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01" class="form-control"
-                                    name="ipk" id="ipk" value="{{ $candidates->ipk }}" readonly>
+                                    name="ipk" id="ipk" value="{{ $candidate->ipk }}" readonly>
                             </div>
                             <div class="form-group col-md-6 col-12 mb-2">
                                 <label>SSKM</label>
                                 <input type="text" class="form-control" name="sskm" id="sskm"
-                                    value="{{ $candidates->sskm }}" readonly>
+                                    value="{{ $candidate->sskm }}" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <a href="{{ route('candidate.personal.edit', ['candidate' => $candidates->id]) }}" type="button"
+                        <a href="{{ route('candidate.personal.edit', ['candidate' => $candidate->id]) }}" type="button"
                             class="btn btn-info">
                             Ubah</a>
                         <x-back-button route="{{ route('candidate.personal.index') }}" />
@@ -110,8 +109,8 @@
                         <h4>File Berkas Kandidat</h4>
                     </div>
                     <div class="card-body">
-                        @if (count($candidates->candidateFiles) == 0)
-                            <a href="{{ route('candidate.personal.file.create', ['candidate' => $candidates->id]) }}"
+                        @if (count($candidate->candidateFiles) == 0)
+                            <a href="{{ route('candidate.personal.file.create', ['candidate' => $candidate->id]) }}"
                                 class="btn btn-outline-success"><i class="fas fa-plus">&nbsp;&nbsp; Unggah
                                     Berkas</i></a>
                         @else
@@ -127,7 +126,7 @@
                                     </thead>
                                     <tbody class="text-center">
                                         @php $i=0 @endphp
-                                        @foreach ($candidates->candidateFiles as $file)
+                                        @foreach ($candidate->candidateFiles as $file)
                                             @php $i++ @endphp
                                             <tr>
                                                 <th scope="row">{{ $i }}</th>
@@ -139,7 +138,7 @@
                                                             target="_blank" type="button"
                                                             class="btn btn-sm btn-outline-info">Lihat
                                                             File</a>
-                                                        <a href={{ route('candidate.personal.file.edit', ['candidate' => $candidates->id, 'candidateFile' => $file->id]) }}
+                                                        <a href={{ route('candidate.personal.file.edit', ['candidate' => $candidate->id, 'candidateFile' => $file->id]) }}
                                                             type="button" class="btn btn-sm btn-info">Ubah Berkas</a>
                                                     </div>
                                                 </td>

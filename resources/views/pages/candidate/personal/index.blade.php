@@ -44,7 +44,7 @@
                                                 <td>{{ $candidate->status }}</td>
                                                 <td>
                                                     <div>
-                                                        <a href="{{ route('candidate.personal.show', ['candidate' => $candidate->id]) }}"
+                                                        <a href="{{ route('candidate.personal.show', ['personal' => $candidate->id]) }}"
                                                             type="button" class="btn btn-sm btn-outline-info">Lihat
                                                             Detail</a>
                                                         <a href="{{ route('candidate.personal.edit', ['candidate' => $candidate->id]) }}"
