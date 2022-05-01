@@ -33,9 +33,9 @@ class CandidatePartner extends Model
 
     public function getIsPassStatusAttribute()
     {
-        if ($this->is_pass === true) {
+        if ($this->is_pass === 1) {
             return 'Lolos';
-        } else if ($this->is_pass === false) {
+        } else if ($this->is_pass === 0) {
             return 'Tidak Lolos';
         }
 

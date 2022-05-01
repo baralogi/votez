@@ -44,8 +44,23 @@
 
                         <div class="w-100 d-sm-none"></div>
                         <div class="float-right mt-sm-0 mt-3">
-                            <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-success">Terima</a>
-                            <a href="{{ route('voting.index') }}" class="btn btn-sm btn-outline-danger">Tolak</a>
+                            @if (empty($candidatePartner->is_pass))
+                                <form method="POST" class="d-inline"
+                                    action="{{ route('voting.candidate-partner.approve', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}">
+                                    @method("put")
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-success"
+                                        onclick="return confirm('Yakin ingin menerima calon kandidat?')">Terima</button>
+                                </form>
+                                <form method="POST" class="d-inline"
+                                    action="{{ route('voting.candidate-partner.decline', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}">
+                                    @method("put")
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Yakin ingin menolak calon kandidat?')">Tolak</button>
+                                </form>
+                            @endif
+
                             <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                         </div>
                     </div>

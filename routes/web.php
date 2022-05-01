@@ -34,6 +34,19 @@ Route::middleware('auth')->group(function () {
         Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate')->only('show');
         Route::resource('participant', Committee\ParticipantController::class)->names('participant')->only('index');
         Route::resource('blog', Committee\BlogController::class)->names('blog')->only('index');
+
+        Route::put(
+            'voting/{voting}/candidate-partner/{candidate_partner}/approve',
+            [App\Http\Controllers\Committee\CandidatePartnerController::class, 'approve']
+        )
+            ->name('voting.candidate-partner.approve')
+            ->scopeBindings();
+        Route::put(
+            'voting/{voting}/candidate-partner/{candidate_partner}/decline',
+            [App\Http\Controllers\Committee\CandidatePartnerController::class, 'decline']
+        )
+            ->name('voting.candidate-partner.decline')
+            ->scopeBindings();
     });
 
     Route::prefix('candidates')->group(function () {
