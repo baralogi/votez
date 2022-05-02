@@ -6,13 +6,13 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     /**
      * Sets up the tests
