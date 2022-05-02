@@ -1,7 +1,10 @@
 <div>
-    <a href="{{ route('voting.show', ['voting' => $voting->id]) }}" class="btn btn-sm btn-outline-info">Detail</a>
-    <a href="{{ route('voting.edit', ['voting' => $voting->id]) }}" class="btn btn-sm btn-outline-primary">Ubah</a>
-    <form method="POST" class="d-inline" action="{{ route('voting.destroy', ['voting' => $voting->id]) }}">
+    <a href="{{ route('committee.voting.show', ['voting' => $voting->id]) }}"
+        class="btn btn-sm btn-outline-info">Detail</a>
+    <a href="{{ route('committee.voting.edit', ['voting' => $voting->id]) }}"
+        class="btn btn-sm btn-outline-primary">Ubah</a>
+    <form method="POST" class="d-inline"
+        action="{{ route('committee.voting.destroy', ['voting' => $voting->id]) }}">
         @method("delete")
         @csrf
         <input type="hidden" value="{{ $voting->id }}" />

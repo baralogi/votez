@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.committee.app')
 
 @section('title')
     <title>Votez &mdash; Kelola Voting</title>
@@ -8,14 +8,14 @@
     <div class="main-content">
         <section class="section">
             <x-header title="Voting">
-                <div class="breadcrumb-item"><a href="{{ route('voting.index') }}">Voting</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('committee.voting.index') }}">Voting</a></div>
                 <div class="breadcrumb-item">Simpan Data</div>
             </x-header>
 
             <div class="section-body">
                 <x-title title="Manajemen Voting" lead="Simpan Data Voting" />
                 <div class="card">
-                    <form action="{{ route('voting.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('committee.voting.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <x-save-button />
-                            <x-back-button route="{{ route('voting.index') }}" />
+                            <x-back-button route="{{ route('committee.voting.index') }}" />
                         </div>
                     </form>
                 </div>

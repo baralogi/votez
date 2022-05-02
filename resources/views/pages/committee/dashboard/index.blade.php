@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.committee.app')
 
 @section('title')
     <title>Votez &mdash; Dashboard</title>

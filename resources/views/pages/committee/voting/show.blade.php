@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.committee.app')
 
 @section('title')
     <title>Votez &mdash; Kelola Data Voting</title>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
+                                <a href="{{ route('committee.voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <a href={{ route('voting.candidate-partner.show', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}
+                                                    <a href={{ route('committee.voting.candidate-partner.show', ['voting' => $voting,'candidate_partner' => $candidatePartner]) }}
                                                         type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                                 </div>
                                             </td>

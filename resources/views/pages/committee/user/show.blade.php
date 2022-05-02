@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.committee.app')
 
 @section('title')
     <title>Votez &mdash; Kelola User</title>
@@ -8,7 +8,7 @@
     <div class="main-content">
         <section class="section">
             <x-header title="Panitia">
-                <div class="breadcrumb-item"><a href="{{ route('user.index') }}">Panitia</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('committee.user.index') }}">Panitia</a></div>
                 <div class="breadcrumb-item">Detail Data</div>
             </x-header>
             <div class="section-body">
@@ -40,7 +40,7 @@
                             </fieldset>
                         </div>
                         <div class="card-footer text-right">
-                            <x-back-button route="{{ route('user.index') }}" />
+                            <x-back-button route="{{ route('committee.user.index') }}" />
                         </div>
                     @else
                         <div class="card-body p-5">

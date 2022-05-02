@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.committee.app')
 
 @section('title')
     <title>Votez &mdash; Kelola Calon Kandidat</title>
@@ -46,14 +46,14 @@
                         <div class="float-right mt-sm-0 mt-3">
                             @if (empty($candidatePartner->is_pass))
                                 <form method="POST" class="d-inline"
-                                    action="{{ route('voting.candidate-partner.approve', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}">
+                                    action="{{ route('committee.voting.candidate-partner.approve', ['voting' => $voting,'candidate_partner' => $candidatePartner]) }}">
                                     @method("put")
                                     @csrf
                                     <button class="btn btn-sm btn-outline-success"
                                         onclick="return confirm('Yakin ingin menerima calon kandidat?')">Terima</button>
                                 </form>
                                 <form method="POST" class="d-inline"
-                                    action="{{ route('voting.candidate-partner.decline', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}">
+                                    action="{{ route('committee.voting.candidate-partner.decline', ['voting' => $voting,'candidate_partner' => $candidatePartner]) }}">
                                     @method("put")
                                     @csrf
                                     <button class="btn btn-sm btn-outline-danger"
@@ -65,7 +65,7 @@
                                     Atur nomor urut
                                 </button>
                             @endif
-                            <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
+                            <a href="{{ route('committee.voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                                         <td>{{ $candidate->status }}</td>
                                         <td>
                                             <div>
-                                                <a href={{ route('voting.candidate-partner.candidate.show', ['voting' => $voting,'candidate_partner' => $candidatePartner,'candidate' => $candidate]) }}
+                                                <a href={{ route('committee.voting.candidate-partner.candidate.show', ['voting' => $voting,'candidate_partner' => $candidatePartner,'candidate' => $candidate]) }}
                                                     type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                             </div>
                                         </td>
@@ -123,7 +123,7 @@
                 </button>
             </div>
             <form method="POST" class="d-inline"
-                action="{{ route('voting.candidate-partner.sequence-number', ['voting' => $voting,'candidate_partner' => $candidatePartner]) }}">
+                action="{{ route('committee.voting.candidate-partner.sequence-number', ['voting' => $voting,'candidate_partner' => $candidatePartner]) }}">
                 @method("put")
                 @csrf
                 <div class="modal-body">

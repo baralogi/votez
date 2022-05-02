@@ -20,7 +20,7 @@
     <div id="app">
         <div class="main-wrapper">
             @include('includes.navbar')
-            @include('includes.sidebar')
+            @include('includes.committee.sidebar')
 
             <!-- Main Content -->
             @yield('main')

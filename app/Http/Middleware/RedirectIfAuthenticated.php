@@ -17,27 +17,23 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                $role = Auth::user()->roles[0]->name;
-                switch ($role) {
-                    case 'ketua panitia':
-                        return RouteServiceProvider::COMMITTEE;
-                        break;
-                    case 'panitia':
-                        return RouteServiceProvider::COMMITTEE;
-                        break;
-                    case 'kandidat':
-                        return RouteServiceProvider::CANDIDATEE;
-                        break;
-                    default:
-                        return \abort(403);
-                        break;
-                }
+        if (Auth::guard($guard)->check()) {
+            $role = Auth::user()->roles[0]->name;
+            switch ($role) {
+                case 'ketua panitia':
+                    return redirect()->route('committee.dashboard.index');
+                    break;
+                case 'panitia':
+                    return redirect()->route('committee.dashboard.index');
+                    break;
+                case 'kandidat':
+                    return redirect()->route('candidate.dashboard.index');
+                    break;
+                default:
+                    return \abort(403);
+                    break;
             }
         }
 
