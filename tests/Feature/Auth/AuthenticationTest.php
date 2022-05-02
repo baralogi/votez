@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     /**
      * Sets up the tests

@@ -37,7 +37,7 @@ class VotingController extends Controller
     public function store(StoreVotingRequest $request)
     {
         $this->votingRepository->create($request->validated());
-        return redirect()->route('voting.index');
+        return redirect()->route('committee.voting.index');
     }
 
     public function edit(Voting $voting)
@@ -48,12 +48,12 @@ class VotingController extends Controller
     public function update(UpdateVotingRequest $request, Voting $voting)
     {
         $this->votingRepository->update($voting, $request->validated());
-        return redirect()->route('voting.index');
+        return redirect()->route('committee.voting.index');
     }
 
     public function destroy(Voting $voting)
     {
         $this->votingRepository->destroy($voting);
-        return redirect()->route('voting.index');
+        return redirect()->route('committee.voting.index');
     }
 }
