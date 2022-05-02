@@ -25,4 +25,9 @@ class CandidatePartnerRepository extends BaseRepository
         $attributes['is_pass'] = false;
         return parent::update($model, $attributes);
     }
+
+    public function setSequenceNumber(Model $model, array $attributes): Model
+    {
+        return parent::update($model, $attributes);
+    }
 }

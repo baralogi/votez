@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Committee;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Committee\CandidatePartner\SetSequenceNumberRequest;
 use App\Models\CandidatePartner;
 use App\Models\Voting;
 use App\Repositories\Eloquent\CandidatePartnerRepository;
@@ -31,6 +32,12 @@ class CandidatePartnerController extends Controller
     public function decline(Voting $voting, CandidatePartner $candidate_partner)
     {
         $this->candidatePartnerRepository->decline($candidate_partner);
+        return redirect()->back();
+    }
+
+    public function setSequenceNumber(Voting $voting, CandidatePartner $candidate_partner, SetSequenceNumberRequest $request)
+    {
+        $this->candidatePartnerRepository->setSequenceNumber($candidate_partner, $request->validated());
         return redirect()->back();
     }
 }

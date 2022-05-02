@@ -48,9 +48,11 @@ class Voting extends Model
         $startDate = Carbon::createFromFormat('Y-m-d', $this->start_at);
         $endDate = Carbon::createFromFormat('Y-m-d', $this->end_at);
 
-        $check = Carbon::now()->between($startDate, $endDate);
+        $check1 = Carbon::now()->isSameDay($endDate);
+        $check2 = Carbon::now()->between($startDate, $endDate);
 
-        if ($check) {
+
+        if ($check1 || $check2) {
             return 'Aktif';
         }
 

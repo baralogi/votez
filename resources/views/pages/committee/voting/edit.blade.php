@@ -66,7 +66,7 @@
                                 <label>Tanggal Berakhir</label>
                                 <input type="date" class="form-control datepicker" name="end_at"
                                     value="{{ $voting->end_at }}">
-                                @error('start_at')
+                                @error('end_at')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

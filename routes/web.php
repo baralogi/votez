@@ -47,6 +47,12 @@ Route::middleware('auth')->group(function () {
         )
             ->name('voting.candidate-partner.decline')
             ->scopeBindings();
+        Route::put(
+            'voting/{voting}/candidate-partner/{candidate_partner}/sequence-number',
+            [App\Http\Controllers\Committee\CandidatePartnerController::class, 'setSequenceNumber']
+        )
+            ->name('voting.candidate-partner.sequence-number')
+            ->scopeBindings();
     });
 
     Route::prefix('candidates')->group(function () {

@@ -59,8 +59,12 @@
                                     <button class="btn btn-sm btn-outline-danger"
                                         onclick="return confirm('Yakin ingin menolak calon kandidat?')">Tolak</button>
                                 </form>
+                            @else
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#setSequenceNumberModal">
+                                    Atur nomor urut
+                                </button>
                             @endif
-
                             <a href="{{ route('voting.index') }}" class="btn btn-sm btn-danger">Kembali</a>
                         </div>
                     </div>
@@ -106,6 +110,40 @@
     </section>
     </div>
 @endsection
+
+<!-- Modal -->
+<div class="modal fade" id="setSequenceNumberModal" tabindex="-1" aria-labelledby="setSequenceNumberModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Atur Nomor Urut Calon Kandidat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" class="d-inline"
+                action="{{ route('voting.candidate-partner.sequence-number', ['voting' => $voting,'candidate_partner' => $candidatePartner]) }}">
+                @method("put")
+                @csrf
+                <div class="modal-body">
+                    <div class="from-group col-md-12 col-12 mb-2">
+                        <label for="">No. urut</label>
+                        <input type="number" class="form-control" name="sequence_number"
+                            value="{{ old('sequence_number') }}">
+                        @error('sequence_number')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
     <script>

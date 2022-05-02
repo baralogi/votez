@@ -27,8 +27,8 @@ class UpdateVotingRequest extends FormRequest
             'logo' => 'mimes:jpeg,jpg,png|max:2000',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'start_at' => 'required|date|after:today',
-            'end_at' => 'required|date|after:start_at',
+            'start_at' => 'required|date|after_or_equal:today',
+            'end_at' => 'required|date|after_or_equal:start_at',
         ];
     }
 }

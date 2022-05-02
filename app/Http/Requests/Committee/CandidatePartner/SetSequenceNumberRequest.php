@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Committee\Voting;
+namespace App\Http\Requests\Committee\CandidatePartner;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreVotingRequest extends FormRequest
+class SetSequenceNumberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +25,11 @@ class StoreVotingRequest extends FormRequest
     public function rules()
     {
         return [
-            'logo' => 'required|mimes:jpeg,jpg,png|max:2000',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'start_at' => 'required|date|after_or_equal:today',
-            'end_at' => 'required|date|after_or_equal:start_at',
+            'sequence_number' => [
+                'required', 
+                'numeric', 
+                Rule::unique('candidate_partners', 'sequence_number')->where('voting_id', $this->voting->id)->whereNot('id', $this->candidate_partner->id)
+            ]
         ];
     }
 }
