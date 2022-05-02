@@ -13,11 +13,6 @@ class Candidate extends Model
     const VICE = 'WAKIL KETUA';
     protected $fillable = ['user_id', 'voting_id', 'candidate_partner_id', 'name', 'status', 'description'];
 
-    public function votingCounts()
-    {
-        return $this->hasMany(VotingCount::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

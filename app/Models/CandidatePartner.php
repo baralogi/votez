@@ -21,6 +21,11 @@ class CandidatePartner extends Model
         return $this->hasMany(Candidate::class);
     }
 
+    public function votingCounts()
+    {
+        return $this->hasMany(VotingCount::class);
+    }
+
     public function getDefaultPhotoLinkAttribute()
     {
         return asset('images/default-image.jpg');

@@ -28,6 +28,6 @@ class CreateMajorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('major');
+        Schema::dropIfExists('majors');
     }
 }

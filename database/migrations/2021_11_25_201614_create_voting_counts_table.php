@@ -15,7 +15,7 @@ class CreateVotingCountsTable extends Migration
     {
         Schema::create('voting_counts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('candidate_id')->constrained();
+            $table->foreignId('candidate_partner_id')->constrained();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateVotingCountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('candidate_counts');
+        Schema::dropIfExists('voting_counts');
     }
 }

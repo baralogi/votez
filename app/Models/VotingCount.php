@@ -9,8 +9,8 @@ class VotingCount extends Model
 {
     use HasFactory;
 
-    public function candidate()
+    public function candidate_partner()
     {
-        return $this->belongsTo(Candidate::class);
+        return $this->belongsTo(CandidatePartner::class);
     }
 }
