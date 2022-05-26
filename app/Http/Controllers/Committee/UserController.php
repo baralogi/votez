@@ -36,7 +36,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $this->userRepository->create($request->validated());
-        return redirect()->route('user.index');
+        return redirect()->route('committee.user.index');
     }
 
     public function show(User $user)
@@ -53,12 +53,12 @@ class UserController extends Controller
     public function update(User $user, UpdateUserRequest $request)
     {
         $this->userRepository->update($user, $request->validated());
-        return redirect()->route('user.index');
+        return redirect()->route('committee.user.index');
     }
 
     public function destroy(User $user)
     {
         $this->userRepository->destroy($user);
-        return redirect()->route('users.index');
+        return redirect()->route('committee.user.index');
     }
 }
