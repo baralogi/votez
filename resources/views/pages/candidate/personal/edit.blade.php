@@ -15,8 +15,8 @@
             <div class="section-body">
                 <x-title title="Manajemen Kandidat" lead="Ubah Data Kandidat" />
                 <div class="card">
-                    <form action="{{ route('candidate.personal.update', ['candidate' => $candidates->id]) }}"
-                        method="post" enctype="multipart/form-data">
+                    <form action="{{ route('candidate.personal.update', ['personal' => $candidates->id]) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="card-body">

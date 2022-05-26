@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <a href="{{ route('candidate.personal.edit', ['candidate' => $candidate->id]) }}" type="button"
+                        <a href="{{ route('candidate.personal.edit', ['personal' => $candidate->id]) }}" type="button"
                             class="btn btn-info">
                             Ubah</a>
                         <x-back-button route="{{ route('candidate.personal.index') }}" />
@@ -138,7 +138,7 @@
                                                             target="_blank" type="button"
                                                             class="btn btn-sm btn-outline-info">Lihat
                                                             File</a>
-                                                        <a href={{ route('candidate.personal.file.edit', ['candidate' => $candidate->id, 'candidateFile' => $file->id]) }}
+                                                        <a href={{ route('candidate.personal.file.edit', ['personal' => $candidate->id, 'candidateFile' => $file->id]) }}
                                                             type="button" class="btn btn-sm btn-info">Ubah Berkas</a>
                                                     </div>
                                                 </td>

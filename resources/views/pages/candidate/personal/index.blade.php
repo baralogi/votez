@@ -47,7 +47,7 @@
                                                         <a href="{{ route('candidate.personal.show', ['personal' => $candidate->id]) }}"
                                                             type="button" class="btn btn-sm btn-outline-info">Lihat
                                                             Detail</a>
-                                                        <a href="{{ route('candidate.personal.edit', ['candidate' => $candidate->id]) }}"
+                                                        <a href="{{ route('candidate.personal.edit', ['personal' => $candidate->id]) }}"
                                                             type="button" class="btn btn-sm btn-outline-secondary">
                                                             Ubah</a>
                                                         <button class="btn btn-sm btn-outline-danger" data-toggle="modal"
@@ -75,14 +75,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="title">Hapus
-                        Jadwal Event
+                        Data Calon Kandidat
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action={{ route('candidate.personal.destroy', ['candidate' => $candidate->id]) }}
+                    <form action={{ route('candidate.personal.destroy', ['personal' => $candidate->id]) }}
                         method="post">
                         @method('DELETE')
                         @csrf

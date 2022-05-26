@@ -54,7 +54,7 @@
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label>Voting</label>
                                     <input type="text" class="form-control"
-                                        value="{{ auth()->user()->candidate->voting->name }}" disabled>
+                                        value="{{ auth()->user()->candidate->candidatePartner->voting->name }}" disabled>
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="status">Jabatan</label>

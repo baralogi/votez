@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Candidate\Personal\StorePersonalRequest;
+use App\Http\Requests\Candidate\Personal\UpdatePersonalRequest;
 use App\Models\Candidate;
 use App\Models\CandidateFile;
+use App\Repositories\Eloquent\CandidatePartnerRepository;
 use App\Repositories\Eloquent\CandidateRepository;
+use App\Repositories\Eloquent\FacultyRepository;
 use App\Services\CandidateFileService;
 use App\Services\CandidateService;
 use App\Services\FacultyService;
@@ -14,22 +18,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonalController extends Controller
 {
-    protected $candidateRepository, $candidateService, $facultyService, $candidateFileService;
+    private $facultyRepository, $candidateRepository, $candidateService, $candidateFileService;
 
-    /**
-     * @param CandidateService $candidateService
-     * @param FacultyService $facultyService
-     * @param CandidateFileService $candidateFileService
-     */
     public function __construct(
+        FacultyRepository $facultyRepository,
         CandidateRepository $candidateRepository,
         CandidateService $candidateService,
-        FacultyService $facultyService,
         CandidateFileService $candidateFileService
     ) {
+        $this->facultyRepository = $facultyRepository;
         $this->candidateRepository = $candidateRepository;
         $this->candidateService = $candidateService;
-        $this->facultyService = $facultyService;
         $this->candidateFileService = $candidateFileService;
     }
 
@@ -41,29 +40,13 @@ class PersonalController extends Controller
 
     public function create()
     {
-        $faculties = $this->facultyService->listFaculty();
+        $faculties = $this->facultyRepository->list();
         return view('pages.candidate.personal.create')->with(['faculties' => $faculties]);
     }
 
-    public function store(Request $request)
+    public function store(StorePersonalRequest $request)
     {
-
-        $this->candidateService->storeCandidate([
-            'name' => $request->name,
-            'nim' => $request->nim,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'sex' => $request->sex,
-            'address' => $request->address,
-            'birth_place' => $request->birth_place,
-            'birth_date' => $request->birth_date,
-            'faculty' => $request->facultyText,
-            'major' => $request->majorText,
-            'semester' => $request->semester,
-            'ipk' => $request->ipk,
-            'sskm' => $request->sskm,
-        ]);
-
+        $this->candidateRepository->create($request->validated());
         return redirect()->route('candidate.personal.index');
     }
 
@@ -72,40 +55,25 @@ class PersonalController extends Controller
         return view('pages.candidate.personal.show')->with(['candidate' => $personal]);
     }
 
-    public function edit(Candidate $candidate)
+    public function edit(Candidate $personal)
     {
-        $faculties = $this->facultyService->listFaculty();
-        return view('pages.candidate.personal.edit')->with(['faculties' => $faculties, 'candidates' => $candidate]);
+        $faculties = $this->facultyRepository->list();
+        return view('pages.candidate.personal.edit')->with(['faculties' => $faculties, 'candidates' => $personal]);
     }
 
-    public function update(Request $request, Candidate $candidate)
+    public function update(UpdatePersonalRequest $request, Candidate $personal)
     {
-        $this->candidateService->updateCanditate($candidate->id, [
-            'name' => $request->name,
-            'nim' => $request->nim,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'sex' => $request->sex,
-            'address' => $request->address,
-            'birth_place' => $request->birth_place,
-            'birth_date' => $request->birth_date,
-            'faculty' => $request->facultyText,
-            'major' => $request->majorText,
-            'semester' => $request->semester,
-            'ipk' => $request->ipk,
-            'sskm' => $request->sskm,
-        ]);
-
+        $this->candidateRepository->update($personal, $request->validated());
         return redirect()->route('candidate.personal.index');
     }
 
-    public function destroy(Candidate $candidate)
+    public function destroy(Candidate $personal)
     {
-        $this->candidateService->destroyCandidateData($candidate->id);
-
+        $this->candidateRepository->destroy($personal);
         return redirect()->route('candidate.personal.index');
     }
 
+    // belum refactor
     public function createFile(Candidate $candidate)
     {
         return view('pages.candidate.personal.create-file')->with(['candidates' => $candidate]);

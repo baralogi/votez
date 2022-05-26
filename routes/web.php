@@ -63,19 +63,12 @@ Route::middleware('auth')->group(function () {
         Route::put('/teams/{candidatePartner}', [TeamController::class, 'update'])->name('team.update');
         Route::get('/teams/{candidatePartner}/photo', [TeamController::class, 'editPhoto'])->name('team.edit.photo');
         Route::put('/teams/{candidatePartner}/photo', [TeamController::class, 'updatePhoto'])->name('team.update.photo');
-        // Personal Data 
-        // Route::get('/personals', [PersonalController::class, 'index'])->name('candidate.personal.index');
-        Route::get('/personals/create', [PersonalController::class, 'create'])->name('personal.create');
-        Route::post('/personals', [PersonalController::class, 'store'])->name('personal.store');
-        // Route::get('/personals/{candidate}', [PersonalController::class, 'show'])->name('candidate.personal.show');
-        Route::get('/personals/{candidate}/edit', [PersonalController::class, 'edit'])->name('personal.edit');
-        Route::put('/personals/{candidate}', [PersonalController::class, 'update'])->name('personal.update');
-        Route::delete('/personals/{candidate}', [PersonalController::class, 'destroy'])->name('personal.destroy');
+
+        Route::resource('/personals', Candidate\PersonalController::class)->names('personal');
+
         Route::get('/personals/{candidate}/files/create', [PersonalController::class, 'createFile'])->name('personal.file.create');
         Route::post('/personals/{candidate}/files', [PersonalController::class, 'storeFile'])->name('personal.file.store');
         Route::get('/personals/{candidate}/files/{candidateFile}/edit', [PersonalController::class, 'editFile'])->name('personal.file.edit');
         Route::put('/personals/{candidate}/files/{candidateFile}', [PersonalController::class, 'updateFile'])->name('personal.file.update');
-
-        Route::resource('/personal', Candidate\PersonalController::class)->names('personal')->only('index', 'show');
     });
 });
