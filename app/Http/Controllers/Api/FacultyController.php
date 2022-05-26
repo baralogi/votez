@@ -4,29 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FacultyResource;
-use App\Services\FacultyService;
-use Illuminate\Http\Request;
+use App\Repositories\Eloquent\FacultyRepository;
 
 class FacultyController extends Controller
 {
-    /**
-     * @var FacultyService $facultyService
-     */
-    protected $facultyService;
+    private $repository;
 
-    /**
-     * FacultyService constructor.
-     *
-     * @param FacultyService $facultyService
-     */
-    public function __construct(FacultyService $facultyService)
+    public function __construct(FacultyRepository $repository)
     {
-        $this->facultyService = $facultyService;
+        $this->repository = $repository;
     }
 
     public function index()
     {
-        $faculties = $this->facultyService->listFaculty();
+        $faculties = $this->repository->list();
 
         return FacultyResource::collection($faculties);
     }

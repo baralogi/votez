@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\VotingService;
-use Illuminate\Http\Request;
+use App\Models\Organization;
+use App\Repositories\Eloquent\VotingRepository;
 
 class VotingController extends Controller
 {
-    protected $votingService;
+    protected $repository;
 
-    public function __construct(VotingService $votingService)
+    public function __construct(VotingRepository $repository)
     {
-        $this->votingService = $votingService;
+        $this->repository = $repository;
     }
 
-    public function getByOrganization($id)
+    public function index(Organization $organization)
     {
-        $votings = $this->votingService->getByOrganizationId($id)->get();
+        $votings = $this->repository->listByOrganizationId($organization->id);
         return response()->json($votings);
     }
 }

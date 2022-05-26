@@ -14,9 +14,9 @@ class VotingRepository extends BaseRepository
         $this->model = $model;
     }
 
-    public function getByOrganizationId($organizationId)
+    public function listByOrganizationId($organizationId)
     {
-        return $this->model->where('organization_id', $organizationId);
+        return $this->model->where('organization_id', $organizationId)->get();
     }
 
     public function create(array $attributes): Model
