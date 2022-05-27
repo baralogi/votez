@@ -52,7 +52,7 @@ class VotingsDataTable extends DataTable
      */
     public function query(VotingRepository $votingRepository)
     {
-        return $votingRepository->getByOrganizationId(auth()->user()->organization_id)->newQuery();
+        return $votingRepository->listDataTables(auth()->user()->organization_id);
     }
 
     /**

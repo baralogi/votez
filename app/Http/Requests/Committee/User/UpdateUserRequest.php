@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Committee\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -24,8 +25,8 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'roles' => 'required'
+            'name' => 'required|string|min:5|max:255',
+            'roles' => ['required', Rule::exists('roles', 'name')->where('guard_name', 'web')],
         ];
     }
 }

@@ -14,9 +14,20 @@ class UserRepository extends BaseRepository
         $this->model = $model;
     }
 
-    public function listByOrganizationId()
+    public function listDataTables($organizationId)
     {
-        return $this->model->CommitteeRole();
+        return $this->model
+            ->WhereOrganization($organizationId)
+            ->RoleCommittee()
+            ->newQuery();
+    }
+
+    public function listWhereCommittee($organizationId)
+    {
+        return $this->model
+            ->WhereOrganization($organizationId)
+            ->RoleCommittee()
+            ->get();
     }
 
     public function create(array $attributes): Model

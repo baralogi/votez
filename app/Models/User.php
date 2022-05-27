@@ -59,10 +59,13 @@ class User extends Authenticatable
         return $this->hasOne(Candidate::class);
     }
 
-    public function scopeCommitteeRole($query)
+    public function scopeWhereOrganization($query, $organizationId)
+    {
+        return $query->where('organization_id', $organizationId);
+    }
+    public function scopeRoleCommittee($query)
     {
         return $query
-            ->where('organization_id', auth()->user()->organization_id)
             ->whereHas('roles', function ($query) {
                 $query->whereIn('roles.name', ['ketua panitia', 'panitia']);
             });

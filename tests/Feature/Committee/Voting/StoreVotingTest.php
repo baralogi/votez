@@ -28,11 +28,6 @@ class StoreVotingTest extends TestCase
         $this->seed(RoleSeeder::class);
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_voting_create_screen_can_be_rendered()
     {
 
@@ -45,11 +40,6 @@ class StoreVotingTest extends TestCase
             ->assertStatus(200);
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_can_store_voting_data()
     {
         Storage::fake('images');
@@ -73,11 +63,6 @@ class StoreVotingTest extends TestCase
         $this->assertSame('Lorem ipsum set dolor amet', $data->description);
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_cant_store_voting_with_invalid_data()
     {
         Storage::fake('images');
@@ -95,11 +80,5 @@ class StoreVotingTest extends TestCase
         ])->assertInvalid([
             'logo', 'name'
         ]);;
-
-
-        // $data = Voting::query()->where('name', 'Badan Eksekutif Mahasiswa Vote')->first();
-
-        // $this->assertSame('Badan Eksekutif Mahasiswa Vote', $data->name);
-        // $this->assertSame('Lorem ipsum set dolor amet', $data->description);
     }
 }

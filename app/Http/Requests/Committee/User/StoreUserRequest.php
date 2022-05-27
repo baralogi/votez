@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Committee\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -24,9 +25,9 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:5|max:255',
             'email' => 'required|email|unique:users,email|max:255',
-            'roles' => 'required'
+            'roles' => ['required', Rule::exists('roles', 'name')->where('guard_name', 'web')],
         ];
     }
 }

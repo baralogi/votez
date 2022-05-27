@@ -14,6 +14,11 @@ class VotingRepository extends BaseRepository
         $this->model = $model;
     }
 
+    public function listDataTables($organizationId)
+    {
+        return $this->model->where('organization_id', $organizationId)->newQuery();
+    }
+
     public function listByOrganizationId($organizationId)
     {
         return $this->model->where('organization_id', $organizationId)->get();

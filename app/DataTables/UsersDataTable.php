@@ -11,12 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
-    protected $userRepository;
+    protected $repository;
 
     public function __construct(
-        UserRepository $userRepository
+        UserRepository $repository
     ) {
-        $this->userRepository = $userRepository;
+        $this->repository = $repository;
     }
 
     /**
@@ -49,7 +49,8 @@ class UsersDataTable extends DataTable
      */
     public function query()
     {
-        return $this->userRepository->listByOrganizationId(auth()->user()->organization_id)->newQuery();
+        return $this->repository
+            ->listDataTables(auth()->user()->organization_id);
     }
 
     /**
@@ -62,9 +63,8 @@ class UsersDataTable extends DataTable
         return $this->builder()
             ->setTableId('users-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
             ->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(0, 'asc')
             ->buttons(
                 Button::make('create')->addClass('btn-success'),
                 Button::make('reset')->addClass('btn-warning'),
@@ -98,6 +98,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'users_data_' . date('YmdHis');
     }
 }

@@ -50,7 +50,7 @@ class UserController extends Controller
         return view('pages.committee.user.edit')->with(['user' => $user, 'roles' => $roles]);
     }
 
-    public function update(User $user, UpdateUserRequest $request)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $this->userRepository->update($user, $request->validated());
         return redirect()->route('committee.user.index');
