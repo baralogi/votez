@@ -29,13 +29,12 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'users.action')
-            ->addColumn('roles', function (User $user) {
+            ->editColumn('roles', function (User $user) {
                 return $user->roles->map(function ($role) {
                     return Str::title($role->name);
                 })->implode(', ');
             })
-            ->addColumn('action', function (User $user) {
+            ->editColumn('action', function (User $user) {
                 return view('pages.committee.user.actions', compact('user'));
             })
             ->rawColumns(['action']);

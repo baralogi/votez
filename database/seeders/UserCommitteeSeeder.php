@@ -21,6 +21,6 @@ class UserCommitteeSeeder extends Seeder
             'email' => 'me@sembara.xyz',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
-        ])->syncRoles(['panitia']);
+        ])->syncRoles(['ketua panitia']);
     }
 }
