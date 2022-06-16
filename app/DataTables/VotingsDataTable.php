@@ -38,7 +38,7 @@ class VotingsDataTable extends DataTable
                     return '<span class="badge badge-pill badge-danger">Tidak Aktif</span>';
                 }
             })
-            ->addColumn('action', function (Voting $voting) {
+            ->editColumn('action', function (Voting $voting) {
                 return view('pages.committee.voting.actions', compact('voting'));
             })
             ->rawColumns(['action', 'logo', 'status']);

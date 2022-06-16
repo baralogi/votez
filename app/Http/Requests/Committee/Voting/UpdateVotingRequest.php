@@ -25,7 +25,7 @@ class UpdateVotingRequest extends FormRequest
     {
         return [
             'logo' => 'mimes:jpeg,jpg,png|max:2000',
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:5|max:255',
             'description' => 'required|string',
             'start_at' => 'required|date|after_or_equal:today',
             'end_at' => 'required|date|after_or_equal:start_at',

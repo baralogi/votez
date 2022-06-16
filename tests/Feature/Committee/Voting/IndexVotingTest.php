@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ViewVotingTest extends TestCase
+class IndexVotingTest extends TestCase
 {
     use RefreshDatabase;
 
