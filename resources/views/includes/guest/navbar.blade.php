@@ -1,32 +1,35 @@
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-    <div class="container px-5">
-        <a class="navbar-brand fw-bold" href="#page-top">Votez</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="bi-list"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                <li class="nav-item"><a class="nav-link me-lg-3" href="#">Berita</a>
-                </li>
-                <li class="nav-item"><a class="nav-link me-lg-3" href="{{ route('home.candidates') }}">Bakal
-                        Calon</a></li>
-            </ul>
-            <a href="{{ route('login') }}" class="btn btn-outline-secondary rounded-pill mx-1 px-3 mb-2 mb-lg-0">
-                <span class="d-flex align-items-center">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>
-                    <span class="small">Masuk</span>
-                </span>
-            </a>
-            <button class="btn btn-primary rounded-pill mx-1 px-3 mb-2 mb-lg-0" data-bs-toggle="modal"
-                data-bs-target="#feedbackModal">
-                <span class="d-flex align-items-center">
-                    <i class="bi-card-checklist me-2"></i>
-                    <span class="small">Voting</span>
-                </span>
-            </button>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{{ route('home.index') }}">Votez</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            {{-- <li class="nav-item active">
+                <a class="nav-link" href="{{ route('home.index') }}">Home <span class="sr-only">(current)</span></a>
+            </li> --}}
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('home.vacancy.index') }}">Lowongan Pekerjaan</a>
+            </li> --}}
+            {{-- <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li> --}}
+        </ul>
+        {{-- <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> --}}
+        @auth
+            @role('applicant')
+                <a href="{{ route('user.dashboard.index') }}" class="btn btn-outline-primary my-2 my-sm-0">Dashboard</a>
+            @else
+                {{ 'Logged as ' . auth()->user()->name . ', Admin' }}
+            @endrole
+        @else
+            <a href="{{ route('login') }}" class="btn btn-success mr-sm-2">Masuk</a>
+            <a href="{{ route('register') }}" class="btn btn-outline-primary my-2 my-sm-0">Daftar</a>
+        @endauth
     </div>
 </nav>

@@ -3,7 +3,6 @@
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
-use App\Http\Controllers\Guest\CandidateController as AppCandidateController;
 use App\Http\Controllers\Guest\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/candidates', [AppCandidateController::class, 'index'])->name('home.candidates');
 
 Auth::routes();
 Route::middleware('auth')->group(function () {
@@ -72,3 +70,5 @@ Route::middleware('auth')->group(function () {
         Route::put('/personals/{candidate}/files/{candidateFile}', [PersonalController::class, 'updateFile'])->name('personal.file.update');
     });
 });
+
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
