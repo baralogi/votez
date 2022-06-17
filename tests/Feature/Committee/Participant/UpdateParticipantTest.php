@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Feature\Committee\Participant;
+namespace Tests\Feature\Committee\User;
 
 use App\Models\Organization;
+use App\Models\Participant;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class StoreParticipantTest extends TestCase
+class UpdateParticipantTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -23,22 +23,24 @@ class StoreParticipantTest extends TestCase
         $this->seed(RoleSeeder::class);
     }
 
-    public function test_participant_create_screen_can_be_rendered()
+    public function test_participant_edit_screen_can_be_rendered()
     {
 
         $data = Organization::factory()
             ->has(User::factory(), 'users')
+            ->has(Participant::factory(), 'participants')
             ->create();
 
         $this->actingAs($data->users[0]);
-        $this->get('/committee/participant/create')
-            ->assertStatus(200);
+        $this->get("/committee/participant/{$data->participants[0]->id}/edit")
+            ->assertOk();
     }
 
-    public function test_can_store_participant_data()
+    public function test_can_update_participant_data()
     {
-        $auth = Organization::factory()
+        $organization = Organization::factory()
             ->has(User::factory(), 'users')
+            ->has(Participant::factory(), 'participants')
             ->create();
 
         $data = [
@@ -46,21 +48,22 @@ class StoreParticipantTest extends TestCase
             'name' => "Lidya Ananda",
         ];
 
-        $this->actingAs($auth->users[0]);
-        $this->post('committee/participant', $data)
+        $this->actingAs($organization->users[0]);
+        $this->put("/committee/participant/{$organization->participants[0]->id}", $data)
             ->assertSessionHasNoErrors('identity_number', 'name')
             ->assertRedirect('/committee/participant');
 
         $this->assertDatabaseHas('participants', [
             'identity_number' => $data['identity_number'],
-            'name' => $data['name']
+            'name' => $data['name'],
         ]);
     }
 
-    public function test_cant_store_participant_with_invalid_data()
+    public function test_cant_update_identity_with_invalid_data()
     {
-        $auth = Organization::factory()
+        $organization = Organization::factory()
             ->has(User::factory(), 'users')
+            ->has(Participant::factory(), 'participants')
             ->create();
 
         $data = [
@@ -68,8 +71,8 @@ class StoreParticipantTest extends TestCase
             'name' => "Lid",
         ];
 
-        $this->actingAs($auth->users[0]);
-        $this->post('/committee/participant', $data)
+        $this->actingAs($organization->users[0]);
+        $this->put("/committee/participant/{$organization->participants[0]->id}", $data)
             ->assertSessionHasErrors([
                 'identity_number', 'name'
             ]);;

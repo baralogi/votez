@@ -25,7 +25,7 @@ class StoreParticipantRequest extends FormRequest
     {
         return [
             'identity_number' => ['required', 'string'],
-            'name' => ['required', 'min:5', 'max:255']
+            'name' => ['required', 'string', 'min:5', 'max:255']
         ];
     }
 }
