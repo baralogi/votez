@@ -14,6 +14,11 @@ class BaseRepository implements EloquentRepositoryInterface
         $this->model = $model;
     }
 
+    public function index()
+    {
+        return $this->model;
+    }
+
     public function create(array $attributes): Model
     {
         return $this->model->create($attributes);

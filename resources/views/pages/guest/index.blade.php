@@ -16,4 +16,7 @@
             <a class="btn btn-primary btn-lg" role="button">Mulai Voting</a>
         </div>
     </section>
+    <section class="py-5 py-md-0">
+        @include('layouts.guest.blog')
+    </section>
 @endsection

@@ -16,8 +16,8 @@
                             @php
                                 $photo = $candidatePartner->photo ? $candidatePartner->photo_link : $candidatePartner->default_photo_link;
                             @endphp
-                            <img alt="image" src="{{ $photo }}" class="rounded-circle author-box-picture" width="150"
-                                style="object-fit: cover; object-position: 50% 0%;">
+                            <img alt="image" src="{{ $photo }}" class="rounded-circle author-box-picture"
+                                width="150" style="object-fit: cover; object-position: 50% 0%;">
                         </div>
                         <div class="author-box-details">
                             <div class="author-box-name">
@@ -49,18 +49,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-2 mt-3">
-                                @if ($candidate->is_pass_status == 'Lolos')
-                                    <span class="badge badge-pill badge-success">Lolos</span>
-                                @elseif ($candidate->is_pass_status == 'Tidak Lolos')
-                                    <span class="badge badge-pill badge-danger">Tidak Lolos</span>
-                                @else
-                                    <span class="badge badge-pill badge-info">Belum Terseleksi</span>
-                                @endif
-                            </div>
                             <div class="w-100 d-sm-none"></div>
                             <div class="float-right mt-sm-0 mt-3">
-                                <a href="{{ route('voting.candidate-partner.candidate.show', ['voting' => $voting,'candidate_partner' => $candidatePartner,'candidate' => $candidate]) }}"
+                                <a href={{ route('committee.voting.candidate-partner.show', ['voting' => $voting, 'candidate_partner' => $candidatePartner]) }}
                                     class="btn btn-sm btn-danger">Kembali</a>
                             </div>
                         </div>
@@ -91,7 +82,8 @@
                                             <td>{{ $file->filetype }}</td>
                                             <td>
                                                 <div>
-                                                    <a href="#" type="button" class="btn btn-sm btn-outline-info">Lihat
+                                                    <a href="#" type="button"
+                                                        class="btn btn-sm btn-outline-info">Lihat
                                                         File</a>
                                                 </div>
                                             </td>

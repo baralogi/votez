@@ -19,6 +19,11 @@ class BlogRepository extends BaseRepository
         return $this->model->newQuery();
     }
 
+    public function list()
+    {
+        return parent::index()->where('status', 'PUBLISHED')->cursorPaginate(6);
+    }
+
     public function create($attributes): Model
     {
         $attributes['user_id'] = auth()->user()->id;
