@@ -1,22 +1,21 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Tambah Kandidat</title>
+    <title>Votez &mdash; Kelola Kandidat</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
             <x-header title="Kandidat">
-                <div class="breadcrumb-item"><a href="{{ route('candidate.dashboard.index') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('candidate.personal.index') }}">Personal</a></div>
-                <div class="breadcrumb-item">Ubah Data</div>
+                <div class="breadcrumb-item"><a href="{{ route('candidate.personal.index') }}">Kandidat</a></div>
+                <div class="breadcrumb-item">Ubah</div>
             </x-header>
             <div class="section-body">
-                <x-title title="Manajemen Kandidat" lead="Ubah Data Kandidat" />
+                <x-title title="Kelola Kandidat" lead="Ubah data personal calon kandidat" />
                 <div class="card">
-                    <form action="{{ route('candidate.personal.update', ['personal' => $candidates->id]) }}" method="post"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('candidate.personal.update', ['personal' => $candidates->id]) }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="card-body">
@@ -70,15 +69,15 @@
                                     <label for="gender">Jenis Kelamin</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="sex" id="sex1" value="L"
-                                                {{ $candidates->sex == 'L' ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="sex" id="sex1"
+                                                value="L" {{ $candidates->sex == 'L' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="sex1">
                                                 Laki Laki
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="sex" id="sex2" value="P"
-                                                {{ $candidates->sex == 'P' ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="sex" id="sex2"
+                                                value="P" {{ $candidates->sex == 'P' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="sex2">
                                                 Perempuan
                                             </label>
@@ -147,8 +146,9 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>IPK</label>
-                                    <input type="number" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01" class="form-control"
-                                        name="ipk" id="ipk" value={{ $candidates->ipk }}>
+                                    <input type="number" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01"
+                                        class="form-control" name="ipk" id="ipk"
+                                        value={{ $candidates->ipk }}>
                                     @error('ipk')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -162,7 +162,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden" id="facultyText" name="facultyText" value="{{ $candidates->faculty }}">
+                            <input type="hidden" id="facultyText" name="facultyText"
+                                value="{{ $candidates->faculty }}">
                             <input type="hidden" id="majorText" name="majorText" value="{{ $candidates->major }}"
                                 readonly>
                         </div>

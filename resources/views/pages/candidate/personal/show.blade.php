@@ -1,19 +1,18 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Tambah Kandidat</title>
+    <title>Votez &mdash; Kelola Kandidat</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Kandidat">
-                <div class="breadcrumb-item"><a href="{{ route('candidate.dashboard.index') }}">Dashboard</a></div>
+            <x-header title="Personal">
                 <div class="breadcrumb-item"><a href="{{ route('candidate.personal.index') }}">Personal</a></div>
-                <div class="breadcrumb-item">Detail Data</div>
+                <div class="breadcrumb-item">Detail</div>
             </x-header>
             <div class="section-body">
-                <x-title title="Manajemen Kandidat" lead="Detail Data Kandidat" />
+                <x-title title="Kelola Kandidat" lead="Detail data personal calon kandidat" />
                 <div class="card">
                     <div class="card-header">
                         <h4>Data Diri Kandidat</h4>
@@ -138,7 +137,7 @@
                                                             target="_blank" type="button"
                                                             class="btn btn-sm btn-outline-info">Lihat
                                                             File</a>
-                                                        <a href={{ route('candidate.personal.file.edit', ['personal' => $candidate->id, 'candidateFile' => $file->id]) }}
+                                                        <a href={{ route('candidate.personal.file.edit', ['candidate' => $candidate->id, 'candidateFile' => $file->id]) }}
                                                             type="button" class="btn btn-sm btn-info">Ubah Berkas</a>
                                                     </div>
                                                 </td>

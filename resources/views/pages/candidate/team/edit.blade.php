@@ -1,16 +1,18 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Team</title>
+    <title>Votez &mdash; Kelola Visi Misi</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Team" />
+            <x-header title="Team">
+                <div class="breadcrumb-item">Visi Misi</div>
+            </x-header>
 
             <div class="section-body">
-                <x-title title="Data Team" lead="Manajemen data team pasangan calon" />
+                <x-title title="Kelola Visi Misi" lead="Ubah visi misi calon kandidat" />
                 <div class="card">
                     <form action="{{ route('candidate.team.update', ['candidatePartner' => $candidatePartners->id]) }}"
                         method="post" enctype="multipart/form-data">

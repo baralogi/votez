@@ -1,24 +1,27 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Team</title>
+    <title>Votez &mdash; Kelola Visi Misi</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
-            <x-header title="Team" />
+            <x-header title="Team">
+                <div class="breadcrumb-item">Visi Misi</div>
+            </x-header>
 
             <div class="section-body">
-                <x-title title="Data Team" lead="Manajemen data team pasangan calon" />
+                <x-title title="Kelola Visi Misi" lead="Kelola data team calon kandidat" />
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center mt-5 mb-5">
                             @php
                                 $photo = $candidatePartners->photo ? $candidatePartners->photo_link : $candidatePartners->default_photo_link;
                             @endphp
-                            <img src="{{ $photo }}" style="object-fit: cover; object-position: 50% 50%;" width="512"
-                                height="214" class="rounded elevation-2 mb-2" alt="Logo Image" id="previewImage">
+                            <img src="{{ $photo }}" style="object-fit: cover; object-position: 50% 50%;"
+                                width="512" height="214" class="rounded elevation-2 mb-2" alt="Logo Image"
+                                id="previewImage">
                             <div>
                                 <a href={{ route('candidate.team.edit.photo', ['candidatePartner' => $candidatePartners->id]) }}
                                     class="btn btn-outline-info"><i class="fas fa-edit">&nbsp;&nbsp; Ubah

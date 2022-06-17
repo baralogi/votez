@@ -1,24 +1,23 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Personal</title>
+    <title>Votez &mdash; Kelola Kandidat</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
             <x-header title="Personal">
-                <div class="breadcrumb-item"><a href="{{ route('candidate.dashboard.index') }}">Dashboard</a></div>
-                <div class="breadcrumb-item">Personal</div>
+                <div class="breadcrumb-item">Kandidat</div>
             </x-header>
 
             <div class="section-body">
-                <x-title title="Data Personal" lead="Manajemen data personal pasangan calon" />
+                <x-title title="Kelola Kandidat" lead="Kelola data personal calon kandidat" />
                 <div class="card">
                     <div class="card">
                         <div class="card-header">
                             @if (count($candidates) < 2)
-                                <a href="{{ route('candidate.personal.create') }}" class="btn btn-outline-success"><i
+                                <a href="{{ route('candidate.personal.create') }}" class="btn btn-outline-success p-2"><i
                                         class="fas fa-plus">&nbsp;&nbsp; Tambah
                                         Kandidat</i></a>
                             @endif
@@ -45,8 +44,7 @@
                                                 <td>
                                                     <div>
                                                         <a href="{{ route('candidate.personal.show', ['personal' => $candidate->id]) }}"
-                                                            type="button" class="btn btn-sm btn-outline-info">Lihat
-                                                            Detail</a>
+                                                            type="button" class="btn btn-sm btn-outline-info">Detail</a>
                                                         <a href="{{ route('candidate.personal.edit', ['personal' => $candidate->id]) }}"
                                                             type="button" class="btn btn-sm btn-outline-secondary">
                                                             Ubah</a>

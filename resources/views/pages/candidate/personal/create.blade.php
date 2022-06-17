@@ -1,19 +1,18 @@
 @extends('layouts.candidate.app')
 
 @section('title')
-    <title>Votez &mdash; Tambah Kandidat</title>
+    <title>Votez &mdash; Kelola Kandidat</title>
 @endsection
 
 @section('main')
     <div class="main-content">
         <section class="section">
             <x-header title="Kandidat">
-                <div class="breadcrumb-item"><a href="{{ route('candidate.dashboard.index') }}">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="{{ route('candidate.personal.index') }}">Personal</a></div>
-                <div class="breadcrumb-item">Simpan Data</div>
+                <div class="breadcrumb-item">Simpan</div>
             </x-header>
             <div class="section-body">
-                <x-title title="Manajemen Kandidat" lead="Simpan Data Kandidat" />
+                <x-title title="Kelola Kandidat" lead="Simpan data personal calon kandidat" />
                 <div class="card">
                     <form action="{{ route('candidate.personal.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -58,20 +57,22 @@
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="status">Jabatan</label>
-                                    <input type="text" class="form-control" name="status" id="status" value="WAKIL KETUA"
-                                        disabled>
+                                    <input type="text" class="form-control" name="status" id="status"
+                                        value="WAKIL KETUA" disabled>
                                 </div>
                                 <div class="from-group col-md-6 col-12 mb-2">
                                     <label for="gender">Jenis Kelamin</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="sex" id="sex1" value="L">
+                                            <input class="form-check-input" type="radio" name="sex" id="sex1"
+                                                value="L">
                                             <label class="form-check-label" for="sex1">
                                                 Laki Laki
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="sex" id="sex2" value="P">
+                                            <input class="form-check-input" type="radio" name="sex" id="sex2"
+                                                value="P">
                                             <label class="form-check-label" for="sex2">
                                                 Perempuan
                                             </label>
@@ -133,8 +134,8 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>IPK</label>
-                                    <input type="number" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01" class="form-control"
-                                        name="ipk" id="ipk" value={{ old('ipk') }}>
+                                    <input type="number" pattern="[0-9]+([\,|\.][0-9]+)?" step="0.01"
+                                        class="form-control" name="ipk" id="ipk" value={{ old('ipk') }}>
                                     @error('ipk')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
