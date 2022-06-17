@@ -16,9 +16,9 @@ class CreateParticipantsTable extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organization_id')->constrained();
-            $table->string('identification_number')->unique();
+            $table->string('identity_number')->unique();
             $table->string('name');
-            $table->boolean('have_voted');
+            $table->boolean('have_voted')->default(false);
             $table->string('token')->unique()->nullable();
             $table->timestamps();
         });

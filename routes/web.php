@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('voting', Committee\VotingController::class)->names('voting');
         Route::resource('voting/{voting}/candidate-partner', Committee\CandidatePartnerController::class)->names('voting.candidate-partner')->only('show');
         Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate')->only('show');
-        Route::resource('participant', Committee\ParticipantController::class)->names('participant')->only('index');
+        Route::resource('participant', Committee\ParticipantController::class)->names('participant')->except('show');
         Route::resource('blog', Committee\BlogController::class)->names('blog')->only('index');
 
         Route::put(

@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Participant;
+use Illuminate\Database\Eloquent\Model;
 
 class ParticipantRepository extends BaseRepository
 {
@@ -12,8 +13,14 @@ class ParticipantRepository extends BaseRepository
         $this->model = $model;
     }
 
-    public function listByOrganizationId($organizationId)
+    public function dataTables($organizationId)
     {
-        return $this->model->where('organization_id', $organizationId);
+        return $this->model->where('organization_id', $organizationId)->newQuery();
+    }
+
+    public function create(array $attributes): Model
+    {
+        $attributes['organization_id'] = auth()->user()->organization->id;
+        return parent::create($attributes);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Participant;
 use App\Repositories\Eloquent\ParticipantRepository;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,12 +12,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class ParticipantsDataTable extends DataTable
 {
-    protected $participantRepository;
+    protected $repository;
 
     public function __construct(
-        ParticipantRepository $participantRepository
+        ParticipantRepository $repository
     ) {
-        $this->participantRepository = $participantRepository;
+        $this->repository = $repository;
     }
 
     /**
@@ -29,7 +30,14 @@ class ParticipantsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'participant.action');
+            ->editColumn('action', function (Participant $participant) {
+                $component = $participant->have_voted == false
+                    ? view('pages.committee.participant.actions', compact('participant'))
+                    : '-';
+
+                return $component;
+            })
+            ->rawColumns(['action']);
     }
 
     /**
@@ -40,7 +48,7 @@ class ParticipantsDataTable extends DataTable
      */
     public function query()
     {
-        return $this->participantRepository->listByOrganizationId(auth()->user()->organization_id)->newQuery();
+        return $this->repository->dataTables(auth()->user()->organization_id);
     }
 
     /**
@@ -57,11 +65,9 @@ class ParticipantsDataTable extends DataTable
             ->dom('Bfrtip')
             ->orderBy(1)
             ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
+                Button::make('create')->addClass('btn-success'),
+                Button::make('reset')->addClass('btn-warning'),
+                Button::make('reload')->addClass('btn-danger')
             );
     }
 
@@ -73,9 +79,14 @@ class ParticipantsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('identification_number'),
+            Column::make('identity_number'),
             Column::make('name'),
             Column::make('have_voted'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')
+                ->title('Aksi'),
         ];
     }
 

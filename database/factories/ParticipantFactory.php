@@ -14,7 +14,7 @@ class ParticipantFactory extends Factory
     public function definition()
     {
         return [
-            'identification_number' => $this->faker->isbn10(),
+            'identity_number' => $this->faker->isbn10(),
             'name' => $this->faker->name(),
             'have_voted' => false,
         ];
