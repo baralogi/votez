@@ -2,7 +2,10 @@
 
 namespace App\DataTables;
 
+
 use App\Models\Blog;
+use App\Repositories\Eloquent\BlogRepository;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -21,7 +24,13 @@ class BlogsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'blogs.action');
+            ->editColumn('description', function (Blog $blog) {
+                return Str::limit($blog->description, 100);
+            })
+            ->editColumn('action', function (Blog $blog) {
+                return view('pages.committee.blog.actions', compact('blog'));
+            })
+            ->rawColumns(['action', 'description']);
     }
 
     /**
@@ -30,9 +39,9 @@ class BlogsDataTable extends DataTable
      * @param \App\Models\Blog $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Blog $model)
+    public function query(BlogRepository $repository)
     {
-        return $model->newQuery();
+        return $repository->dataTables();
     }
 
     /**
@@ -49,11 +58,9 @@ class BlogsDataTable extends DataTable
             ->dom('Bfrtip')
             ->orderBy(1)
             ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
+                Button::make('create')->addClass('btn-success'),
+                Button::make('reset')->addClass('btn-warning'),
+                Button::make('reload')->addClass('btn-danger')
             );
     }
 
@@ -65,17 +72,15 @@ class BlogsDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('id'),
+            Column::make('title'),
+            Column::make('description'),
+            Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('title'),
-            Column::make('description'),
-            Column::make('status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

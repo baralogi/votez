@@ -10,13 +10,10 @@
             <x-header title="Blog" />
 
             <div class="section-body">
-                <x-title title="Kelola Blog" lead="Kelola blog dengan mudah dan cepat" />
+                <x-title title="Kelola Blog" lead="Daftar Blog" />
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Data Blog</h4>
-                    </div>
                     <div class="card-body">
-                        {{ $dataTable->table(['class' => 'table table-striped']) }}
+                        {{ $dataTable->table(['class' => 'table table-md table-striped']) }}
                     </div>
                 </div>
             </div>
