@@ -22,20 +22,44 @@
 
                 <div class="section-body">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Example Card</h4>
-                        </div>
+                        @foreach ($votings as $voting)
+                            <div class="card-header">
+                                <h4>{{ $voting->name }}</h4>
+                            </div>
+                        @endforeach
                         <div class="card-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <div class="row">
+                                @foreach ($votings as $voting)
+                                    @foreach ($voting->candidatePartners as $candidatePartner)
+                                        {{-- @foreach ($candidatePartner->candidates as $candidate) --}}
+                                        <div class="col-lg-6">
+                                            <div class="card">
+                                                <img class="card-img-top" src="{{ $candidatePartner->photo_link }}"
+                                                    alt="Card image cap" style="width: 100%; object-fit: cover">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        {{ 'No Urut ' . $candidatePartner->sequence_number }}
+                                                    </h5>
+                                                    <p class="card-title">
+                                                        {{ $candidatePartner->candidates[0]->status . ' : ' . $candidatePartner->candidates[0]->name }}</br>
+                                                        {{ $candidatePartner->candidates[1]->status . ' : ' . $candidatePartner->candidates[1]->name }}
+                                                    </p>
+                                                    <p class="card-title">Visi</p>
+                                                    <p class="card-text">{!! $candidatePartner->vision !!}</p>
+                                                    <p class="card-title">Misi</p>
+                                                    <p class="card-text">{!! $candidatePartner->mission !!}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- @endforeach --}}
+                                    @endforeach
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="card-footer bg-whitesmoke">
-                            This is card footer
+                        <div class="card-footer">
+                            {{ $votings->links() }}
                         </div>
+
                     </div>
                 </div>
             </section>
