@@ -9,7 +9,16 @@ class Participant extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
+
+    protected $hidden = [
+        'token', 'remember_token',
+    ];
+
+    public function getAuthPassword()
+    {
+        return $this->token;
+    }
 
     public function organization()
     {

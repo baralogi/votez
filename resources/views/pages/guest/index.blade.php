@@ -13,7 +13,8 @@
             <p class="lead fw-normal text-muted">Pemilu bukan untuk memilih yang terbaik, namun
                 mencegah yang buruk untuk berkuasa</p>
             <p class="blockquote-footer">Franz Magnis Suseno</p>
-            <a class="btn btn-primary btn-lg" role="button">Mulai Voting</a>
+            <a class="btn btn-primary btn-lg" role="button" href="{{ route('participant.check.index') }}">Mulai
+                Voting</a>
         </div>
     </section>
     <section class="py-5 py-md-0">

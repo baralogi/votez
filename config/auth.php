@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'participant' => [
+            'redirectTo' => 'participant.home',
+            'driver' => 'session',
+            'provider' => 'participant',
+        ],
     ],
 
     /*
@@ -63,6 +68,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'participants' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Participant::class,
         ],
 
         // 'users' => [

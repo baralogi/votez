@@ -4,6 +4,7 @@ use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardCont
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
 use App\Http\Controllers\Guest\HomeController;
+use App\Http\Controllers\Participant\CheckParticipantController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/personals/{candidate}/files/{candidateFile}/edit', [PersonalController::class, 'editFile'])->name('personal.file.edit');
         Route::put('/personals/{candidate}/files/{candidateFile}', [PersonalController::class, 'updateFile'])->name('personal.file.update');
     });
+});
+
+Route::name('participant.')->prefix('participants')->group(function () {
+    Route::get('/checks', [CheckParticipantController::class, 'index'])->name('check.index');
+    Route::post('/checks', [CheckParticipantController::class, 'store'])->name('check.store');
 });
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

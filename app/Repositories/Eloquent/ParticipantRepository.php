@@ -18,6 +18,13 @@ class ParticipantRepository extends BaseRepository
         return $this->model->where('organization_id', $organizationId)->newQuery();
     }
 
+    public function findByIdentityNumber($identityNumber, $organizationId)
+    {
+        return parent::index()
+            ->where(['identity_number' => $identityNumber, 'organization_id' => $organizationId])
+            ->first();
+    }
+
     public function create(array $attributes): Model
     {
         $attributes['organization_id'] = auth()->user()->organization->id;
