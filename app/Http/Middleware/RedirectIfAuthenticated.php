@@ -20,6 +20,10 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            if ($guard == 'participant') {
+                return redirect()->route('participant.voting');
+            }
+
             $role = Auth::user()->roles[0]->name;
             switch ($role) {
                 case 'ketua panitia':

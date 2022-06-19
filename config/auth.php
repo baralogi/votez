@@ -41,9 +41,9 @@ return [
             'provider' => 'users',
         ],
         'participant' => [
-            'redirectTo' => 'participant.home',
+            'redirectTo' => 'participant.voting',
             'driver' => 'session',
-            'provider' => 'participant',
+            'provider' => 'participants',
         ],
     ],
 
@@ -73,11 +73,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Participant::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -102,6 +97,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'participants' => [
+            'provider' => 'participants',
+            'table' => 'password_reset',
+            'expire' => 60,
+        ],
+
     ],
 
     /*

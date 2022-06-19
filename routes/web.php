@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\Participant\LoginController as ParticipantLoginController;
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Participant\CheckParticipantController;
+use App\Http\Controllers\Participant\VotingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +22,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
 Auth::routes();
+Route::get('participant/login', [ParticipantLoginController::class, 'showLoginForm'])->name('participant.login.form');
+Route::post('participant/login', [ParticipantLoginController::class, 'login'])->name('participant.login');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('participant/checks', [CheckParticipantController::class, 'index'])->name('participant.check.index');
+Route::post('participant/checks', [CheckParticipantController::class, 'store'])->name('participant.check.store');
+
+
 Route::middleware('auth')->group(function () {
     Route::name('committee.')->prefix('committee')->group(function () {
         Route::resource('dashboard', Committee\DashboardController::class)->names('dashboard')->only('index');
@@ -72,9 +78,12 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::name('participant.')->prefix('participants')->group(function () {
-    Route::get('/checks', [CheckParticipantController::class, 'index'])->name('check.index');
-    Route::post('/checks', [CheckParticipantController::class, 'store'])->name('check.store');
+Route::group(['prefix' => 'participant', 'as' => 'participant.', 'middleware' => 'auth:participant'], function () {
+    Route::get('/vote', [VotingController::class, 'index'])->name('voting');
 });
+
+
+
+
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
