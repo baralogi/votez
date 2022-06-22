@@ -79,6 +79,6 @@ class StoreVotingTest extends TestCase
             'end_at' => Carbon::tomorrow(),
         ])->assertInvalid([
             'logo', 'name'
-        ]);;
+        ]);
     }
 }

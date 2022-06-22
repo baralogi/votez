@@ -4,6 +4,7 @@ namespace Tests\Feature\Committee\Voting;
 
 use App\Models\Organization;
 use App\Models\User;
+use App\Models\Voting;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -37,6 +38,6 @@ class IndexVotingTest extends TestCase
 
         $this->actingAs($data->users[0]);
         $this->get('/committee/voting')
-            ->assertStatus(200);
+            ->assertOk();
     }
 }
