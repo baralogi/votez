@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Candidate;
 use App\Models\Voting;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class VotingSeeder extends Seeder
 {
@@ -15,8 +15,25 @@ class VotingSeeder extends Seeder
      */
     public function run()
     {
-        Voting::factory()
-            ->count(3)
-            ->create();
+        $faker = \Faker\Factory::create();
+
+        Voting::insert([
+            [
+                'organization_id' => 1,
+                'name' => 'Badan Eksekutif Mahasiswa',
+                'description' => 'Pemilihan ketua dan wakil ketua Badan Eksekutif Mahasiswa Universitas Dinamika',
+                'start_at' => Carbon::now(),
+                'end_at' => Carbon::now()->addDays(3),
+                'logo' => $faker->imageUrl($width = 640, $height = 480),
+            ],
+            [
+                'organization_id' => 1,
+                'name' => 'Dewan Perwakilan Mahasiswa',
+                'description' => 'Pemilihan ketua dan wakil ketua Dewan Perwakilan Mahasiswa Universitas Dinamika',
+                'start_at' => Carbon::now(),
+                'end_at' => Carbon::now()->addDays(3),
+                'logo' => $faker->imageUrl($width = 640, $height = 480),
+            ]
+        ]);
     }
 }
