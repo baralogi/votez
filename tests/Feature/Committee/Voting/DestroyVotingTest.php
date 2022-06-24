@@ -25,7 +25,7 @@ class DestroyVotingTest extends TestCase
         $this->seed(RoleSeeder::class);
     }
 
-    public function test_can_destroy_user_data()
+    public function test_can_destroy_voting_data()
     {
         Storage::fake('images');
         $auth = Organization::factory()
