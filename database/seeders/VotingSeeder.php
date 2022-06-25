@@ -24,7 +24,6 @@ class VotingSeeder extends Seeder
                 'description' => 'Pemilihan ketua dan wakil ketua Badan Eksekutif Mahasiswa Universitas Dinamika',
                 'start_at' => Carbon::now(),
                 'end_at' => Carbon::now()->addDays(3),
-                'logo' => $faker->imageUrl($width = 640, $height = 480),
             ],
             [
                 'organization_id' => 1,
@@ -32,7 +31,6 @@ class VotingSeeder extends Seeder
                 'description' => 'Pemilihan ketua dan wakil ketua Dewan Perwakilan Mahasiswa Universitas Dinamika',
                 'start_at' => Carbon::now(),
                 'end_at' => Carbon::now()->addDays(3),
-                'logo' => $faker->imageUrl($width = 640, $height = 480),
             ]
         ]);
     }

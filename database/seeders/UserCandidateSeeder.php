@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserCandidateSeeder extends Seeder
 {
@@ -33,6 +35,22 @@ class UserCandidateSeeder extends Seeder
             'name' => 'Dian Ayu Palapa Putri',
             'organization_id' => 1,
             'email' => 'me@dian.xyz',
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ])->syncRoles(['kandidat']);
+
+        User::create([
+            'name' => 'Mahardika Alamsyah Singgih',
+            'organization_id' => 1,
+            'email' => 'me@dika.xyz',
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ])->syncRoles(['kandidat']);
+
+        User::create([
+            'name' => 'Irvan Alfaridzi Dwi Prastowo',
+            'organization_id' => 1,
+            'email' => 'me@irvan.xyz',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ])->syncRoles(['kandidat']);

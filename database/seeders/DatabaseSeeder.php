@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             OrganizationSeeder::class,
             UserCommitteeSeeder::class,
+            UserCandidateSeeder::class,
             VotingSeeder::class,
+            CandidatePartnerSeeder::class,
+            CandidateSeeder::class,
             FacultySeeder::class,
             MajorSeeder::class
         ]);
