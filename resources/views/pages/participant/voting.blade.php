@@ -40,14 +40,27 @@
                                                     <h5 class="card-title">
                                                         {{ 'No Urut ' . $candidatePartner->sequence_number }}
                                                     </h5>
-                                                    <p class="card-title">
-                                                        {{ $candidatePartner->candidates[0]->status . ' : ' . $candidatePartner->candidates[0]->name }}</br>
-                                                        {{ $candidatePartner->candidates[1]->status . ' : ' . $candidatePartner->candidates[1]->name }}
-                                                    </p>
+                                                    @if ($candidatePartner->candidates->count() == 1)
+                                                        <p class="card-title">
+                                                            {{ $candidatePartner->candidates[0]->status . ' : ' . $candidatePartner->candidates[0]->name }}
+                                                        </p>
+                                                    @else
+                                                        <p class="card-title">
+                                                            {{ $candidatePartner->candidates[0]->status . ' : ' . $candidatePartner->candidates[0]->name }}</br>
+                                                            {{ $candidatePartner->candidates[1]->status . ' : ' . $candidatePartner->candidates[1]->name }}
+                                                        </p>
+                                                    @endif
+
                                                     <p class="card-title">Visi</p>
                                                     <p class="card-text">{!! $candidatePartner->vision !!}</p>
                                                     <p class="card-title">Misi</p>
                                                     <p class="card-text">{!! $candidatePartner->mission !!}</p>
+                                                    <form method="POST" class="d-inline" action="#">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $voting->id }}" />
+                                                        <button class="btn btn-primary btn-lg"
+                                                            onclick="return confirm('Yakin ingin menghapus data?')">Pilih</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
