@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Committee\Article;
+namespace Tests\Feature\Supervisor\PotentialStudent;
 
 use App\Models\Organization;
 use App\Models\User;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class IndexArticleTest extends TestCase
+class IndexStudentTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -23,7 +23,11 @@ class IndexArticleTest extends TestCase
         $this->seed(RoleSeeder::class);
     }
 
-    public function test_article_index_screen_can_be_rendered()
+    public function test_student_index_screen_can_be_rendered()
+    {
+    }
+
+    public function test_can_recommend_potential_students()
     {
     }
 }
