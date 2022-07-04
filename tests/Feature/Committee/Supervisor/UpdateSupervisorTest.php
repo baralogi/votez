@@ -13,10 +13,15 @@ class UpdateSupervisorTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_supervisor_edit_screen_can_be_rendered()
     {
-        $response = $this->get('/');
+    }
 
-        $response->assertStatus(200);
+    public function test_can_update_supervisor_data()
+    {
+    }
+
+    public function test_cant_update_supervisor_with_invalid_data()
+    {
     }
 }

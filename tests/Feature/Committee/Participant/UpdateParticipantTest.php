@@ -59,7 +59,7 @@ class UpdateParticipantTest extends TestCase
         ]);
     }
 
-    public function test_cant_update_identity_with_invalid_data()
+    public function test_cant_update_participant_with_invalid_data()
     {
         $organization = Organization::factory()
             ->has(User::factory(), 'users')

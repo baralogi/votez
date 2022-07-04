@@ -13,7 +13,7 @@ class IndexSupervisorTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_supervisor_index_screen_can_be_rendered()
     {
         $response = $this->get('/');
 

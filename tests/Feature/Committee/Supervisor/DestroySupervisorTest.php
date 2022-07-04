@@ -13,7 +13,7 @@ class DestroySupervisorTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_can_destroy_supervisor_data()
     {
         $response = $this->get('/');
 
