@@ -19,6 +19,11 @@
                         <div class="breadcrumb-item">Pasangan Calon</div>
                     </div>
                 </div>
+                @if ($checkHaveBeenVote === 1)
+                    <div class="alert alert-warning" role="alert">
+                        Anda sudah pernah memilih dalam voting ini!
+                    </div>
+                @endif
 
                 <div class="section-body">
                     <div class="row">
@@ -47,12 +52,18 @@
                                         <p class="card-text">{!! $candidatePartner->mission !!}</p>
                                         <div class="card-footer text-center">
                                             <button class="btn btn-outline-info btn-lg">Detail Pasangan Calon</button>
-                                            <form method="POST" class="d-inline" action="#">
-                                                @csrf
-                                                <input type="hidden" value="{{ $candidatePartner->id }}" />
-                                                <button class="btn btn-primary btn-lg"
-                                                    onclick="return confirm('Yakin ingin memilih pasangan calon?')">Pilih</button>
-                                            </form>
+                                            @if ($checkHaveBeenVote === 0)
+                                                <form method="POST" class="d-inline"
+                                                    action="{{ route('participant.vote.candidate') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="voting_id"
+                                                        value="{{ $candidatePartner->voting_id }}" />
+                                                    <input type="hidden" name="candidate_partner_id"
+                                                        value="{{ $candidatePartner->id }}" />
+                                                    <button class="btn btn-primary btn-lg"
+                                                        onclick="return confirm('Yakin ingin memilih pasangan calon?')">Pilih</button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

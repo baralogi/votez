@@ -9,6 +9,8 @@ class VotingCount extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function candidate_partner()
     {
         return $this->belongsTo(CandidatePartner::class);

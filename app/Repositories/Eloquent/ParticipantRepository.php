@@ -30,4 +30,9 @@ class ParticipantRepository extends BaseRepository
         $attributes['organization_id'] = auth()->user()->organization->id;
         return parent::create($attributes);
     }
+
+    public function updateHaveVoted()
+    {
+        return $this->model->find(auth()->user()->id)->update(['have_voted' => true]);
+    }
 }

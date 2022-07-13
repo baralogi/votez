@@ -16,7 +16,7 @@ class CreateVotingChecksTable extends Migration
         Schema::create('voting_checks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('voting_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('participant_id')->constrained();
             $table->timestamps();
         });
     }

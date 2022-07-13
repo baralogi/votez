@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'participant', 'as' => 'participant.', 'middleware' => 'auth:participant'], function () {
     Route::get('/voting', [VotingController::class, 'index'])->name('voting.index');
     Route::get('/voting/{voting}/candidate-partner', [VotingController::class, 'show'])->name('voting.show');
+
+    Route::post('/vote', [VotingController::class, 'vote'])->name('vote.candidate');
 });
 
 
