@@ -71,7 +71,8 @@ class VotingsDataTable extends DataTable
             ->buttons(
                 Button::make('create')->addClass('btn-success'),
                 Button::make('reset')->addClass('btn-warning'),
-                Button::make('reload')->addClass('btn-danger')
+                Button::make('reload')->addClass('btn-danger'),
+                Button::make('export'),
             );
     }
 
