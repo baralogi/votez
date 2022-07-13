@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\CandidatePartner;
 use App\Models\Voting;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class CandidatePartnerRepository extends BaseRepository
 {
@@ -29,5 +30,13 @@ class CandidatePartnerRepository extends BaseRepository
     public function setSequenceNumber(Model $model, array $attributes): Model
     {
         return parent::update($model, $attributes);
+    }
+
+    public function groubByVoting()
+    {
+        return $this->model
+            ->select('voting_id', DB::raw('COUNT(*) as total'))
+            ->groupBy('voting_id')
+            ->get();
     }
 }

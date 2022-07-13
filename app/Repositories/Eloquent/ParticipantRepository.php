@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Participant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ParticipantRepository extends BaseRepository
 {
@@ -11,6 +12,15 @@ class ParticipantRepository extends BaseRepository
     public function __construct(Participant $model)
     {
         $this->model = $model;
+    }
+
+    public function groubByHaveVoted()
+    {
+        return $this->model
+            ->select('have_voted', DB::raw('COUNT(*) as total'))
+            ->where('organization_id', auth()->user()->organization_id)
+            ->groupBy('have_voted')
+            ->get();
     }
 
     public function dataTables($organizationId)

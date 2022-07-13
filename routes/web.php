@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\CandidatePartnerController as ApiCandidatePartnerController;
+use App\Http\Controllers\Api\ParticipantController as ApiParticipantController;
+use App\Http\Controllers\Api\VotingController as ApiVotingController;
 use App\Http\Controllers\Auth\Participant\LoginController as ParticipantLoginController;
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
@@ -62,6 +65,9 @@ Route::middleware('auth')->group(function () {
         )
             ->name('voting.candidate-partner.sequence-number')
             ->scopeBindings();
+
+        Route::get('api/participant', [ApiParticipantController::class, 'groubByHaveVoted'])->name('participant.groubByHaveVoted');
+        Route::get('api/voting', [ApiCandidatePartnerController::class, 'groubByVoting'])->name('voting');
     });
 
     Route::name('candidate.')->prefix('candidates')->group(function () {

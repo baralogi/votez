@@ -11,14 +11,140 @@
 
             <div class="section-body">
                 <x-title title="Dashboard Panitia" lead="Dashboard Informasi voting untuk panitia" />
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Dashboard</h4>
+                {{-- <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Line Chart</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Bar Chart</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="row">
+
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Partisipan yg Melakukan Voting</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChart4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Jumlah Kandidat Setiap Voting</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChart2"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+        integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        getData();
+
+        async function getData() {
+            const response = await fetch(
+                'https://votez.test/committee/api/participant');
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+            length = data.length;
+            console.log(length);
+
+            const labels = [];
+            const values = [];
+
+            for (i = 0; i < length; i++) {
+                labels.push(data[i].have_voted);
+                values.push(data[i].total);
+            }
+
+            const newLabels = labels.map((val, i) => i === 1 ? "Memilih" : "Tidak Memilih");
+
+            var ctx = document.getElementById("myChart4").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [
+                            '#fc544b',
+                            '#63ed7a',
+                        ],
+                        label: 'Prosentase Partisipan'
+                    }],
+                    labels: newLabels,
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom',
+                    },
+                }
+            });
+        }
+    </script>
+
+    <script>
+        getData();
+
+        async function getData() {
+            const response = await fetch(
+                'https://votez.test/committee/api/voting');
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+            length = data.data.length;
+            console.log(length);
+
+            labels = [];
+            values = [];
+            for (i = 0; i < length; i++) {
+                labels.push(data.data[i].voting);
+                values.push(data.data[i].total_candidate);
+            }
+
+
+            new Chart(document.getElementById("myChart2"), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Jumlah (Pasangan)",
+                        backgroundColor: ["#3e95cd",
+                            "#8e5ea2",
+                        ],
+                        data: values
+                    }]
+                },
+            });
+
+        }
+    </script>
+@endpush()
