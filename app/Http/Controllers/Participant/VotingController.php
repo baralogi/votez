@@ -50,11 +50,13 @@ class VotingController extends Controller
 
     public function vote(VotingCheckRepository $repository, VotingCountRepository $votingCountRepository, ParticipantRepository $participantRepository, UpsertCheckVotingRequest $request)
     {
-        $repository->upsert(['participant_id' => auth()->user()->id, 'voting_id' => $request->voting_id], ['voting_id' => $request->voting_id]);
-        $votingCountRepository->upsert([
-            'voting_id' => $request->voting_id,
-            'candidate_partner_id' => $request->candidate_partner_id
-        ], ['candidate_partner_id' => $request->candidate_partner_id]);
+        $repository->upsert([
+            'participant_id' => auth()->user()->id,
+            'voting_id' => $request->voting_id
+        ], ['voting_id' => $request->voting_id]);
+        $votingCountRepository->create([
+            'voting_id' => $request->voting_id, 'candidate_partner_id' => $request->candidate_partner_id
+        ]);
 
         $participantRepository->updateHaveVoted();
 

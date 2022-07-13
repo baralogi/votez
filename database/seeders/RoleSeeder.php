@@ -42,5 +42,8 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'kandidat'])
             ->givePermissionTo(Permission::all());
+
+        Role::create(['name' => 'pengawas'])
+            ->givePermissionTo(Permission::all());
     }
 }

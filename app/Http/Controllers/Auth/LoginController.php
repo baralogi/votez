@@ -31,6 +31,9 @@ class LoginController extends Controller
             case 'kandidat':
                 return RouteServiceProvider::CANDIDATEE;
                 break;
+            case 'pengawas':
+                return RouteServiceProvider::SUPERVISOR;
+                break;
             default:
                 return \abort(403);
                 break;

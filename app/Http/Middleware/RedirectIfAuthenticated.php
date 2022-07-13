@@ -35,6 +35,9 @@ class RedirectIfAuthenticated
                 case 'kandidat':
                     return redirect()->route('candidate.dashboard.index');
                     break;
+                case 'pengawas':
+                    return redirect()->route('supervisor.student.index');
+                    break;
                 default:
                     return \abort(403);
                     break;

@@ -55,6 +55,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Quick Count</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
         </section>
     </div>
@@ -137,6 +147,43 @@
                     labels: labels,
                     datasets: [{
                         label: "Jumlah (Pasangan)",
+                        backgroundColor: ["#3e95cd",
+                            "#8e5ea2",
+                        ],
+                        data: values
+                    }]
+                },
+            });
+
+        }
+    </script>
+
+    <script>
+        getData();
+
+        async function getData() {
+            const response = await fetch(
+                'http://votez.test/committee/api/quick-count');
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+            length = data.data.length;
+            console.log(length);
+
+            labels = [];
+            values = [];
+            for (i = 0; i < length; i++) {
+                labels.push(data.data[i].candidate_partner);
+                values.push(data.data[i].total);
+            }
+
+
+            new Chart(document.getElementById("myChart1"), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Jumlah (Suara)",
                         backgroundColor: ["#3e95cd",
                             "#8e5ea2",
                         ],

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CandidatePartnerController as ApiCandidatePartnerController;
 use App\Http\Controllers\Api\ParticipantController as ApiParticipantController;
 use App\Http\Controllers\Api\VotingController as ApiVotingController;
+use App\Http\Controllers\Api\VotingCountController;
 use App\Http\Controllers\Auth\Participant\LoginController as ParticipantLoginController;
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Committee\VotingController as CommitteeVotingController
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Participant\CheckParticipantController;
 use App\Http\Controllers\Participant\VotingController;
+use App\Http\Controllers\Supervisor\StudentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +70,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('api/participant', [ApiParticipantController::class, 'groubByHaveVoted'])->name('participant.groubByHaveVoted');
         Route::get('api/voting', [ApiCandidatePartnerController::class, 'groubByVoting'])->name('voting');
+        Route::get('api/quick-count', [VotingCountController::class, 'quickCount'])->name('voting.quick-count');
     });
 
     Route::name('candidate.')->prefix('candidates')->group(function () {
@@ -85,6 +88,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/personals/{candidate}/files', [PersonalController::class, 'storeFile'])->name('personal.file.store');
         Route::get('/personals/{candidate}/files/{candidateFile}/edit', [PersonalController::class, 'editFile'])->name('personal.file.edit');
         Route::put('/personals/{candidate}/files/{candidateFile}', [PersonalController::class, 'updateFile'])->name('personal.file.update');
+    });
+
+    Route::name('supervisor.')->prefix('supervisor')->group(function () {
+        Route::resource('student', Supervisor\StudentController::class)->names('student');
+        Route::post('student/recomendation', [StudentController::class, 'recommendation'])->name('student.recom');
     });
 });
 

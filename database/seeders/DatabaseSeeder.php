@@ -19,11 +19,13 @@ class DatabaseSeeder extends Seeder
             ParticipantSeeder::class,
             UserCommitteeSeeder::class,
             UserCandidateSeeder::class,
+            UserSupervisorSeeder::class,
             VotingSeeder::class,
             CandidatePartnerSeeder::class,
             CandidateSeeder::class,
             FacultySeeder::class,
-            MajorSeeder::class
+            MajorSeeder::class,
+            StudentSeeder::class,
         ]);
     }
 }

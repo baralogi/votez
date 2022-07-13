@@ -21,7 +21,9 @@ class RouteServiceProvider extends ServiceProvider
 
     public const CANDIDATEE = '/candidates/dashboard';
 
-    public const PARTICIPANT = '/participant/vote';
+    public const PARTICIPANT = '/participant/voting';
+
+    public const SUPERVISOR = '/supervisor/student';
 
     /**
      * The controller namespace for the application.
