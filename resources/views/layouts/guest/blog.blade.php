@@ -15,8 +15,8 @@
             </div>
         </div>
     @endforeach
-
 </div>
+
 <div class="my-4">
     {{ $blogs->links() }}
 </div>

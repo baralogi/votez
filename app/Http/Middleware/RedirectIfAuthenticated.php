@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             if ($guard == 'participant') {
-                return redirect()->route('participant.voting');
+                return redirect()->route('participant.voting.index');
             }
 
             $role = Auth::user()->roles[0]->name;

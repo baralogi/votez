@@ -12,16 +12,30 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Vote Calon Kandidat</h1>
-                    {{-- <div class="section-header-breadcrumb">
-                        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                        <div class="breadcrumb-item"><a href="#">Layout</a></div>
-                        <div class="breadcrumb-item">Top Navigation</div>
-                    </div> --}}
+                    <h1>Daftar Voting Aktif</h1>
+                    <div class="section-header-breadcrumb">
+                        <div class="breadcrumb-item">Voting</div>
+                    </div>
                 </div>
 
                 <div class="section-body">
-                    <div class="card">
+                    <div class="row">
+                        @foreach ($votings as $voting)
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <img class="card-img-top" src="{{ $voting->image }}" alt="Voting Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $voting->name }}</h5>
+                                        <p class="card-text">{{ Str::limit($voting->description, 50) }}</p>
+                                        <a href="{{ route('participant.voting.show', ['voting' => $voting->id]) }}"
+                                            class="btn btn-primary">Lihat
+                                            Calon</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    {{-- <div class="card">
                         @foreach ($votings as $voting)
                             <div class="card-header">
                                 <h4>{{ $voting->name }}</h4>
@@ -31,7 +45,6 @@
                             <div class="row">
                                 @foreach ($votings as $voting)
                                     @foreach ($voting->candidatePartners as $candidatePartner)
-                                        {{-- @foreach ($candidatePartner->candidates as $candidate) --}}
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <img class="card-img-top" src="{{ $candidatePartner->photo_link }}"
@@ -64,7 +77,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- @endforeach --}}
                                     @endforeach
                                 @endforeach
                             </div>
@@ -72,8 +84,7 @@
                         <div class="card-footer">
                             {{ $votings->links() }}
                         </div>
-
-                    </div>
+                    </div> --}}
                 </div>
             </section>
         </div>

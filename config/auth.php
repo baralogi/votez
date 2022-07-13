@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
         'participant' => [
-            'redirectTo' => 'participant.voting',
+            'redirectTo' => 'participant.voting.index',
             'driver' => 'session',
             'provider' => 'participants',
         ],

@@ -40,7 +40,7 @@ class LoginController extends DefaultLoginController
         if (Auth::guard('participant')->attempt($credential)) {
             // If login succesful, then redirect to their intended location
 
-            return redirect()->intended('/participant/vote');
+            return redirect()->intended('/participant/voting');
         }
         // If Unsuccessful, then redirect back to the login with the form data
         return redirect()->back()->with(['error' => 'NIM atau Token Salah! atau Sudah Pernah Melakukan Voting!']);
