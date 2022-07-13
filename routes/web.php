@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\Participant\LoginController as ParticipantLoginCon
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
 use App\Http\Controllers\Candidate\PersonalController;
 use App\Http\Controllers\Candidate\TeamController;
+use App\Http\Controllers\Committee\VotingController as CommitteeVotingController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Participant\CheckParticipantController;
 use App\Http\Controllers\Participant\VotingController;
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('voting/{voting}/candidate-partner/{candidate_partner}/candidate', Committee\CandidateController::class)->names('voting.candidate-partner.candidate')->only('show');
         Route::resource('participant', Committee\ParticipantController::class)->names('participant')->except('show');
         Route::resource('blog', Committee\BlogController::class)->names('blog');
+
+        Route::put('voting/{voting}/active', [CommitteeVotingController::class, 'activated'])->name('voting.active');
+        Route::put('voting/{voting}/nonactive', [CommitteeVotingController::class, 'nonactivated'])->name('voting.nonactive');
 
         Route::put(
             'voting/{voting}/candidate-partner/{candidate_partner}/approve',

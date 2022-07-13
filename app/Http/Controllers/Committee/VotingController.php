@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Committee;
 
 use App\Http\Controllers\Controller;
 use App\DataTables\VotingsDataTable;
+use App\Http\Requests\Committee\Voting\ActiveStatusVotingRequest;
 use App\Http\Requests\Committee\Voting\StoreVotingRequest;
 use App\Http\Requests\Committee\Voting\UpdateVotingRequest;
 use App\Models\Voting;
@@ -54,6 +55,18 @@ class VotingController extends Controller
     public function destroy(Voting $voting)
     {
         $this->votingRepository->destroy($voting);
+        return redirect()->route('committee.voting.index');
+    }
+
+    public function activated(Voting $voting)
+    {
+        $this->votingRepository->active($voting);
+        return redirect()->route('committee.voting.index');
+    }
+
+    public function nonactivated(Voting $voting)
+    {
+        $this->votingRepository->nonactive($voting);
         return redirect()->route('committee.voting.index');
     }
 }

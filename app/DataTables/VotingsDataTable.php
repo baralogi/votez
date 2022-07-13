@@ -32,7 +32,7 @@ class VotingsDataTable extends DataTable
                 return '<img src="' . $logoImage . '" alt="voting_logo" border="0" width="40" height="40" align="center" class="rounded-circle">';
             })
             ->editColumn('status', function (Voting $voting) {
-                if ($voting->voting_status == 'Aktif') {
+                if ($voting->is_active == true) {
                     return '<span class="badge badge-pill badge-success">Aktif</span>';
                 } else {
                     return '<span class="badge badge-pill badge-danger">Tidak Aktif</span>';

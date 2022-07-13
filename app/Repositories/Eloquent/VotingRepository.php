@@ -62,4 +62,16 @@ class VotingRepository extends BaseRepository
         Storage::delete('public/images/logo/' . $model->logo);
         return parent::destroy($model);
     }
+
+    public function active(Model $model): Model
+    {
+        $attributes['is_active'] = true;
+        return parent::update($model, $attributes);
+    }
+
+    public function nonactive(Model $model): Model
+    {
+        $attributes['is_active'] = false;
+        return parent::update($model, $attributes);
+    }
 }
