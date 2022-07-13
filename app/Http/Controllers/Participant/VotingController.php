@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Participant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Participant\UpsertCheckVotingRequest;
+use App\Models\Candidate;
 use App\Models\CandidatePartner;
 use App\Models\Voting;
 use App\Models\VotingCheck;
@@ -35,6 +36,15 @@ class VotingController extends Controller
             ->with([
                 'candidatePartners' => $candidatePartners,
                 'checkHaveBeenVote' => $checkHaveBeenVote
+            ]);
+    }
+
+    public function showCandidate(Voting $voting, CandidatePartner $candidatePartner)
+    {
+        $candidates = Candidate::where('candidate_partner_id', $candidatePartner->id)->get();
+        return view('pages.participant.voting-candidate')
+            ->with([
+                'candidates' => $candidates
             ]);
     }
 

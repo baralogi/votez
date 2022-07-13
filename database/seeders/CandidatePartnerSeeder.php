@@ -24,6 +24,7 @@ class CandidatePartnerSeeder extends Seeder
                 	<li>Mengajak Ormawa untuk lebih siap dan proaktif dalam menghadapi dunia VUCA (Volatility, Uncertainty, Complexity, dan Ambiguity) guna terciptanya Ormawa yang strategis, berinovasi, dan flexibel</li>
                 	<li>Meningkatkan prestasi ormawa dan mahasiswa Universitas Dinamika dalam ranah akademik maupun non akademik</li>
                 </ol>',
+                'is_pass' => 1,
                 'photo' => 'paslon_1.jpeg'
 
             ],
@@ -37,6 +38,7 @@ class CandidatePartnerSeeder extends Seeder
                 	<li>Mengoptimalkan pemberdayaan internal Badan Eksekutif Mahasiswa dan Ormawa yang berada dibawah naungan Universitas</li>
                 	<li>Meningkatkan kolaborasi antar lembaga legislatif, ormawa dengan Badan Eksekutif Mahasiswa</li>
                 </ol>',
+                'is_pass' => 1,
                 'photo' => 'paslon_2.jpeg'
             ],
             [
@@ -50,6 +52,7 @@ class CandidatePartnerSeeder extends Seeder
                     <li>Menciptakan Dewan Perwakilan Mahasiswa Universitas Dinamika yang tanggap dengan permasalahan dan isu isu di lingkungan Universitas Dinamika</li>
                 </ol>
                 ',
+                'is_pass' => 1,
                 'photo' => 'paslon_3.jpeg'
             ],
             [
@@ -62,6 +65,7 @@ class CandidatePartnerSeeder extends Seeder
                     <li>Tanggap dan terbuka dalam pelaksanaan fungsi dan peran DPM-U</li>
                     <li>Mengoptimalkan forum diskusi dan kajian pada internal DPM-U</li>  
                 </ol>',
+                'is_pass' => 1,
                 'photo' => 'paslon_4.jpeg'
             ],
             [
@@ -74,6 +78,7 @@ class CandidatePartnerSeeder extends Seeder
                     <li>Menyelenggarakan program pengembangan bakat dan minat seluruh mahasiswa.</li>
                     <li>Mampu bekerja sama untuk mencapai tujuan BEM sebagai organisasi mahasiswa yang bersinergi.</li>
                 </ol>',
+                'is_pass' => 1,
                 'photo' => 'paslon_5.jpeg'
             ]
         ]);

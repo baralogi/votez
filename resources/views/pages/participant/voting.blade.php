@@ -21,9 +21,12 @@
                 <div class="section-body">
                     <div class="row">
                         @foreach ($votings as $voting)
+                            @php
+                                $logoImage = $voting->logo ? $voting->logo_link : $voting->default_logo_link;
+                            @endphp
                             <div class="col-md-6 my-2">
                                 <div class="card">
-                                    <img class="card-img-top" src="{{ $voting->image }}" alt="Voting Image">
+                                    <img class="card-img-top" src="{{ $logoImage }}" alt="Voting Image">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $voting->name }}</h5>
                                         <p class="card-text">{{ Str::limit($voting->description, 50) }}</p>

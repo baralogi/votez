@@ -12,7 +12,7 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Daftar Calon Pemilihan</h1>
+                    <h1>Daftar Pasangan Calon Kandidat</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="{{ route('participant.voting.index') }}">Voting</a>
                         </div>
@@ -28,10 +28,13 @@
                 <div class="section-body">
                     <div class="row">
                         @foreach ($candidatePartners as $candidatePartner)
+                            @php
+                                $photo = $candidatePartner->photo ? $candidatePartner->photo_link : $candidatePartner->default_photo_link;
+                                $sequence_number = $candidatePartner->sequence_number ? $candidatePartner->sequence_number : '-';
+                            @endphp
                             <div class="col-md-6 my-2">
                                 <div class="card">
-                                    <img class="card-img-top" src="{{ $candidatePartner->photo }}"
-                                        alt="Candidate Partner Image">
+                                    <img class="card-img-top" src="{{ $photo }}" alt="Candidate Partner Image">
                                     <div class="card-body">
                                         <h5 class="card-title">
                                             {{ 'No Urut ' . $candidatePartner->sequence_number }}
@@ -51,7 +54,8 @@
                                         <p class="card-title">Misi</p>
                                         <p class="card-text">{!! $candidatePartner->mission !!}</p>
                                         <div class="card-footer text-center">
-                                            <button class="btn btn-outline-info btn-lg">Detail Pasangan Calon</button>
+                                            <a href="{{ route('participant.voting.candidate-partner.show', ['voting' => $candidatePartner->voting_id, 'candidatePartner' => $candidatePartner->id]) }}"
+                                                class="btn btn-outline-info btn-lg">Detail Pasangan Calon</a>
                                             @if ($checkHaveBeenVote === 0)
                                                 <form method="POST" class="d-inline"
                                                     action="{{ route('participant.vote.candidate') }}">

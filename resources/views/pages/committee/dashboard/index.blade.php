@@ -70,7 +70,7 @@
 
         async function getData() {
             const response = await fetch(
-                'https://votez.test/committee/api/participant');
+                'http://votez.test/committee/api/participant');
             console.log(response);
             const data = await response.json();
             console.log(data);
@@ -116,7 +116,7 @@
 
         async function getData() {
             const response = await fetch(
-                'https://votez.test/committee/api/voting');
+                'http://votez.test/committee/api/voting');
             console.log(response);
             const data = await response.json();
             console.log(data);
