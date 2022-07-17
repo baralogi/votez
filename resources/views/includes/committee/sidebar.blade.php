@@ -8,15 +8,19 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
-            <li><a class="nav-link" href="{{ route('committee.dashboard.index') }}"><i
-                        class="fab fa-dashcube"></i>
-                    <span>Dashboard</span></a></li>
+            <li><a class="nav-link" href="{{ route('committee.dashboard.index') }}"><i class="fab fa-dashcube"></i>
+                    <span>
+                        <h3>Dashboard</h3>
+                    </span></a></li>
             <li><a class="nav-link" href="{{ route('committee.user.index') }}"><i class="fas fa-user"></i>
-                    <span>Panitia</span></a></li>
+                    <span>
+                        <h3>Panitia</h3>
+                    </span></a></li>
             <li><a class="nav-link" href="{{ route('committee.voting.index') }}"><i class="fas fa-vote-yea"></i>
-                    <span>Voting</span></a></li>
-            <li><a class="nav-link" href="{{ route('committee.participant.index') }}"><i
-                        class="fas fa-users"></i>
+                    <span>
+                        <h3>Voting</h3>
+                    </span></a></li>
+            <li><a class="nav-link" href="{{ route('committee.participant.index') }}"><i class="fas fa-users"></i>
                     <span>Partisipan</span></a></li>
             <li><a class="nav-link" href="{{ route('committee.blog.index') }}"><i class="fas fa-newspaper"></i>
                     <span>Blog</span></a></li>

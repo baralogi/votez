@@ -95,7 +95,7 @@
                 values.push(data[i].total);
             }
 
-            const newLabels = labels.map((val, i) => i === 1 ? "Memilih" : "Tidak Memilih");
+            const newLabels = labels.map((val, i) => (i === 1) ? "Tidak Memilih" : "Memilih");
 
             var ctx = document.getElementById("myChart4").getContext('2d');
             var myChart = new Chart(ctx, {
@@ -104,8 +104,9 @@
                     datasets: [{
                         data: values,
                         backgroundColor: [
-                            '#fc544b',
                             '#63ed7a',
+                            '#fc544b',
+
                         ],
                         label: 'Prosentase Partisipan'
                     }],

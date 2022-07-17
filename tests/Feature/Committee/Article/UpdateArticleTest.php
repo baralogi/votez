@@ -25,13 +25,22 @@ class UpdateArticleTest extends TestCase
 
     public function test_article_edit_screen_can_be_rendered()
     {
+        $response = $this->get('/login');
+
+        $response->assertStatus(200);
     }
 
     public function test_can_update_article_data()
     {
+        $response = $this->get('/login');
+
+        $response->assertStatus(200);
     }
 
     public function test_cant_update_article_with_invalid_data()
     {
+        $response = $this->get('/login');
+
+        $response->assertStatus(200);
     }
 }

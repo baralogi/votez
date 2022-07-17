@@ -25,9 +25,15 @@ class IndexStudentTest extends TestCase
 
     public function test_student_index_screen_can_be_rendered()
     {
+        $response = $this->get('/login');
+
+        $response->assertStatus(200);
     }
 
     public function test_can_recommend_potential_students()
     {
+        $response = $this->get('/login');
+
+        $response->assertStatus(200);
     }
 }

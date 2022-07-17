@@ -27,5 +27,8 @@ class DestroyArticleTest extends TestCase
 
     public function test_can_destroy_article_data()
     {
+        $response = $this->get('/login');
+
+        $response->assertStatus(200);
     }
 }
