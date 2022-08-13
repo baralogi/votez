@@ -13,6 +13,6 @@ class Role extends Model
 
     public function scopeCommitteeRole($query)
     {
-        return $query->whereIn('name', ['ketua panitia', 'panitia']);
+        return $query->whereIn('name', ['ketua panitia', 'panitia', 'pengawas']);
     }
 }

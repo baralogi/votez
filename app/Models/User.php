@@ -67,7 +67,7 @@ class User extends Authenticatable
     {
         return $query
             ->whereHas('roles', function ($query) {
-                $query->whereIn('roles.name', ['ketua panitia', 'panitia']);
+                $query->whereIn('roles.name', ['ketua panitia', 'panitia', 'pengawas']);
             });
     }
 }

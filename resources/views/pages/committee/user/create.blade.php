@@ -41,6 +41,7 @@
                                     <div class="from-group col-md-6 col-12 mb-2">
                                         <label>Jabatan</label>
                                         <select class="form-control" name="roles">
+
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->name }}">{{ Str::title($role->name) }}</option>
                                             @endforeach

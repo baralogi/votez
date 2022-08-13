@@ -10,15 +10,15 @@
             <li class="menu-header">Menu</li>
             <li><a class="nav-link" href="{{ route('committee.dashboard.index') }}"><i class="fab fa-dashcube"></i>
                     <span>
-                        <h3>Dashboard</h3>
+                        Dashboard
                     </span></a></li>
             <li><a class="nav-link" href="{{ route('committee.user.index') }}"><i class="fas fa-user"></i>
                     <span>
-                        <h3>Panitia</h3>
+                        Panitia
                     </span></a></li>
             <li><a class="nav-link" href="{{ route('committee.voting.index') }}"><i class="fas fa-vote-yea"></i>
                     <span>
-                        <h3>Voting</h3>
+                        Voting
                     </span></a></li>
             <li><a class="nav-link" href="{{ route('committee.participant.index') }}"><i class="fas fa-users"></i>
                     <span>Partisipan</span></a></li>
