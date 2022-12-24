@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\CandidatePartnerController as ApiCandidatePartnerController;
 use App\Http\Controllers\Api\ParticipantController as ApiParticipantController;
-use App\Http\Controllers\Api\VotingController as ApiVotingController;
 use App\Http\Controllers\Api\VotingCountController;
 use App\Http\Controllers\Auth\Participant\LoginController as ParticipantLoginController;
 use App\Http\Controllers\Candidate\DashboardController as CandidateDashboardController;
